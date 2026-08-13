@@ -105,7 +105,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="blendreal">BlendReal®</h1>
+                <h1 id="blendreal-pipeline-ue5">BlendReal® - Pipeline UE5</h1>
 <p>Automated Blender → Unreal Engine 5 pipeline.</p>
 <p>BlendReal® kết nối <strong>Blender</strong> và <strong>Unreal Engine 5</strong> thành 1 quy trình tự động — export FBX, tự động bake Camera + Animation, tự tạo vật liệu PBR/Glass Master Material, chuyển volume VDB, và điều khiển trọn vẹn Ultra Dynamic Sky — tất cả chỉ từ 1 tab Sidebar (N-panel) trong Blender.</p>
 <hr />
@@ -152,18 +152,17 @@
 <hr />
 <h2 id="yeu-cau-he-thong">💻 Yêu cầu hệ thống</h2>
 <ul>
-<li><strong>Windows 10/11 64-bit</strong></li>
-<li><strong>Blender</strong>: 4.4, 5.0, hoặc 5.2 (LTS) — <em>[cần xác nhận lại: <code>bl_info</code> trong code hiện khai tối thiểu 4.5, chưa khớp với 4.4 — xem lưu ý ở đầu cuộc trò chuyện]</em></li>
-<li>Project <strong>Unreal Engine 5</strong> — <em>[cần xác nhận version cụ thể, ví dụ UE 5.8+]</em></li>
-<li>Hệ điều hành: <em>[cần xác nhận — chỉ test Windows hay có cả macOS/Linux]</em></li>
-<li>Các tính năng Remote Execution (áp trực tiếp material/sky/camera vào UE) cần bật <strong>Python Remote Execution</strong> trong project UE (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>) — addon có sẵn nút hướng dẫn thiết lập.</li>
+<li>Hệ điều hành <strong>Windows 10/11 64-bit</strong></li>
+<li><strong>Blender</strong>: 4.5, 5.0, hoặc 5.2 (LTS).</li>
+<li>Project <strong>Unreal Engine 5.6+, 5.7+, 5.8+</strong> tuy nhiên UE5.6, 5.7 chế độ shadow của VDB hoạt động không chính xác và có thể mất shadow, UE5.8+ hoạt động tốt với shadow của cả VDB tĩnh và sequence</li>
+<li>Các tính năng Remote Execution (áp trực tiếp material/sky/camera vào UE) cần bật <strong>Python Remote Execution</strong> trong project UE (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>) — addon có sẵn nút hướng dẫn thiết lập mà không cần thảo tác thủ công.</li>
 </ul>
 <hr />
 <h2 id="cai-at-installation">🛠️ Cài đặt (Installation)</h2>
 <ol>
 <li>Trong Blender, vào <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
-<li>Bấm <strong>Install from Disk...</strong> (hoặc <strong>Install Add-on from File...</strong> ở bản Blender cũ hơn), chọn file <code>.zip</code> đã tải</li>
-<li>Tick vào ô bên cạnh <strong>BlendReal®</strong> trong danh sách Add-ons để bật addon</li>
+<li>Bấm <strong>Install from Disk...</strong>, chọn file <code>.zip</code> đã tải</li>
+<li>Tick vào ô bên cạnh <strong>BlendReal® - Pipeline UE5</strong> trong danh sách Add-ons để bật addon</li>
 <li>Mở Sidebar trong 3D Viewport (phím <code>N</code>), tìm tab <strong>BlendReal®</strong></li>
 </ol>
 <p>Nếu Blender báo addon không tương thích, kiểm tra lại đúng bản Blender đang cài có nằm trong danh sách hỗ trợ ở mục <strong>Yêu cầu hệ thống</strong> không.</p>
@@ -173,7 +172,9 @@
 </div>
 
 <h3 id="cap-nhat-len-ban-moi">🔄 Cập nhật lên bản mới</h3>
-<p>Trước khi cài bản mới, gỡ bản cũ trước (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.</p>
+<p>Nếu cài đặt lần đầu (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
+Trước khi cài bản mới, gỡ bản cũ trước (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
+Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và <strong>cấu hình cá nhân</strong>. Sau đó, gỡ phiên bản hiện tại của addon và cài đặt phiên bản mới nhất từ trang sản phẩm</p>
 <hr />
 <p><img src="images/02.png" width="48%"></p>
 <h2 id="tinh-nang-3-cong-cu-1-tab-sidebar">⚙️ Tính năng — 3 công cụ, 1 tab Sidebar</h2>
