@@ -159,12 +159,14 @@
 </ul>
 <hr />
 <h2 id="cai-at-installation">🛠️ Cài đặt (Installation)</h2>
+<blockquote>
 <ol>
 <li>Trong Blender, vào <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
 <li>Bấm <strong>Install from Disk...</strong>, chọn file <code>.zip</code> đã tải</li>
 <li>Tick vào ô bên cạnh <strong>BlendReal® - Pipeline UE5</strong> trong danh sách Add-ons để bật addon</li>
 <li>Mở Sidebar trong 3D Viewport (phím <code>N</code>), tìm tab <strong>BlendReal®</strong></li>
 </ol>
+</blockquote>
 <p>Nếu Blender báo addon không tương thích, kiểm tra lại đúng bản Blender đang cài có nằm trong danh sách hỗ trợ ở mục <strong>Yêu cầu hệ thống</strong> không.</p>
 <div style="display: flex; gap: 10px; align-items: flex-end;">
   <img src="images/01.png" width="48%">
@@ -172,11 +174,15 @@
 </div>
 
 <h3 id="cap-nhat-len-ban-moi">🔄 Cập nhật lên bản mới</h3>
+<blockquote>
 <p>Nếu cài đặt lần đầu (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
 Trước khi cài bản mới, gỡ bản cũ trước (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
 Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và <strong>cấu hình cá nhân</strong>. Sau đó, gỡ phiên bản hiện tại của addon và cài đặt phiên bản mới nhất từ trang sản phẩm</p>
+</blockquote>
 <hr />
+<blockquote>
 <p><img src="images/02.png" width="48%"></p>
+</blockquote>
 <h2 id="tinh-nang-3-cong-cu-1-tab-sidebar">⚙️ Tính năng — 3 công cụ, 1 tab Sidebar</h2>
 <h3 id="blendreal-pipeline-chinh">🔷 BlendReal — Pipeline Chính</h3>
 <ul>
@@ -196,6 +202,7 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 <li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive cho MNEMO Window Glow</li>
 </ul>
 <h3 id="uds-ieu-khien-ultra-dynamic-sky">🔷 UDS — Điều Khiển Ultra Dynamic Sky</h3>
+<blockquote>
 <ul>
 <li>13 preset bầu trời dựng sẵn theo phong cách điện ảnh (Golden Hour, Overcast, Night, Blue Moon, Dust Storm...) — chọn thẳng 1 mood có sẵn</li>
 <li>Cinematic Setup đầy đủ: nhiệt độ màu ánh sáng, cường độ, tán xạ volumetric, khoảng đổ bóng, mật độ + độ tắt dần của sương mù</li>
@@ -203,6 +210,7 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 <li>Lưu/tải/backup preset riêng của bạn</li>
 <li>Xuất thông số bầu trời sang UE project dạng JSON, hoặc Import ngược lại từ UE sang Blender, hoặc áp trực tiếp qua Remote Execution</li>
 </ul>
+</blockquote>
 <h3 id="vdb-pipeline-volume">🔷 VDB — Pipeline Volume</h3>
 <ul>
 <li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
@@ -218,18 +226,22 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 </ul>
 <hr />
 <h2 id="license-ma-nguon">📄 License &amp; Mã nguồn</h2>
+<blockquote>
 <p>BlendReal® được phát hành theo GPL-2.0-or-later. Gói cài đặt bao gồm <strong>init</strong>.py và các thành phần lõi được phân phối dưới dạng Python bytecode (.pyc).
 Khách hàng có thể yêu cầu mã nguồn tương ứng (.py) của addon. Mã nguồn sẽ được cung cấp khi có yêu cầu theo các điều khoản được quy định trong LICENSE đi kèm sản phẩm.</p>
+</blockquote>
 <hr />
 <h2 id="ho-tro">💬 Hỗ trợ</h2>
+<blockquote>
 <p>Mọi câu hỏi/yêu cầu cập nhật, liên hệ qua kênh <strong><a href="https://discord.gg/7qNt7NVsT">Discord Support</a></strong> của BlendReal®.</p>
+</blockquote>
 <hr />
 <h2 id="cau-hoi-thuong-gap-faq">❓ Câu hỏi thường gặp (FAQ)</h2>
 <p><strong>✅ Addon có cần Unreal Engine để sử dụng không?</strong></p>
 <blockquote>
 <p>Không phải tất cả tính năng đều yêu cầu Unreal Engine. Một số tính năng có thể được sử dụng trực tiếp trong Blender. Các tính năng sử dụng <strong>Remote Execution</strong> để áp dụng trực tiếp Material, Sky, Camera và các thiết lập khác vào Unreal Engine yêu cầu Unreal Engine đang mở project và đã bật <strong>Remote Execution</strong> bằng nút bấm tự động cài trên UI addon.</p>
-</blockquote>
 <p><img src="images/faq01.png" width="48%"></p>
+</blockquote>
 <p><strong>✅ Addon có tự động cập nhật khi Blender ra bản mới không?</strong></p>
 <blockquote>
 <p>Không. Khi có phiên bản Blender mới nằm ngoài danh sách phiên bản được hỗ trợ, bản addon tương thích sẽ được phát hành thông qua cùng link mua của bạn. Bạn có thể tải xuống phiên bản mới khi addon được cập nhật.</p>
@@ -239,15 +251,25 @@ Khách hàng có thể yêu cầu mã nguồn tương ứng (.py) của addon. M
 <p>Không. Addon chỉ hỗ trợ các phiên bản Blender được liệt kê trong phần <strong>Yêu cầu hệ thống</strong> của sản phẩm. Các phiên bản Blender mới hơn sẽ được hỗ trợ khi bản addon tương thích được phát hành.</p>
 </blockquote>
 <p><strong>✅ Có giới hạn số máy cài đặt không?</strong></p>
+<blockquote>
 <p>License được tính theo Seat (người dùng), không phải số lượng máy cài đặt. Một Seat dành cho một người dùng và không được chia sẻ cho người khác. Người dùng có thể cài đặt addon trên các máy cá nhân của mình để phục vụ công việc</p>
+</blockquote>
 <p><strong>✅ Tôi có được cập nhật addon sau khi mua không?</strong></p>
+<blockquote>
 <p>Có. Các bản cập nhật và bản sửa lỗi tương thích sẽ được cung cấp cho người dùng đã mua addon thông qua trang sản phẩm.</p>
+</blockquote>
 <p><strong>✅ Tôi có phải trả phí cho các bản cập nhật không?</strong></p>
+<blockquote>
 <p>Không. Các bản cập nhật và bản sửa lỗi được phát hành cho phiên bản sản phẩm hiện tại sẽ được cung cấp miễn phí cho khách hàng đã mua. Nếu giá sản phẩm được điều chỉnh trong tương lai, mức giá mới chỉ áp dụng cho các giao dịch mua mới và không ảnh hưởng đến những khách hàng đã mua trước đó</p>
+</blockquote>
 <p><strong>✅ Làm sao để biết khi nào có bản cập nhật mới?</strong></p>
+<blockquote>
 <p>Các bản cập nhật sẽ được phát hành trên trang sản phẩm. Bạn chỉ cần truy cập lại link mua sản phẩm để kiểm tra và tải xuống phiên bản mới nhất</p>
+</blockquote>
 <p><strong>✅ Làm thế nào để cập nhật addon?</strong></p>
+<blockquote>
 <p>Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và <strong>cấu hình cá nhân</strong>. Sau đó, gỡ phiên bản hiện tại của addon và cài đặt phiên bản mới nhất từ trang sản phẩm</p>
+</blockquote>
               
             </div>
           </div><footer>
