@@ -1,0 +1,11 @@
+site_name: BlendReal Documentation
+
+nav:
+  - Home: index.md
+  - BlendReal:
+      - Overview: blendreal_pipeline/index.md
+  - BlendReal Spaceship Traffic:
+      - Overview: blendreal_spaceship_traffic/index.md
+
+theme:
+  name: readthedocs
