@@ -51,6 +51,44 @@
               <p class="caption"><span class="caption-text">BlendReal Spaceship Traffic</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#yeu-cau-he-thong">Yêu cầu hệ thống</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cai-at-installation">Cài đặt (Installation)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quy-trinh-su-dung-co-ban">Quy trình sử dụng cơ bản</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tinh-nang-chi-tiet">Tính năng chi tiết</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#che-o-luong-streams">Chế độ luồng (Streams)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#traffic-lane-engine-mang-luoi-lan-uong">Traffic Lane Engine — Mạng lưới làn đường</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#building-avoidance-ne-toa-nha">Building Avoidance — Né tòa nhà</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ship-ship-avoidance-space-time-reservation">Ship-Ship Avoidance — Space-Time Reservation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#import-to-chuc-tau">Import &amp; Tổ chức tàu</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flight-path-tools-cong-cu-tao-uong-bay">Flight Path Tools — Công cụ tạo đường bay</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-utilities-dung-oc-lap-khong-can-blendreal">Mesh Utilities — dùng độc lập, không cần BlendReal®</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#spaceship-exhaust-trail-unreal-niagara-tuy-chon-can-blendreal">Spaceship Exhaust Trail → Unreal Niagara (tuỳ chọn, cần BlendReal®)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-preset">Config Preset</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tuy-chon-khac">Tuỳ chọn khác</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license-ma-nguon">License &amp; Mã nguồn</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ho-tro">Hỗ trợ</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cau-hoi-thuong-gap-faq">Câu hỏi thường gặp (FAQ)</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -77,8 +115,113 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>&#x20;# BlendReal® spaceship_traffic</p>
-<p>Trang hướng dẫn sử dụng BlendReal® dang được cập nhật</p>
+                <h1 id="blendreal-spaceship-traffic">BlendReal® Spaceship Traffic</h1>
+<p>Addon Blender tạo giao thông tàu vũ trụ theo thủ tục (procedural) — tự sinh mạng lưới làn đường/giao lộ, tự né tòa nhà bằng raycast, và tự né tàu-với-tàu bằng hệ đặt-chỗ không-thời-gian (Space-Time Reservation) thật. Đi kèm bộ công cụ tạo đường bay (7 preset NURBS Path + Follow Curve + Auto Bank), bộ tiện ích mesh, và tuỳ chọn xuất hiệu ứng khói động cơ sang Unreal Niagara qua BlendReal®.</p>
+<p><strong>Không bắt buộc cần Unreal Engine</strong> — toàn bộ tính năng traffic chạy độc lập trong Blender. Chỉ tính năng Spaceship Exhaust Trail mới cần thêm BlendReal® (để đẩy dữ liệu sang UE Niagara).</p>
+<hr />
+<h2 id="yeu-cau-he-thong">Yêu cầu hệ thống</h2>
+<ul>
+<li><strong>Blender</strong>: 4.4, 5.0, hoặc 5.2 (LTS) — <em>[cần xác nhận lại: <code>bl_info</code> trong code hiện khai tối thiểu 5.0, chưa khớp với 4.4]</em></li>
+<li>Không bắt buộc cần Unreal Engine cho tính năng traffic chính</li>
+<li>Cần <strong>BlendReal®</strong> (addon riêng) nếu muốn dùng tính năng Spaceship Exhaust Trail</li>
+</ul>
+<hr />
+<h2 id="cai-at-installation">Cài đặt (Installation)</h2>
+<ol>
+<li>Trong Blender, vào <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
+<li>Bấm <strong>Install from Disk...</strong>, chọn file <code>.zip</code></li>
+<li>Tick vào ô bên cạnh <strong>BlendReal® Spaceship Traffic</strong> để bật addon</li>
+<li>Mở Sidebar (phím <code>N</code>) trong 3D Viewport, tìm tab <strong>Spaceship Traffic</strong></li>
+</ol>
+<hr />
+<h2 id="quy-trinh-su-dung-co-ban">Quy trình sử dụng cơ bản</h2>
+<ol>
+<li><strong>Chuẩn bị model</strong>: có sẵn model tàu vũ trụ (dạng <code>.blend</code>, mỗi file 1 hoặc vài chiếc) và model tòa nhà/vật cản trong scene</li>
+<li><strong>Tạo Collection</strong>: bấm <strong>Create Collections (Ships + Buildings)</strong> để addon tự tạo sẵn các Collection đúng tên cần dùng (tự động theo chế độ 1 luồng hoặc 3 luồng)</li>
+<li><strong>Import tàu</strong>: chọn thư mục chứa file <code>.blend</code> tàu ở ô <strong>Ship File Folder</strong>, chọn luồng muốn nhập vào (<strong>Import Into Stream</strong>), bấm <strong>Import Ships From Folder</strong></li>
+<li><strong>Đưa tòa nhà vào Collection</strong> đã tạo (kéo-thả thủ công trong Outliner)</li>
+<li><strong>Chỉnh tham số</strong> (làn đường, giao lộ, tốc độ, né va chạm... xem chi tiết bên dưới)</li>
+<li>Bấm <strong>▶ Generate Traffic</strong> — addon tự sinh animation cho toàn bộ tàu</li>
+<li>Muốn làm lại từ đầu: bấm <strong>✕ Clear Animation</strong></li>
+<li>Muốn xem báo cáo hệ thống: bấm <strong>🔍 Check Collections</strong> (in ra System Console)</li>
+</ol>
+<hr />
+<h2 id="tinh-nang-chi-tiet">Tính năng chi tiết</h2>
+<h3 id="che-o-luong-streams">Chế độ luồng (Streams)</h3>
+<ul>
+<li><strong>Single Stream</strong> (tắt "Split Into 3 Separate Streams"): tất cả tàu dùng chung 1 Collection</li>
+<li><strong>3 Streams</strong> (mặc định bật): tách riêng Civilian / Cargo / Military — mỗi luồng có Collection riêng, hệ số tốc độ riêng (mặc định: Civilian ×0.85, Cargo ×0.6, Military ×1.35), khu vực làn riêng không chồng lấn (lệch ngang theo <strong>Distance Between Streams</strong>), nhưng vẫn dùng chung 1 hệ Space-Time Reservation nên vẫn né nhau đúng tại các điểm giao cắt giữa luồng</li>
+</ul>
+<h3 id="traffic-lane-engine-mang-luoi-lan-uong">Traffic Lane Engine — Mạng lưới làn đường</h3>
+<ul>
+<li><strong>Intersection Grid</strong>: số hàng × số cột tuỳ chỉnh (<strong>Number Of Rows/Columns</strong>), khoảng cách giữa các giao lộ liền kề (<strong>Distance Between Adjacent Intersections</strong>)</li>
+<li><strong>Lanes Per Road Cluster</strong>: số làn trong MỖI hàng/cột của lưới (không phải tổng số làn toàn scene) — luôn để số CHẴN, mỗi 2 làn liền kề ghép thành 1 "đường" 2 chiều</li>
+<li><strong>Two-Way Distance</strong>: khoảng cách giữa 2 làn đối chiều trong cùng 1 "đường" — nên NHỎ hơn nhiều so với <strong>Distance Between Lanes</strong> (khoảng cách tới đường khác)</li>
+<li><strong>Number Of Altitude Levels</strong>: số tầng độ cao (Z) bay cùng lúc, có <strong>Distance Between Levels</strong> và <strong>Horizontal Offset Between Levels</strong> (lệch ngang xen kẽ giữa tầng chẵn/lẻ cho tự nhiên hơn)</li>
+<li><strong>Random Seed</strong>: đổi để có bố cục tàu khác mà không cần chỉnh tham số nào khác</li>
+</ul>
+<h3 id="building-avoidance-ne-toa-nha">Building Avoidance — Né tòa nhà</h3>
+<p>Dò đường bằng raycast + kiểm tra AABB thật giữa 2 điểm. Khi phát hiện bị chặn, addon thử theo thứ tự:
+1. Bay VƯỢT nóc tòa nhà (cao hơn <strong>Building Overflight Height</strong>), kiểm tra lại cả 2 đoạn đường mới có sạch không
+2. Nếu vẫn chặn, lệch ngang dần từng bước (<strong>Horizontal Offset Step</strong>), thử cả 2 phía
+3. Phương án cuối: bay lên độ cao an toàn phía trên cả điểm đầu và điểm cuối</p>
+<p><strong>Building Collision Margin</strong> là biên độ an toàn quanh tòa nhà.</p>
+<h3 id="ship-ship-avoidance-space-time-reservation">Ship-Ship Avoidance — Space-Time Reservation</h3>
+<p>Đây KHÔNG phải random đơn giản — mỗi tàu mới sinh ra được kiểm tra khoảng cách tối thiểu với TẤT CẢ quỹ đạo tàu đã "đặt chỗ" trước, tính đúng theo khung thời gian trùng nhau (không chỉ khoảng cách tĩnh).</p>
+<ul>
+<li><strong>Safety Distance (Ship Hull Outer Edge)</strong>: khoảng cách an toàn tính từ MÉP NGOÀI thân tàu (tự cộng thêm bán kính thật của cả 2 chiếc, tính từ bounding box × scale) — KHÔNG phải tâm-tới-tâm</li>
+<li><strong>Staggered Slots — Horizontal/Vertical</strong>: kích thước đội hình so le để nhiều tàu chia sẻ 1 làn mà không xếp chồng</li>
+<li><strong>Fallback Delay Step / Max Delay Attempts</strong>: cơ chế delay dự phòng CHỈ dùng khi 2 tàu rơi đúng cùng 1 vị trí đội hình (cơ chế né chính là không gian, không phải thời gian)</li>
+<li>Sau khi <strong>Generate Traffic</strong>, addon báo rõ số tàu chưa né hết được + gợi ý tăng tham số nào</li>
+</ul>
+<h3 id="import-to-chuc-tau">Import &amp; Tổ chức tàu</h3>
+<ul>
+<li><strong>Import Ships From Folder</strong>: import theo lô toàn bộ Object từ tất cả file <code>.blend</code> trong 1 thư mục, có thanh tiến trình + đồng hồ đếm giờ ngay trong viewport, tự bỏ qua Camera/Light, tự nhớ file đã import (không import trùng lần sau)</li>
+<li><strong>Create Collections</strong>: tự tạo Collection đúng tên các field đang khai, chỉ 1 click</li>
+</ul>
+<h3 id="flight-path-tools-cong-cu-tao-uong-bay">Flight Path Tools — Công cụ tạo đường bay</h3>
+<ul>
+<li><strong>NURBS Path Presets</strong>: 7 hình dựng sẵn — Straight, Arc, Loop, S-Curve, Zigzag, Spiral, Figure-8 — spawn tại vị trí object đang chọn (hoặc 3D Cursor), chỉnh Size/Points/Forward Axis và tham số riêng từng hình (Arc Angle, Amplitude, Wave Cycles, Turns, Height) trong panel "Adjust Last Operation" ngay sau khi tạo</li>
+<li><strong>Follow Curve</strong>: chọn đúng 1 mesh + 1 curve, bấm — gắn Follow Path constraint được quản lý sẵn, chỉ cần keyframe 2 giá trị: <strong>Distance</strong> (khoảng cách thật theo đơn vị Blender, không phải tỉ lệ 0–1) và <strong>Tilt</strong> (góc nghiêng cánh phụ thêm)</li>
+<li><strong>Bake Auto Bank</strong>: tự động keyframe cả Distance lẫn Tilt trong 1 khoảng frame, tự tính góc nghiêng dựa theo độ cong thật của curve (giới hạn <strong>Max Bank Angle</strong>, nhân với <strong>Sensitivity</strong>)</li>
+</ul>
+<h3 id="mesh-utilities-dung-oc-lap-khong-can-blendreal">Mesh Utilities — dùng độc lập, không cần BlendReal®</h3>
+<ul>
+<li><strong>Apply Rotation</strong> / <strong>Apply Scale</strong> hàng loạt, 1 click</li>
+<li><strong>Apply MNEMO Naming Convention</strong>: đổi tên hàng loạt theo tiền tố Island_/Building_/Landscape_ (hoặc Custom Prefix tự do) + tên gốc + số thứ tự — chỉnh được số bắt đầu + số chữ số</li>
+<li><strong>Fix Normals Per UV Island</strong>: tính lại normal theo từng đảo UV theo hướng xuyên tâm ra ngoài, chạy tốt cả khi Recalculate Outside / Merge+Recalculate mặc định của Blender bó tay</li>
+<li><strong>Create Proxy Collision (Convex Hull)</strong>: nhân bản mesh đã đặt tên MNEMO, dựng Convex Hull sạch riêng cho từng mảnh rời, đặt tên để UE tự nhận diện làm Collision; có phương án Voxel Remesh dự phòng</li>
+</ul>
+<h3 id="spaceship-exhaust-trail-unreal-niagara-tuy-chon-can-blendreal">Spaceship Exhaust Trail → Unreal Niagara (tuỳ chọn, cần BlendReal®)</h3>
+<p>Quy trình 3 bước:
+1. Chọn tàu/collection nào có trail (danh sách <strong>Include/Exclude</strong>, live-linked theo Collection hoặc chọn từng tàu)
+2. <strong>Compute &amp; Preview Trail Points</strong>: tự tính điểm gắn trail theo bounding box + <strong>Nose Axis</strong> của từng tàu, hiện dưới dạng marker Empty kéo-thả được trong viewport (cặp marker đối xứng tự đồng bộ)
+3. <strong>Apply Marker Positions to Export Data</strong>: ghi vị trí cuối cùng vào dữ liệu export</p>
+<p>Các tham số Niagara chỉnh được ngay từ Blender: <strong>Hot Phase Duration</strong>, <strong>Noise Intensity</strong>, <strong>Trail Lifetime</strong>, <strong>Trail Opacity</strong>, <strong>Ribbon Width Ratio</strong>, màu trail riêng theo từng luồng (hoặc 1 màu chung khi tắt 3 Streams). Có nút <strong>Scan for Trail Systems</strong> để quét thư mục Trail Package đã cài, tự tìm và chọn đúng Niagara System path.</p>
+<p>Mặc định chỉ tính lại điểm trail cho tàu CHƯA có dữ liệu (an toàn, không đè lên marker đã chỉnh tay) — có tuỳ chọn <strong>Recompute ALL Ships</strong> nếu cần, có xác nhận trước khi ghi đè.</p>
+<h3 id="config-preset">Config Preset</h3>
+<p>Lưu/Tải/Xoá preset đặt tên riêng cho toàn bộ thiết lập traffic (JSON) — chuyển đổi giữa các cấu hình khác nhau tức thì.</p>
+<h3 id="tuy-chon-khac">Tuỳ chọn khác</h3>
+<ul>
+<li><strong>Ship Nose Axis</strong>: chọn đúng trục local mà mũi tàu hướng theo (nếu tàu bay "lộn ngược" hoặc "ngang" sau khi Generate, đổi giá trị này)</li>
+<li><strong>Interpolation Type</strong>: <strong>Linear</strong> (khớp 100% khi export sang UE qua BlendReal, cả 2 chế độ export) hoặc <strong>Bezier</strong> (mượt hơn, chỉ khớp chính xác tuyệt đối khi BlendReal dùng chế độ "Every Frame")</li>
+</ul>
+<hr />
+<h2 id="license-ma-nguon">License &amp; Mã nguồn</h2>
+<p>BlendReal® Spaceship Traffic phát hành theo <strong>GPL-2.0-or-later</strong>. Bạn nhận được toàn bộ mã nguồn.</p>
+<hr />
+<h2 id="ho-tro">Hỗ trợ</h2>
+<p>Mọi câu hỏi/yêu cầu cập nhật, liên hệ qua kênh Discord support <em>(link đang cập nhật)</em>.</p>
+<hr />
+<h2 id="cau-hoi-thuong-gap-faq">Câu hỏi thường gặp (FAQ)</h2>
+<p><strong>Addon này có cần mở Unreal Engine không?</strong>
+Không — toàn bộ traffic (làn đường, né tòa nhà, né tàu, animation) chạy hoàn toàn trong Blender. Chỉ tính năng Exhaust Trail mới cần thêm BlendReal®.</p>
+<p><strong>Có bắt buộc dùng chung với BlendReal® không?</strong>
+Không — 2 addon hoạt động độc lập, có thể chỉ mua Spaceship Traffic mà không cần BlendReal®.</p>
+<p><strong>Tàu bay sai hướng (lộn ngược/ngang) sau khi Generate Traffic?</strong>
+Đổi lại giá trị <strong>Ship Nose Axis</strong> cho khớp với hướng mũi tàu thật của model.</p>
+<p><strong>Generate Traffic xong báo "X ship(s) COULD NOT fully avoid collisions"?</strong>
+Tăng <strong>Staggered Slots Horizontal/Vertical</strong>, hoặc tăng <strong>Max Delay Attempts</strong> / <strong>Fallback Delay Step</strong>.</p>
               
             </div>
           </div><footer>
