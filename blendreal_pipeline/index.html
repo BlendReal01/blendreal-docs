@@ -106,12 +106,15 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="blendreal-pipeline-ue5">BlendReal® - Pipeline UE5</h1>
+<blockquote>
 <p>Automated Blender → Unreal Engine 5 pipeline.</p>
 <p>BlendReal® kết nối <strong>Blender</strong> và <strong>Unreal Engine 5</strong> thành 1 quy trình tự động — export FBX, tự động bake Camera + Animation, tự tạo vật liệu PBR/Glass Master Material, chuyển volume VDB, và điều khiển trọn vẹn Ultra Dynamic Sky — tất cả chỉ từ 1 tab Sidebar (N-panel) trong Blender.</p>
+</blockquote>
 <hr />
 <h2 id="whats-new">✨ What's new?</h2>
 <p><strong>V1.0.1</strong></p>
 <p>🔷 <strong>BlendReal — Pipeline Chính</strong></p>
+<blockquote>
 <ul>
 <li>Export hàng loạt FBX kèm Animation qua Sequencer hoặc FBX tĩnh, tự động áp <strong>Nanite Settings</strong> khi import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) và Apply Two Sided, chỉ 1 click — kèm PBR Texture đầy đủ (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion)</li>
 <li>Tạo Camera với <strong>Track To Constraint</strong> chỉ 1 click, tự động bake Camera + Animation trước khi export — có thể <strong>Restore Baked Constraint</strong> để chỉnh lại chuyển động camera bất cứ lúc nào</li>
@@ -128,7 +131,9 @@
 <li>Quản lý Mesh, Camera, VDB gọn gàng trong Outliner UE</li>
 <li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive cho MNEMO Window Glow</li>
 </ul>
+</blockquote>
 <p>🔷 <strong>UDS — Điều Khiển Ultra Dynamic Sky</strong></p>
+<blockquote>
 <ul>
 <li>13 preset bầu trời dựng sẵn theo phong cách điện ảnh (Golden Hour, Overcast, Night, Blue Moon, Dust Storm...) — chọn thẳng 1 mood có sẵn</li>
 <li>Cinematic Setup đầy đủ: nhiệt độ màu ánh sáng, cường độ, tán xạ volumetric, khoảng đổ bóng, mật độ + độ tắt dần của sương mù</li>
@@ -136,7 +141,9 @@
 <li>Lưu/tải/backup preset riêng của bạn</li>
 <li>Xuất thông số bầu trời sang UE project dạng JSON, hoặc Import ngược lại từ UE sang Blender, hoặc áp trực tiếp qua Remote Execution</li>
 </ul>
+</blockquote>
 <p>🔷 <strong>VDB — Pipeline Volume</strong></p>
+<blockquote>
 <ul>
 <li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
 <li>Hỗ trợ cả VDB dạng chuỗi animation đầy đủ và 1 frame tĩnh</li>
@@ -149,14 +156,17 @@
 <li><strong>Diagnose Sequencer Bindings</strong> (chỉ đọc) + <strong>Clean Orphaned Bindings</strong> — dọn dữ liệu rác nếu UE crash giữa lúc Place VDB</li>
 <li>Lưu/tải/xoá preset riêng cho Cinematic Setup, Material, Point Light</li>
 </ul>
+</blockquote>
 <hr />
 <h2 id="yeu-cau-he-thong">💻 Yêu cầu hệ thống</h2>
+<blockquote>
 <ul>
 <li>Hệ điều hành <strong>Windows 10/11 64-bit</strong></li>
 <li><strong>Blender</strong>: 4.5, 5.0, hoặc 5.2 (LTS).</li>
 <li>Project <strong>Unreal Engine 5.6+, 5.7+, 5.8+</strong> tuy nhiên UE5.6, 5.7 chế độ shadow của VDB hoạt động không chính xác và có thể mất shadow, UE5.8+ hoạt động tốt với shadow của cả VDB tĩnh và sequence</li>
 <li>Các tính năng Remote Execution (áp trực tiếp material/sky/camera vào UE) cần bật <strong>Python Remote Execution</strong> trong project UE (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>) — addon có sẵn nút hướng dẫn thiết lập mà không cần thảo tác thủ công.</li>
 </ul>
+</blockquote>
 <hr />
 <h2 id="cai-at-installation">🛠️ Cài đặt (Installation)</h2>
 <blockquote>
@@ -166,13 +176,12 @@
 <li>Tick vào ô bên cạnh <strong>BlendReal® - Pipeline UE5</strong> trong danh sách Add-ons để bật addon</li>
 <li>Mở Sidebar trong 3D Viewport (phím <code>N</code>), tìm tab <strong>BlendReal®</strong></li>
 </ol>
-</blockquote>
 <p>Nếu Blender báo addon không tương thích, kiểm tra lại đúng bản Blender đang cài có nằm trong danh sách hỗ trợ ở mục <strong>Yêu cầu hệ thống</strong> không.</p>
-<div style="display: flex; gap: 10px; align-items: flex-end;">
-  <img src="images/01.png" width="48%">
-  <img src="images/02.png" width="48%">
-</div>
-
+<p><div style="display: flex; gap: 10px; align-items: flex-end;">
+ <img src="images/01.png" width="48%">
+ <img src="images/02.png" width="48%">
+</div></p>
+</blockquote>
 <h3 id="cap-nhat-len-ban-moi">🔄 Cập nhật lên bản mới</h3>
 <blockquote>
 <p>Nếu cài đặt lần đầu (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
@@ -185,6 +194,7 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 </blockquote>
 <h2 id="tinh-nang-3-cong-cu-1-tab-sidebar">⚙️ Tính năng — 3 công cụ, 1 tab Sidebar</h2>
 <h3 id="blendreal-pipeline-chinh">🔷 BlendReal — Pipeline Chính</h3>
+<blockquote>
 <ul>
 <li>Export hàng loạt FBX kèm Animation qua Sequencer hoặc FBX tĩnh, tự động áp <strong>Nanite Settings</strong> khi import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) và Apply Two Sided, chỉ 1 click — kèm PBR Texture đầy đủ (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion)</li>
 <li>Tạo Camera với <strong>Track To Constraint</strong> chỉ 1 click, tự động bake Camera + Animation trước khi export — có thể <strong>Restore Baked Constraint</strong> để chỉnh lại chuyển động camera bất cứ lúc nào</li>
@@ -201,6 +211,7 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 <li>Quản lý Mesh, Camera, VDB gọn gàng trong Outliner UE</li>
 <li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive cho MNEMO Window Glow</li>
 </ul>
+</blockquote>
 <h3 id="uds-ieu-khien-ultra-dynamic-sky">🔷 UDS — Điều Khiển Ultra Dynamic Sky</h3>
 <blockquote>
 <ul>
@@ -212,6 +223,7 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 </ul>
 </blockquote>
 <h3 id="vdb-pipeline-volume">🔷 VDB — Pipeline Volume</h3>
+<blockquote>
 <ul>
 <li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
 <li>Hỗ trợ cả VDB dạng chuỗi animation đầy đủ và 1 frame tĩnh</li>
@@ -224,6 +236,7 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 <li><strong>Diagnose Sequencer Bindings</strong> (chỉ đọc) + <strong>Clean Orphaned Bindings</strong> — dọn dữ liệu rác nếu UE crash giữa lúc Place VDB</li>
 <li>Lưu/tải/xoá preset riêng cho Cinematic Setup, Material, Point Light</li>
 </ul>
+</blockquote>
 <hr />
 <h2 id="license-ma-nguon">📄 License &amp; Mã nguồn</h2>
 <blockquote>
