@@ -158,8 +158,8 @@
 <li>Bấm <strong>Install from Disk...</strong>, chọn file <code>.zip</code> đã tải</li>
 <li>Tick vào ô bên cạnh <strong>BlendReal® - Pipeline UE5</strong> trong danh sách Add-ons để bật addon</li>
 <li>Mở Sidebar trong 3D Viewport (phím <code>N</code>), tìm tab <strong>BlendReal®</strong></li>
+<li>Nếu Blender báo addon không tương thích, kiểm tra lại đúng bản Blender đang cài có nằm trong danh sách hỗ trợ ở mục <strong>Yêu cầu hệ thống</strong> không.</li>
 </ol>
-<p>Nếu Blender báo addon không tương thích, kiểm tra lại đúng bản Blender đang cài có nằm trong danh sách hỗ trợ ở mục <strong>Yêu cầu hệ thống</strong> không.</p>
 <p><div style="display: flex; gap: 10px; align-items: flex-end;">
  <img src="images/01.png" width="48%">
  <img src="images/02.png" width="48%">
@@ -167,13 +167,13 @@
 </blockquote>
 <p><img src="images/Updating.png" width="100%"></p>
 <blockquote>
-<p>Nếu cài đặt lần đầu (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
-Trước khi cài bản mới, gỡ bản cũ trước (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.
+<p>Nếu cài đặt lần đầu (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.<br>
+Trước khi cài bản mới, gỡ bản cũ trước (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender.<br>
 Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và <strong>cấu hình cá nhân</strong>. Sau đó, gỡ phiên bản hiện tại của addon và cài đặt phiên bản mới nhất từ trang sản phẩm</p>
 </blockquote>
 <hr />
-<blockquote>
 <p><img src="images/Features.png" width="100%"></p>
+<blockquote>
 <ul>
 <li>Export hàng loạt FBX kèm Animation qua Sequencer hoặc FBX tĩnh, tự động áp <strong>Nanite Settings</strong> khi import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) và Apply Two Sided, chỉ 1 click — kèm PBR Texture đầy đủ (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion)</li>
 <li>Tạo Camera với <strong>Track To Constraint</strong> chỉ 1 click, tự động bake Camera + Animation trước khi export — có thể <strong>Restore Baked Constraint</strong> để chỉnh lại chuyển động camera bất cứ lúc nào</li>
@@ -190,7 +190,9 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 <li>Quản lý Mesh, Camera, VDB gọn gàng trong Outliner UE</li>
 <li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive cho MNEMO Window Glow</li>
 </ul>
+</blockquote>
 <p><img src="images/UDS.png" width="100%"></p>
+<blockquote>
 <ul>
 <li>13 preset bầu trời dựng sẵn theo phong cách điện ảnh (Golden Hour, Overcast, Night, Blue Moon, Dust Storm...) — chọn thẳng 1 mood có sẵn</li>
 <li>Cinematic Setup đầy đủ: nhiệt độ màu ánh sáng, cường độ, tán xạ volumetric, khoảng đổ bóng, mật độ + độ tắt dần của sương mù</li>
@@ -198,7 +200,9 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 <li>Lưu/tải/backup preset riêng của bạn</li>
 <li>Xuất thông số bầu trời sang UE project dạng JSON, hoặc Import ngược lại từ UE sang Blender, hoặc áp trực tiếp qua Remote Execution</li>
 </ul>
+</blockquote>
 <p><img src="images/VDB.png" width="100%"></p>
+<blockquote>
 <ul>
 <li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
 <li>Hỗ trợ cả VDB dạng chuỗi animation đầy đủ và 1 frame tĩnh</li>
@@ -213,20 +217,18 @@ Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và 
 </ul>
 </blockquote>
 <hr />
-<blockquote>
 <p><img src="images/License.png" width="100%"></p>
-<p>BlendReal® được phát hành theo GPL-2.0-or-later. Gói cài đặt bao gồm <strong>init</strong>.py và các thành phần lõi được phân phối dưới dạng Python bytecode (.pyc).
+<blockquote>
+<p>BlendReal® được phát hành theo GPL-2.0-or-later. Gói cài đặt bao gồm <strong>init</strong>.py và các thành phần lõi được phân phối dưới dạng Python bytecode (.pyc).<br>
 Khách hàng có thể yêu cầu mã nguồn tương ứng (.py) của addon. Mã nguồn sẽ được cung cấp khi có yêu cầu theo các điều khoản được quy định trong LICENSE đi kèm sản phẩm.</p>
 </blockquote>
 <hr />
-<blockquote>
 <p><img src="images/Support.png" width="100%"></p>
+<blockquote>
 <p>Mọi câu hỏi/yêu cầu cập nhật, liên hệ qua kênh <strong><a href="https://discord.gg/7qNt7NVsT">Discord Support</a></strong> của BlendReal®.</p>
 </blockquote>
 <hr />
-<blockquote>
 <p><img src="images/FAQ.png" width="100%"></p>
-</blockquote>
 <p><strong>✅ Addon có cần Unreal Engine để sử dụng không?</strong></p>
 <blockquote>
 <p>Không phải tất cả tính năng đều yêu cầu Unreal Engine. Một số tính năng có thể được sử dụng trực tiếp trong Blender. Các tính năng sử dụng <strong>Remote Execution</strong> để áp dụng trực tiếp Material, Sky, Camera và các thiết lập khác vào Unreal Engine yêu cầu Unreal Engine đang mở project và đã bật <strong>Remote Execution</strong> bằng nút bấm tự động cài trên UI addon.</p>
