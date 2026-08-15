@@ -58,7 +58,7 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#blendreal-main-pipeline">🔷 BlendReal - Main Pipeline</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#uds-ultra-dynamic-sky-control">&gt;🔷 UDS - Ultra Dynamic Sky Control</a>
+    <li class="toctree-l3"><a class="reference internal" href="#uds-ultra-dynamic-sky-control">🔷 UDS - Ultra Dynamic Sky Control</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#vdb-pipeline-volume">🔷 VDB - Pipeline Volume</a>
     </li>
@@ -124,13 +124,13 @@
 <h2 id="1why-choose-blendreal"><span class="toc-only">1.Why Choose BlendReal?</span></h2>
 <p><img src="images/WhyChooseBlendReal.png" width="100%"></p>
 <blockquote>
-<p>🔶 Free Updates — Your purchase includes future updates at no additional cost. New features, improvements and bug fixes will continue to be included with your license.</p>
-<p>🔶 Technical Support — Get direct support when you encounter installation issues, unexpected behavior, workflow problems or Blender → Unreal integration issues.</p>
-<p>🔶 Official Releases — Always receive the official version of BlendReal®, ensuring that you are working with a release maintained and distributed by the developer.</p>
-<p>🔶 Complete Documentation — Access the official documentation covering installation, configuration, usage, troubleshooting and frequently asked questions.</p>
-<p>🔶 Continuous Development — Your purchase supports ongoing development, testing, optimization and the addition of new capabilities to BlendReal®.</p>
-<p>🔶 Your Feedback Matters — Report bugs, suggest improvements and request features. User feedback helps determine future development priorities.</p>
-<p>🔶 One Purchase, Ongoing Value — You are not simply purchasing a software file. Your license gives you access to the product, its future updates, documentation and developer support throughout the continued development of BlendReal®.</p>
+<p>🔶 Free Updates — One-time purchase includes all future updates at no extra cost (new features, improvements, and bug fixes).</p>
+<p>🔶 Technical Support — Direct help with installation issues, unexpected behavior, workflow problems, or Blender → Unreal integration.</p>
+<p>🔶 Official Releases — Always receive the official version maintained and distributed by the developer.</p>
+<p>🔶 Complete Documentation — Full documentation covering installation, setup, usage, troubleshooting, and FAQs.</p>
+<p>🔶 Continuous Development — Your purchase helps fund ongoing development, testing, and optimization of the product.</p>
+<p>🔶 Your Feedback Matters — Report bugs, suggest improvements, or request features. User feedback directly influences future development priorities.</p>
+<p>🔶 One Purchase, Ongoing Value — You’re not just buying a file. Your license includes the product, updates, documentation, and support throughout the continued development of BlendReal®.</p>
 </blockquote>
 <h2 id="2blendreal-cinematic-pipeline-ue5"><span class="toc-only">2.BlendReal® - Cinematic Pipeline UE5</span></h2>
 <h2 id="_1"><img src="images/cinematicpipeline.png" width="100%"></h2>
@@ -171,9 +171,11 @@
 <li>Recalculate Normals theo từng UV Island (radial outward) hàng loạt — chính xác hơn Recalculate Normals thông thường</li>
 <li>Tự động tạo Sequencer cho các actor có animation</li>
 <li>Quản lý Mesh, Camera, VDB gọn gàng trong Outliner UE</li>
-<li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive cho MNEMO Window Glow</li>
+<li>Xuất các giá trị của Niagara System Trail và nhập vào UE hàng loạt chỉ 1 click</li>
+<li>Xuất các giá trị của Niagara System Trail và nhập vào UE hàng loạt chỉ 1 click: tính năng này chỉ hoạt động kèm <strong>addon BlendReal_SpaceshipTraffic</strong></li>
+<li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive</li>
 </ul>
-<h3 id="uds-ultra-dynamic-sky-control">&gt;🔷 UDS - Ultra Dynamic Sky Control</h3>
+<h3 id="uds-ultra-dynamic-sky-control">🔷 UDS - Ultra Dynamic Sky Control</h3>
 <ul>
 <li>13 preset bầu trời dựng sẵn theo phong cách điện ảnh (Golden Hour, Overcast, Night, Blue Moon, Dust Storm...) — chọn thẳng 1 mood có sẵn</li>
 <li>Cinematic Setup đầy đủ: nhiệt độ màu ánh sáng, cường độ, tán xạ volumetric, khoảng đổ bóng, mật độ + độ tắt dần của sương mù</li>
@@ -238,6 +240,13 @@
 <blockquote>
 <ul>
 <li>Export hàng loạt FBX kèm Animation qua Sequencer hoặc FBX tĩnh, tự động áp <strong>Nanite Settings</strong> khi import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) và Apply Two Sided, chỉ 1 click — kèm PBR Texture đầy đủ (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion)</li>
+</ul>
+</blockquote>
+<p><img src="images/Exporthangloat.png" width="48%"></p>
+<p><a href="https://www.youtube.com/watch?v=OqLff7fg4ro"><img alt="BlendReal® — 13-Step Setup Guide" src="https://img.youtube.com/vi/OqLff7fg4ro/maxresdefault.jpg" /></a></p>
+<hr />
+<blockquote>
+<ul>
 <li>Tạo Camera với <strong>Track To Constraint</strong> chỉ 1 click, tự động bake Camera + Animation trước khi export — có thể <strong>Restore Baked Constraint</strong> để chỉnh lại chuyển động camera bất cứ lúc nào</li>
 <li>Đồng bộ hoá Camera giữa Blender và UE</li>
 <li>Bake animation cho mesh có gắn Constraint (Track To, Follow Path, Damped Track...) chỉ 1 click, có thể Restore lại animation gốc</li>
@@ -250,6 +259,7 @@
 <li>Recalculate Normals theo từng UV Island (radial outward) hàng loạt — chính xác hơn Recalculate Normals thông thường</li>
 <li>Tự động tạo Sequencer cho các actor có animation</li>
 <li>Quản lý Mesh, Camera, VDB gọn gàng trong Outliner UE</li>
+<li>Xuất các giá trị của Niagara System Trail và nhập vào UE hàng loạt chỉ 1 click: tính năng này chỉ hoạt động kèm <strong>addon BlendReal_SpaceshipTraffic</strong></li>
 <li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive cho MNEMO Window Glow</li>
 </ul>
 </blockquote>
