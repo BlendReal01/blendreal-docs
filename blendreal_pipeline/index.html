@@ -76,7 +76,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#uds-ultra-dynamic-sky-control_1">🔷 UDS - Ultra Dynamic Sky Control</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#vdb-pipeline-volume">🔷 VDB - Pipeline Volume</a>
+    <li class="toctree-l3"><a class="reference internal" href="#vdb-volume-pipeline_1">🔷 VDB - Volume Pipeline</a>
     </li>
         </ul>
     </li>
@@ -417,10 +417,10 @@
   <img src="images/jsontudong.png" width="50%">
 </p>
 <hr />
-<h3 id="vdb-pipeline-volume">🔷 VDB - Pipeline Volume</h3>
+<h3 id="vdb-volume-pipeline_1">🔷 VDB - Volume Pipeline</h3>
 <blockquote>
 <ul>
-<li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
+<li>3-step workflow: <strong>Load VDB into Blender</strong> → <strong>Send VDB Files to UE Project</strong> (copy frames + write a transform manifest) → <strong>Place VDB in UE Scene</strong> via Remote Execution — automatically convert to <strong>SVT</strong> (Sparse Volume Texture), create a Material Instance, spawn a <strong>Heterogeneous Volume actor</strong>, and automatically assign Material/Animation/Transform</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -429,7 +429,7 @@
 <hr />
 <blockquote>
 <ul>
-<li>Hỗ trợ cả VDB dạng chuỗi animation đầy đủ và 1 frame tĩnh</li>
+<li>Supports both full VDB animation sequences and a single static frame</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -438,7 +438,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>VDB Fill Light</strong> — Directional Light riêng chuyên chiếu sáng VDB mà không chiếu sáng môi trường xung quanh, cường độ tự nội suy theo đường cong Ngày/Đêm bám Time of Day của Ultra Dynamic Sky (hoặc override thủ công)</li>
+<li><strong>VDB Fill Light</strong> — dedicated Directional Light for illuminating VDBs without illuminating the surrounding environment. Its intensity is automatically interpolated along a Day/Night curve based on the Ultra Dynamic Sky's Time of Day, with manual override available</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -447,7 +447,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>VDB Shadow Light</strong> — Directional Light riêng đổ bóng VDB xuống mặt đất mà không đổ bóng môi trường xung quanh, không xung đột với bóng Sun/Moon của UDS</li>
+<li><strong>VDB Shadow Light</strong> — dedicated Directional Light for casting VDB shadows onto the ground without casting shadows from the surrounding environment, without interfering with UDS Sun/Moon shadows</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -456,7 +456,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Point Light bám theo VDB</strong>, đồng bộ 2 chiều thật với UE — đọc animation Intensity/Location trực tiếp từ UE Sequencer về Blender</li>
+<li><strong>Point Light follows the VDB</strong>, with true two-way synchronization with UE — reads Intensity/Location animation directly from the UE Sequencer into Blender</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -465,7 +465,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Apply Flicker to Light</strong> — hiệu ứng nhấp nháy lửa/nổ bằng Noise Modifier (Scale/Strength/Depth) kết hợp Auto-ramp không đều (lên nhanh, tắt chậm)</li>
+<li><strong>Apply Flicker to Light</strong> — fire/explosion flickering effect using a Noise Modifier (Scale/Strength/Depth) combined with an uneven Auto-ramp (fast rise, slow fall)</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -474,7 +474,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Bạn hãy tạo preset vật liệu cho riêng mình</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — tham số Density/Albedo/Blackbody/Temperature (Kelvin) tinh chỉnh theo chuẩn vật lý màu lửa thật</li>
+<li><strong>Create your own custom material presets</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — Density/Albedo/Blackbody/Temperature (Kelvin) parameters tuned for physically accurate fire color</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -483,7 +483,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Cinematic Setup</strong> — dialog thiết lập nhanh cho Console Variables (chất lượng render Heterogeneous Volumes), DirectionalLight, Material VDB, ExponentialHeightFog — tự cảnh báo nếu xung đột với hệ Sky/Fog của UDS</li>
+<li><strong>Cinematic Setup</strong> — quick setup dialog for Console Variables (Heterogeneous Volumes render quality), DirectionalLight, VDB Material, ExponentialHeightFog — automatically warns of conflicts with the UDS Sky/Fog system</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -492,7 +492,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Diagnose Sequencer Bindings</strong> (chỉ đọc) + <strong>Clean Orphaned Bindings</strong> — dọn dữ liệu rác nếu UE crash giữa lúc Place VDB</li>
+<li><strong>Diagnose Sequencer Bindings</strong> (read-only) + <strong>Clean Orphaned Bindings</strong> — clean up orphaned data if UE crashes during Place VDB</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -501,7 +501,7 @@
 <hr />
 <blockquote>
 <ul>
-<li>Lưu/tải/xoá preset riêng cho Cinematic Setup, Material, Point Light</li>
+<li>Save/load/delete custom presets for Cinematic Setup, Material, and Point Light</li>
 </ul>
 </blockquote>
 <hr />
@@ -509,51 +509,51 @@
 <p><img src="images/License.png" width="100%"><br></p>
 <blockquote>
 <ul>
-<li>You should have received a copy of the GNU General Public License along with this program.  If not, see <strong><a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></strong>. </li>
-<li>Gói cài đặt bao gồm các file py được đóng gói zip</li>
+<li>You should have received a copy of the GNU General Public License along with this program. If not, see <strong><a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></strong>.</li>
+<li>The installation package includes the add-on's Python (<code>.py</code>) source files packaged in a <code>.zip</code> archive.</li>
 </ul>
 </blockquote>
 <hr />
 <h2 id="9support"><span class="toc-only">9.Support</span></h2>
 <p><img src="images/Support.png" width="100%"></p>
 <blockquote>
-<p>Mọi câu hỏi/yêu cầu cập nhật, liên hệ qua kênh <strong><a href="https://discord.gg/7qNt7NVsT">Discord Support</a></strong> của BlendReal®.</p>
+<p>For any questions or update requests, please contact us through the <strong><a href="https://discord.gg/7qNt7NVsT">BlendReal® Discord Support</a></strong> channel.</p>
 </blockquote>
 <hr />
 <h2 id="10faq"><span class="toc-only">10.FAQ</span></h2>
 <p><img src="images/FAQ.png" width="100%"></p>
-<p><strong>✅ Addon có cần Unreal Engine để sử dụng không?</strong></p>
+<p><strong>✅ Does the add-on require Unreal Engine to use?</strong></p>
 <blockquote>
-<p>Không phải tất cả tính năng đều yêu cầu Unreal Engine. Một số tính năng có thể được sử dụng trực tiếp trong Blender. Các tính năng sử dụng <strong>Remote Execution</strong> để áp dụng trực tiếp Material, Sky, Camera và các thiết lập khác vào Unreal Engine yêu cầu Unreal Engine đang mở project và đã bật <strong>Remote Execution</strong> bằng nút bấm tự động cài trên UI addon.</p>
+<p>Not all features require Unreal Engine. Some features can be used directly in Blender. Features that use <strong>Remote Execution</strong> to directly apply Materials, Sky, Camera, and other settings to Unreal Engine require an Unreal Engine project to be open with <strong>Python Remote Execution</strong> enabled using the automatic setup button provided in the add-on UI.</p>
 <p><img src="images/faq01.png" width="48%"></p>
 </blockquote>
-<p><strong>✅ Addon có tự động cập nhật khi Blender ra bản mới không?</strong></p>
+<p><strong>✅ Does the add-on automatically update when a new Blender version is released?</strong></p>
 <blockquote>
-<p>Không. Khi có phiên bản Blender mới nằm ngoài danh sách phiên bản được hỗ trợ, bản addon tương thích sẽ được phát hành thông qua cùng link mua của bạn. Bạn có thể tải xuống phiên bản mới khi addon được cập nhật.</p>
+<p>No. When a new Blender version is released outside the list of supported versions, a compatible add-on version will be released through the same purchase link. You can download the new version once the add-on has been updated.</p>
 </blockquote>
-<p><strong>✅ Addon có hỗ trợ tất cả phiên bản Blender không?</strong></p>
+<p><strong>✅ Does the add-on support all Blender versions?</strong></p>
 <blockquote>
-<p>Không. Addon chỉ hỗ trợ các phiên bản Blender được liệt kê trong phần <strong>Yêu cầu hệ thống</strong> của sản phẩm. Các phiên bản Blender mới hơn sẽ được hỗ trợ khi bản addon tương thích được phát hành.</p>
+<p>No. The add-on only supports the Blender versions listed in the product's <strong>System Requirements</strong>. Newer Blender versions will be supported when a compatible add-on version is released.</p>
 </blockquote>
-<p><strong>✅ Có giới hạn số máy cài đặt không?</strong></p>
+<p><strong>✅ Is there a limit to the number of computers I can install the add-on on?</strong></p>
 <blockquote>
-<p>License được tính theo Seat (người dùng), không phải số lượng máy cài đặt. Một Seat dành cho một người dùng và không được chia sẻ cho người khác. Người dùng có thể cài đặt addon trên các máy cá nhân của mình để phục vụ công việc</p>
+<p>The license is based on the number of Seats (users), not the number of computers. One Seat is intended for one user and may not be shared with another person. The user may install the add-on on their own computers for their work.</p>
 </blockquote>
-<p><strong>✅ Tôi có được cập nhật addon sau khi mua không?</strong></p>
+<p><strong>✅ Do I receive updates after purchasing the add-on?</strong></p>
 <blockquote>
-<p>Có. Các bản cập nhật và bản sửa lỗi tương thích sẽ được cung cấp cho người dùng đã mua addon thông qua trang sản phẩm.</p>
+<p>Yes. Updates and compatibility fixes will be provided to customers who have purchased the add-on through the product page.</p>
 </blockquote>
-<p><strong>✅ Tôi có phải trả phí cho các bản cập nhật không?</strong></p>
+<p><strong>✅ Do I have to pay for updates?</strong></p>
 <blockquote>
-<p>Không. Các bản cập nhật và bản sửa lỗi được phát hành cho phiên bản sản phẩm hiện tại sẽ được cung cấp miễn phí cho khách hàng đã mua. Nếu giá sản phẩm được điều chỉnh trong tương lai, mức giá mới chỉ áp dụng cho các giao dịch mua mới và không ảnh hưởng đến những khách hàng đã mua trước đó</p>
+<p>No. Updates and bug fixes released for the current product version will be provided free of charge to customers who have purchased the add-on. If the product price is adjusted in the future, the new price will only apply to new purchases and will not affect customers who purchased the product previously.</p>
 </blockquote>
-<p><strong>✅ Làm sao để biết khi nào có bản cập nhật mới?</strong></p>
+<p><strong>✅ How can I know when a new update is available?</strong></p>
 <blockquote>
-<p>Các bản cập nhật sẽ được phát hành trên trang sản phẩm. Bạn chỉ cần truy cập lại link mua sản phẩm để kiểm tra và tải xuống phiên bản mới nhất</p>
+<p>Updates will be released on the product page. Simply revisit your purchase link to check for and download the latest version.</p>
 </blockquote>
-<p><strong>✅ Làm thế nào để cập nhật addon?</strong></p>
+<p><strong>✅ How do I update the add-on?</strong></p>
 <blockquote>
-<p>Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và <strong>cấu hình cá nhân</strong>. Sau đó, gỡ phiên bản hiện tại của addon và cài đặt phiên bản mới nhất từ trang sản phẩm</p>
+<p>Before updating, we recommend backing up your <strong>Presets</strong> and <strong>personal configuration</strong>. Then remove the current version of the add-on and install the latest version from the product page.</p>
 </blockquote>
 <h2 id="11what-you-can-create"><span class="toc-only">11.What You Can Create</span></h2>
 <p><img src="images/whatyoucancreate.png" width="100%"></p>
