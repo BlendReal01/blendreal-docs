@@ -60,7 +60,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#uds-ultra-dynamic-sky-control">🔷 UDS - Ultra Dynamic Sky Control</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#vdb-pipeline-volume">🔷 VDB - Pipeline Volume</a>
+    <li class="toctree-l3"><a class="reference internal" href="#vdb-volume-pipeline">🔷 VDB - Volume Pipeline</a>
     </li>
         </ul>
     </li>
@@ -76,7 +76,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#uds-ultra-dynamic-sky-control_1">🔷 UDS - Ultra Dynamic Sky Control</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#vdb-pipeline-volume_1">🔷 VDB - Pipeline Volume</a>
+    <li class="toctree-l3"><a class="reference internal" href="#vdb-pipeline-volume">🔷 VDB - Pipeline Volume</a>
     </li>
         </ul>
     </li>
@@ -137,17 +137,17 @@
 <blockquote>
 <p>✦<strong>Automated Blender → Unreal Engine 5 Cinematic Pipeline</strong><br>
 ✦<strong>13 Steps. 3 Integrated Systems. 1 Complete Pipeline.</strong></p>
-<p>📌 BlendReal® biến <strong>quy trình Blender → Unreal Engine 5</strong> thành một <strong>workflow có hướng dẫn từng bước</strong>, giúp bạn đi từ Blender Scene đến Unreal Engine Scene sẵn sàng cho cinematic render mà <strong>không cần phải thành thạo các thiết lập kỹ thuật phức tạp trong Unreal Engine</strong>.</p>
-<p>📌 <strong>13-Step Guided Workflow</strong> — BlendReal® hướng dẫn bạn từng bước từ thiết lập <strong>Remote Execution, Movie Render Queue, tạo PBR/Glass Master Material, thiết lập Master Sequence, export mesh &amp; animation, cấu hình Camera, FPS, Draw Distance, Two Sided</strong> cho đến <strong>export và setup VDB</strong>. Bạn không cần phải tự nhớ hàng loạt thiết lập hoặc tìm kiếm từng bước trong UE.</p>
-<p>📌 <strong>Không chỉ là một công cụ Export đơn thuần</strong>. BlendReal® là một pipeline gồm <strong>3 hệ thống được tích hợp và giao tiếp với nhau</strong><br> </p>
+<p>📌 BlendReal® transforms the <strong>Blender → Unreal Engine 5</strong> process into a <strong>step-by-step guided workflow</strong>, taking you from a Blender Scene to a cinematic-ready Unreal Engine Scene <strong>without requiring you to master complex technical setups in Unreal Engine</strong>.</p>
+<p>📌 <strong>13-Step Guided Workflow</strong> — BlendReal® guides you through every step, from configuring <strong>Remote Execution, Movie Render Queue, creating PBR/Glass Master Materials, setting up the Master Sequence, exporting Meshes &amp; Animation, configuring Camera, FPS, Draw Distance, Two Sided</strong>, all the way to <strong>VDB export and setup</strong>. You don't need to memorize countless settings or search for individual steps in UE.</p>
+<p>📌 <strong>More than just an Export tool</strong>. BlendReal® is a pipeline consisting of <strong>3 integrated systems that communicate with each other</strong><br></p>
 <blockquote>
-<p>▣ <strong>Blender → Unreal Pipeline</strong>— Export, Camera, Animation, Materials, Sequencer<br> 
+<p>▣ <strong>Blender → Unreal Pipeline</strong>— Export, Camera, Animation, Materials, Sequencer<br>
 ▣ <strong>UDS — Cinematic Sky &amp; Lighting</strong>— Sky, Time of Day, Lighting, Fog &amp; Presets<br>
 ▣ <strong>VDB — Cinematic Volume</strong>— VDB, SVT, Volume, Materials &amp; Lighting</p>
 </blockquote>
-<p>📌 Từ một <strong>Sidebar (N-panel) trong Blender</strong>, BlendReal® tự động hóa những công việc thường phải thực hiện thủ công trong UE: <strong>FBX, Camera, Animation, Materials, Sequencer, Sky, Lighting, VDB và Movie Render Queue</strong>. </p>
-<p>📌 <strong>Không cần phải là Unreal Engine expert</strong>. Nếu bạn đã có kỹ năng Blender và chỉ biết những thao tác cơ bản trong Unreal Engine, BlendReal® cung cấp một quy trình rõ ràng để bạn từng bước đưa scene vào UE và thiết lập cinematic render.</p>
-<p>📌 Với người dùng Unreal Engine có kinh nghiệm, BlendReal® giúp <strong>loại bỏ các thao tác lặp lại</strong>, batch processing và setup thủ công — đặc biệt hữu ích cho những cảnh <strong>Wide Shot / Extreme Wide Shot</strong> với nhiều mesh, camera, animation, lighting và VDB.</p>
+<p>📌 From a single <strong>Sidebar (N-panel) in Blender</strong>, BlendReal® automates tasks that would normally require manual setup in UE: <strong>FBX, Camera, Animation, Materials, Sequencer, Sky, Lighting, VDB, and Movie Render Queue</strong>.</p>
+<p>📌 <strong>You don't need to be an Unreal Engine expert</strong>. If you already have Blender skills and only basic Unreal Engine knowledge, BlendReal® provides a clear workflow to guide you step by step from bringing your scene into UE to setting up a cinematic render.</p>
+<p>📌 For experienced Unreal Engine users, BlendReal® helps <strong>eliminate repetitive tasks</strong>, batch processing, and manual setup — especially useful for <strong>Wide Shot / Extreme Wide Shot</strong> scenes with multiple meshes, cameras, animations, lighting, and VDBs.</p>
 <p>📌 <strong>13 Steps. 3 Integrated Systems. 1 Complete Blender → Unreal Pipeline.</strong></p>
 <p>📌 <strong>From Blender Scene to Cinematic Render — Without the Complex Setup.</strong></p>
 </blockquote>
@@ -161,43 +161,41 @@
 <blockquote>
 <h3 id="blendreal-main-pipeline">🔷 BlendReal - Main Pipeline</h3>
 <ul>
-<li>Export hàng loạt FBX kèm Animation qua Sequencer hoặc FBX tĩnh, tự động áp <strong>Nanite Settings</strong> khi import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) và Apply Two Sided, chỉ 1 click — kèm PBR Texture đầy đủ (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion)</li>
-<li>Tạo Camera với <strong>Track To Constraint</strong> chỉ 1 click, tự động bake Camera + Animation trước khi export — có thể <strong>Restore Baked Constraint</strong> để chỉnh lại chuyển động camera bất cứ lúc nào</li>
-<li>Đồng bộ hoá Camera giữa Blender và UE</li>
-<li>Bake animation cho mesh có gắn Constraint (Track To, Follow Path, Damped Track...) chỉ 1 click, có thể Restore lại animation gốc</li>
-<li>Tự tạo sẵn PBR Master Material và Glass Master Material, dùng ngay trong UE</li>
-<li>Tuỳ chọn áp trực tiếp vào UE project qua Remote Execution — bỏ qua bước import thủ công</li>
-<li>Có hướng dẫn thiết lập sẵn để kết nối project Blender với thư mục UE project</li>
-<li>Đổi tên Mesh hàng loạt, tự phân loại theo Island/Building/Landscape kèm số thứ tự, chỉ 1 click</li>
-<li>Apply Rotation hàng loạt (giữ nguyên Location + Scale)</li>
-<li>Apply Scale hàng loạt (giữ nguyên Location + Rotation)</li>
-<li>Recalculate Normals theo từng UV Island (radial outward) hàng loạt — chính xác hơn Recalculate Normals thông thường</li>
-<li>Tự động tạo Sequencer cho các actor có animation</li>
-<li>Quản lý Mesh, Camera, VDB gọn gàng trong Outliner UE</li>
-<li>Xuất các giá trị của Niagara System Trail và nhập vào UE hàng loạt chỉ 1 click</li>
-<li>Xuất các giá trị của Niagara System Trail và nhập vào UE hàng loạt chỉ 1 click: tính năng này chỉ hoạt động kèm <strong>addon BlendReal_SpaceshipTraffic</strong></li>
-<li>1-click batch-set: Filmback/Sensor (16:9 hoặc 9:16), Focal Length cho toàn bộ CineCameraActor, FPS Master Sequence, Max Draw Distance (kèm Force Always Loaded chống World Partition culling khi render), Motion Blur, Exposure, độ sáng Emissive</li>
+<li>Batch export FBX Animation or static FBX, automatically apply <strong>Nanite Settings</strong> — including PBR Textures</li>
+<li>Create Cameras with <strong>Track To Constraint</strong>, automatically bake Camera + Animation, and use <strong>Restore Baked Constraint</strong> to adjust camera movement at any time</li>
+<li>Transfer Camera Animation from Blender to Unreal Engine</li>
+<li>Bake animation for FBX with Constraints (Track To, Follow Path, Damped Track, etc.) with a single click, with the option to restore the original animation</li>
+<li>Create PBR Master Material and Glass Master Material, ready to use in UE</li>
+<li>Built-in setup guide for connecting the Blender project to the UE project folder</li>
+<li>Batch rename Meshes, automatically categorize or use custom names with sequential numbering, with a single click</li>
+<li>Batch Apply Rotation (preserving Location + Scale)</li>
+<li>Batch Apply Scale (preserving Location + Rotation)</li>
+<li>Batch Recalculate Normals per UV Island (radial outward)</li>
+<li>Automatically create a Sequencer for actors with animation</li>
+<li>Automatically create and manage dedicated Mesh, Camera, and VDB folders in the UE Outliner</li>
+<li>Batch export Niagara System Trail values and import them into UE with a single click: this feature requires the <strong>BlendReal_SpaceshipTraffic</strong> add-on</li>
+<li>1-click batch setup: Filmback/Sensor, Focal Length for all CineCameraActors, Master Sequence FPS, Max Draw Distance, Force Always Loaded to prevent World Partition culling during rendering, Motion Blur, Exposure, and Emissive brightness</li>
 </ul>
 <h3 id="uds-ultra-dynamic-sky-control">🔷 UDS - Ultra Dynamic Sky Control</h3>
 <ul>
-<li>13 preset bầu trời dựng sẵn theo phong cách điện ảnh (Golden Hour, Overcast, Night, Blue Moon, Dust Storm...) — chọn thẳng 1 mood có sẵn</li>
-<li>Cinematic Setup đầy đủ: nhiệt độ màu ánh sáng, cường độ, tán xạ volumetric, khoảng đổ bóng, mật độ + độ tắt dần của sương mù</li>
-<li>Đồng bộ giữa Ultra Dynamic Sky và Directional Light của Blender — màu/góc xoay ánh sáng cập nhật realtime</li>
-<li>Lưu/tải/backup preset riêng của bạn</li>
-<li>Xuất thông số bầu trời sang UE project dạng JSON, hoặc Import ngược lại từ UE sang Blender, hoặc áp trực tiếp qua Remote Execution</li>
+<li>13 built-in cinematic sky presets (Golden Hour, Overcast, Night, Blue Moon, Dust Storm, etc.) — instantly choose a ready-made mood</li>
+<li>Complete Cinematic Setup: light color temperature, intensity, volumetric scattering, shadow distance, fog density, and fog falloff</li>
+<li>Synchronize Ultra Dynamic Sky with Blender's Directional Light — light color/rotation</li>
+<li>Save/load/back up your custom presets</li>
+<li>Export sky parameters to the UE project as JSON, import them back from UE into Blender, or apply them directly via Remote Execution</li>
 </ul>
-<h3 id="vdb-pipeline-volume">🔷 VDB - Pipeline Volume</h3>
+<h3 id="vdb-volume-pipeline">🔷 VDB - Volume Pipeline</h3>
 <ul>
-<li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
-<li>Hỗ trợ cả VDB dạng chuỗi animation đầy đủ và 1 frame tĩnh</li>
-<li><strong>VDB Fill Light</strong> — Directional Light riêng chuyên chiếu sáng VDB, cường độ tự nội suy theo đường cong Ngày/Đêm bám Time of Day của Ultra Dynamic Sky (hoặc override thủ công)</li>
-<li><strong>VDB Shadow Light</strong> — Directional Light riêng đổ bóng VDB xuống mặt đất, không xung đột với bóng Sun/Moon của UDS</li>
-<li><strong>Point Light bám theo VDB</strong>, đồng bộ 2 chiều thật với UE — đọc animation Intensity/Location trực tiếp từ UE Sequencer về Blender</li>
-<li><strong>Apply Flicker to Light</strong> — hiệu ứng nhấp nháy lửa/nổ bằng Noise Modifier (Scale/Strength/Depth) kết hợp Auto-ramp không đều (lên nhanh, tắt chậm)</li>
-<li><strong>3 preset vật liệu</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — tham số Density/Albedo/Blackbody/Temperature (Kelvin) tinh chỉnh theo chuẩn vật lý màu lửa thật</li>
-<li><strong>Cinematic Setup</strong> — dialog thiết lập nhanh cho Console Variables (chất lượng render Heterogeneous Volumes), DirectionalLight, Material VDB, ExponentialHeightFog — tự cảnh báo nếu xung đột với hệ Sky/Fog của UDS</li>
-<li><strong>Diagnose Sequencer Bindings</strong> (chỉ đọc) + <strong>Clean Orphaned Bindings</strong> — dọn dữ liệu rác nếu UE crash giữa lúc Place VDB</li>
-<li>Lưu/tải/xoá preset riêng cho Cinematic Setup, Material, Point Light</li>
+<li>3-step workflow: <strong>Load VDB into Blender</strong> → <strong>Send VDB Files to UE Project</strong> (copy frames + write a transform manifest) → <strong>Place VDB in UE Scene</strong> via Remote Execution — automatically convert to <strong>SVT</strong> (Sparse Volume Texture), create a Material Instance, spawn a <strong>Heterogeneous Volume actor</strong>, and automatically assign Material/Animation/Transform</li>
+<li>Supports both full VDB animation sequences and a single static frame</li>
+<li><strong>VDB Fill Light</strong> — dedicated Directional Light for illuminating VDBs without affecting the environment</li>
+<li><strong>VDB Shadow Light</strong> — dedicated Directional Light for casting VDB shadows onto the ground without interfering with UDS Sun/Moon shadows</li>
+<li><strong>Point Light follows VDB</strong>, with true two-way synchronization with UE — reads Intensity/Location animation directly from the UE Sequencer into Blender</li>
+<li><strong>Apply Flicker to Light</strong> — fire/explosion flickering effect using a Noise Modifier (Scale/Strength/Depth) combined with an uneven Auto-ramp (fast rise, slow fall)</li>
+<li><strong>Create Material Presets</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — Density/Albedo/Blackbody/Temperature (Kelvin) parameters tuned for physically accurate fire color</li>
+<li><strong>Cinematic Setup</strong> — quick setup dialog for Console Variables (Heterogeneous Volumes render quality), DirectionalLight, VDB Material, ExponentialHeightFog — automatically warns of conflicts with the UDS Sky/Fog system</li>
+<li><strong>Diagnose Sequencer Bindings</strong> (read-only) + <strong>Clean Orphaned Bindings</strong> — clean up orphaned data if UE crashes during Place VDB</li>
+<li>Save/load/delete custom presets for Cinematic Setup, Material, and Point Light</li>
 </ul>
 </blockquote>
 <hr />
@@ -208,10 +206,10 @@
 
 <blockquote>
 <ul>
-<li>Hệ điều hành <strong>Windows 10/11 64-bit</strong></li>
-<li><strong>Blender</strong>: 4.5, 5.0, hoặc 5.2 (LTS).</li>
-<li>Project <strong>Unreal Engine 5.6+, 5.7+, 5.8+</strong> tuy nhiên UE5.6, 5.7 chế độ shadow của VDB hoạt động không chính xác và có thể mất shadow, UE5.8+ hoạt động tốt với shadow của cả VDB tĩnh và sequence</li>
-<li>Các tính năng Remote Execution (áp trực tiếp material/sky/camera vào UE) cần bật <strong>Python Remote Execution</strong> trong project UE (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>) — addon có sẵn nút hướng dẫn thiết lập mà không cần thảo tác thủ công.</li>
+<li><strong>Operating System:</strong> <strong>Windows 10/11 64-bit</strong></li>
+<li><strong>Blender:</strong> 4.5, 5.0, or 5.2 (LTS)</li>
+<li><strong>Unreal Engine:</strong> <strong>UE 5.6+, 5.7+, or 5.8+</strong>. However, VDB shadow functionality may not work correctly in <strong>UE 5.6 and 5.7</strong>, and shadows may be missing. <strong>UE 5.8+</strong> provides proper VDB shadow support for both static VDBs and VDB animation sequences.</li>
+<li>Remote Execution features (directly applying Materials, Sky, Camera, etc. to UE) require <strong>Python Remote Execution</strong> to be enabled in the UE project (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>). BlendReal® includes a built-in setup guide, so you don't need to configure it manually.</li>
 </ul>
 </blockquote>
 <hr />
@@ -222,11 +220,11 @@
 
 <blockquote>
 <ol>
-<li>Trong Blender, vào <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
-<li>Bấm <strong>Install from Disk...</strong>, chọn file <code>.zip</code> đã tải</li>
-<li>Tick vào ô bên cạnh <strong>BlendReal® - Pipeline UE5</strong> trong danh sách Add-ons để bật addon</li>
-<li>Mở Sidebar trong 3D Viewport (phím <code>N</code>), tìm tab <strong>BlendReal®</strong></li>
-<li>Nếu Blender báo addon không tương thích, kiểm tra lại đúng bản Blender đang cài có nằm trong danh sách hỗ trợ ở mục <strong>Yêu cầu hệ thống</strong> không.</li>
+<li>In Blender, go to <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
+<li>Click <strong>Install from Disk...</strong> and select the downloaded <code>.zip</code> file</li>
+<li>Check the box next to <strong>BlendReal® - Pipeline UE5</strong> in the Add-ons list to enable the add-on</li>
+<li>Open the Sidebar in the 3D Viewport (press <code>N</code>) and find the <strong>BlendReal®</strong> tab</li>
+<li>If Blender reports that the add-on is incompatible, check that your installed Blender version is included in the supported versions listed under <strong>System Requirements</strong></li>
 </ol>
 <p><div style="display: flex; gap: 10px; align-items: flex-end;">
  <img src="images/01.png" width="48%">
@@ -240,9 +238,9 @@
 
 <blockquote>
 <ul>
-<li>Nếu cài đặt lần đầu (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender<br></li>
-<li>Trước khi cài bản mới, gỡ bản cũ trước (<strong>Preferences &gt; Add-ons</strong>, mở rộng BlendReal®, bấm <strong>Remove</strong>), sau đó cài <code>.zip</code> mới như hướng dẫn trên rồi khởi động lại Blender<br></li>
-<li>Trước khi cập nhật, bạn nên sao lưu các <strong>Preset</strong> và <strong>cấu hình cá nhân</strong>. Sau đó, gỡ phiên bản hiện tại của addon và cài đặt phiên bản mới nhất từ trang sản phẩm</li>
+<li>Before updating, back up your <strong>Presets</strong> and <strong>personal configuration</strong>.</li>
+<li>Remove the current version from <strong>Preferences &gt; Add-ons</strong> → expand <strong>BlendReal®</strong> → click <strong>Remove</strong>.</li>
+<li>Install the latest <code>.zip</code> file following the installation steps above, then restart Blender.</li>
 </ul>
 </blockquote>
 <hr />
@@ -419,7 +417,7 @@
   <img src="images/jsontudong.png" width="50%">
 </p>
 <hr />
-<h3 id="vdb-pipeline-volume_1">🔷 VDB - Pipeline Volume</h3>
+<h3 id="vdb-pipeline-volume">🔷 VDB - Pipeline Volume</h3>
 <blockquote>
 <ul>
 <li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
@@ -559,13 +557,6 @@
 </blockquote>
 <h2 id="11what-you-can-create"><span class="toc-only">11.What You Can Create</span></h2>
 <p><img src="images/whatyoucancreate.png" width="100%"></p>
-<p>🌌 UDS cinematic environment</p>
-<p>🔥 VDB fire/explosion</p>
-<p>☁️ VDB smoke/cloud</p>
-<p>🎥 Camera &amp; animation</p>
-<p>🏙️ Wide Shot / Extreme Wide Shot</p>
-<p>🌅 Day/night cinematic lighting</p>
-<p>🎬 Final Movie Render Queue output</p>
               
             </div>
           </div><footer>
