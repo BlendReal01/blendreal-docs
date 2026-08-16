@@ -80,6 +80,12 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">&gt;</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">&gt;</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">&gt;</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#8license-source-code">8.License &amp; Source Code</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#9support">9.Support</a>
@@ -372,8 +378,23 @@
 <blockquote>
 <ul>
 <li>Quy trình 3 bước: <strong>Load VDB vào Blender</strong> → <strong>Send VDB Files sang UE Project</strong> (copy frame + ghi kèm transform manifest) → <strong>Place VDB in UE Scene</strong> qua Remote Execution — tự convert sang <strong>SVT</strong> (Sparse Volume Texture), tạo Material Instance, spawn <strong>Heterogeneous Volume actor</strong>, gán Material/Animation/Transform tự động</li>
+</ul>
+</blockquote>
+<h2 id="_2">&gt;<img src="images/3buocVDB.png" width="60%"></h2>
+<blockquote>
+<ul>
 <li>Hỗ trợ cả VDB dạng chuỗi animation đầy đủ và 1 frame tĩnh</li>
+</ul>
+</blockquote>
+<h2 id="_3">&gt;<img src="images/VDBchuoi.png" width="60%"></h2>
+<blockquote>
+<ul>
 <li><strong>VDB Fill Light</strong> — Directional Light riêng chuyên chiếu sáng VDB, cường độ tự nội suy theo đường cong Ngày/Đêm bám Time of Day của Ultra Dynamic Sky (hoặc override thủ công)</li>
+</ul>
+</blockquote>
+<h2 id="_4">&gt;<img src="images/directionalLight.png" width="60%"></h2>
+<blockquote>
+<ul>
 <li><strong>VDB Shadow Light</strong> — Directional Light riêng đổ bóng VDB xuống mặt đất, không xung đột với bóng Sun/Moon của UDS</li>
 <li><strong>Point Light bám theo VDB</strong>, đồng bộ 2 chiều thật với UE — đọc animation Intensity/Location trực tiếp từ UE Sequencer về Blender</li>
 <li><strong>Apply Flicker to Light</strong> — hiệu ứng nhấp nháy lửa/nổ bằng Noise Modifier (Scale/Strength/Depth) kết hợp Auto-ramp không đều (lên nhanh, tắt chậm)</li>
