@@ -129,7 +129,7 @@
 </li>
 </ul>
 <p align="center">
-  <img src="images/01.png" width="50%">
+  <img src="images/01.png" width="40%">
 </p>
 <hr />
 <h2 id="yeu-cau-he-thong">Yêu cầu hệ thống</h2>
@@ -166,7 +166,7 @@
 <li><strong>3 Streams</strong> (mặc định bật): tách riêng Civilian / Cargo / Military — mỗi luồng có Collection riêng, hệ số tốc độ riêng (mặc định: Civilian ×0.85, Cargo ×0.6, Military ×1.35), khu vực làn riêng không chồng lấn (lệch ngang theo <strong>Distance Between Streams</strong>), nhưng vẫn dùng chung 1 hệ Space-Time Reservation nên vẫn né nhau đúng tại các điểm giao cắt giữa luồng</li>
 </ul>
 <p align="center">
-  <img src="images/Streams.png" width="50%">
+  <img src="images/Streams.png" width="40%">
 </p>
 <hr />
 <h3 id="traffic-lane-engine-mang-luoi-lan-uong">Traffic Lane Engine — Mạng lưới làn đường</h3>
@@ -178,7 +178,7 @@
 <li><strong>Random Seed</strong>: đổi để có bố cục tàu khác mà không cần chỉnh tham số nào khác</li>
 </ul>
 <p align="center">
-  <img src="images/Lane.png" width="50%">
+  <img src="images/Lane.png" width="40%">
 </p>
 <hr />
 <h3 id="building-avoidance-ne-toa-nha">Building Avoidance — Né tòa nhà</h3>
@@ -187,6 +187,10 @@
 2. Nếu vẫn chặn, lệch ngang dần từng bước (<strong>Horizontal Offset Step</strong>), thử cả 2 phía
 3. Phương án cuối: bay lên độ cao an toàn phía trên cả điểm đầu và điểm cuối</p>
 <p><strong>Building Collision Margin</strong> là biên độ an toàn quanh tòa nhà.</p>
+<p align="center">
+  <img src="images/BuildingAvoidance.png" width="40%">
+</p>
+<hr />
 <h3 id="ship-ship-avoidance-space-time-reservation">Ship-Ship Avoidance — Space-Time Reservation</h3>
 <p>Đây KHÔNG phải random đơn giản — mỗi tàu mới sinh ra được kiểm tra khoảng cách tối thiểu với TẤT CẢ quỹ đạo tàu đã "đặt chỗ" trước, tính đúng theo khung thời gian trùng nhau (không chỉ khoảng cách tĩnh).</p>
 <ul>
@@ -195,6 +199,10 @@
 <li><strong>Fallback Delay Step / Max Delay Attempts</strong>: cơ chế delay dự phòng CHỈ dùng khi 2 tàu rơi đúng cùng 1 vị trí đội hình (cơ chế né chính là không gian, không phải thời gian)</li>
 <li>Sau khi <strong>Generate Traffic</strong>, addon báo rõ số tàu chưa né hết được + gợi ý tăng tham số nào</li>
 </ul>
+<p align="center">
+  <img src="ShipAvoidance.png" width="40%">
+</p>
+<hr />
 <h3 id="import-to-chuc-tau">Import &amp; Tổ chức tàu</h3>
 <ul>
 <li><strong>Import Ships From Folder</strong>: import theo lô toàn bộ Object từ tất cả file <code>.blend</code> trong 1 thư mục, có thanh tiến trình + đồng hồ đếm giờ ngay trong viewport, tự bỏ qua Camera/Light, tự nhớ file đã import (không import trùng lần sau)</li>
