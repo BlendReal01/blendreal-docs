@@ -200,7 +200,7 @@
 <li>Sau khi <strong>Generate Traffic</strong>, addon báo rõ số tàu chưa né hết được + gợi ý tăng tham số nào</li>
 </ul>
 <p align="center">
-  <img src="ShipAvoidance.png" width="40%">
+  <img src="images/ShipAvoidance.png" width="40%">
 </p>
 <hr />
 <h3 id="import-to-chuc-tau">Import &amp; Tổ chức tàu</h3>
@@ -208,12 +208,20 @@
 <li><strong>Import Ships From Folder</strong>: import theo lô toàn bộ Object từ tất cả file <code>.blend</code> trong 1 thư mục, có thanh tiến trình + đồng hồ đếm giờ ngay trong viewport, tự bỏ qua Camera/Light, tự nhớ file đã import (không import trùng lần sau)</li>
 <li><strong>Create Collections</strong>: tự tạo Collection đúng tên các field đang khai, chỉ 1 click</li>
 </ul>
+<p align="center">
+  <img src="images/Import.png" width="40%">
+</p>
+<hr />
 <h3 id="flight-path-tools-cong-cu-tao-uong-bay">Flight Path Tools — Công cụ tạo đường bay</h3>
 <ul>
 <li><strong>NURBS Path Presets</strong>: 7 hình dựng sẵn — Straight, Arc, Loop, S-Curve, Zigzag, Spiral, Figure-8 — spawn tại vị trí object đang chọn (hoặc 3D Cursor), chỉnh Size/Points/Forward Axis và tham số riêng từng hình (Arc Angle, Amplitude, Wave Cycles, Turns, Height) trong panel "Adjust Last Operation" ngay sau khi tạo</li>
 <li><strong>Follow Curve</strong>: chọn đúng 1 mesh + 1 curve, bấm — gắn Follow Path constraint được quản lý sẵn, chỉ cần keyframe 2 giá trị: <strong>Distance</strong> (khoảng cách thật theo đơn vị Blender, không phải tỉ lệ 0–1) và <strong>Tilt</strong> (góc nghiêng cánh phụ thêm)</li>
 <li><strong>Bake Auto Bank</strong>: tự động keyframe cả Distance lẫn Tilt trong 1 khoảng frame, tự tính góc nghiêng dựa theo độ cong thật của curve (giới hạn <strong>Max Bank Angle</strong>, nhân với <strong>Sensitivity</strong>)</li>
 </ul>
+<p align="center">
+  <img src="images/FlightPath.png" width="40%">
+</p>
+<hr />
 <h3 id="mesh-utilities-dung-oc-lap-khong-can-blendreal">Mesh Utilities — dùng độc lập, không cần BlendReal®</h3>
 <ul>
 <li><strong>Apply Rotation</strong> / <strong>Apply Scale</strong> hàng loạt, 1 click</li>
@@ -221,6 +229,10 @@
 <li><strong>Fix Normals Per UV Island</strong>: tính lại normal theo từng đảo UV theo hướng xuyên tâm ra ngoài, chạy tốt cả khi Recalculate Outside / Merge+Recalculate mặc định của Blender bó tay</li>
 <li><strong>Create Proxy Collision (Convex Hull)</strong>: nhân bản mesh đã đặt tên MNEMO, dựng Convex Hull sạch riêng cho từng mảnh rời, đặt tên để UE tự nhận diện làm Collision; có phương án Voxel Remesh dự phòng</li>
 </ul>
+<p align="center">
+  <img src="images/MeshUtilities.png" width="40%">
+</p>
+<hr />
 <h3 id="spaceship-exhaust-trail-unreal-niagara-tuy-chon-can-blendreal">Spaceship Exhaust Trail → Unreal Niagara (tuỳ chọn, cần BlendReal®)</h3>
 <p>Quy trình 3 bước:
 1. Chọn tàu/collection nào có trail (danh sách <strong>Include/Exclude</strong>, live-linked theo Collection hoặc chọn từng tàu)
@@ -228,8 +240,16 @@
 3. <strong>Apply Marker Positions to Export Data</strong>: ghi vị trí cuối cùng vào dữ liệu export</p>
 <p>Các tham số Niagara chỉnh được ngay từ Blender: <strong>Hot Phase Duration</strong>, <strong>Noise Intensity</strong>, <strong>Trail Lifetime</strong>, <strong>Trail Opacity</strong>, <strong>Ribbon Width Ratio</strong>, màu trail riêng theo từng luồng (hoặc 1 màu chung khi tắt 3 Streams). Có nút <strong>Scan for Trail Systems</strong> để quét thư mục Trail Package đã cài, tự tìm và chọn đúng Niagara System path.</p>
 <p>Mặc định chỉ tính lại điểm trail cho tàu CHƯA có dữ liệu (an toàn, không đè lên marker đã chỉnh tay) — có tuỳ chọn <strong>Recompute ALL Ships</strong> nếu cần, có xác nhận trước khi ghi đè.</p>
+<p align="center">
+  <img src="images/trail.png" width="40%">
+</p>
+<hr />
 <h3 id="config-preset">Config Preset</h3>
 <p>Lưu/Tải/Xoá preset đặt tên riêng cho toàn bộ thiết lập traffic (JSON) — chuyển đổi giữa các cấu hình khác nhau tức thì.</p>
+<p align="center">
+  <img src="images/config.png" width="40%">
+</p>
+<hr />
 <h3 id="tuy-chon-khac">Tuỳ chọn khác</h3>
 <ul>
 <li><strong>Ship Nose Axis</strong>: chọn đúng trục local mà mũi tàu hướng theo (nếu tàu bay "lộn ngược" hoặc "ngang" sau khi Generate, đổi giá trị này)</li>
@@ -237,14 +257,17 @@
 </ul>
 <hr />
 <h2 id="license-ma-nguon">License &amp; Mã nguồn</h2>
-<p>BlendReal® Spaceship Traffic phát hành theo <strong>GPL-2.0-or-later</strong>. Bạn nhận được toàn bộ mã nguồn.</p>
+<ul>
+<li>You should have received a copy of the GNU General Public License along with this program. If not, see <strong><a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></strong>.</li>
+<li>The installation package includes the add-on's Python (<code>.py</code>) source files packaged in a <code>.zip</code> archive.</li>
+</ul>
 <hr />
 <h2 id="ho-tro">Hỗ trợ</h2>
-<p>Mọi câu hỏi/yêu cầu cập nhật, liên hệ qua kênh Discord support <em>(link đang cập nhật)</em>.</p>
+<p>For any questions or update requests, please contact us through the <strong><a href="https://discord.gg/7qNt7NVsT">BlendReal® Discord Support</a></strong> channel.</p>
 <hr />
 <h2 id="cau-hoi-thuong-gap-faq">Câu hỏi thường gặp (FAQ)</h2>
-<p><strong>Addon này có cần mở Unreal Engine không?</strong>
-Không — toàn bộ traffic (làn đường, né tòa nhà, né tàu, animation) chạy hoàn toàn trong Blender. Chỉ tính năng Exhaust Trail mới cần thêm BlendReal®.</p>
+<p><strong>Addon này có hoạt động độc lập không?</strong>
+Có — toàn bộ traffic (làn đường, né tòa nhà, né tàu, animation) chạy hoàn toàn trong Blender. Chỉ tính năng Exhaust Trail mới cần kết hợp thêm addon <strong>BlendReal® - Cinematic Pipeline UE5</strong>.</p>
 <p><strong>Có bắt buộc dùng chung với BlendReal® không?</strong>
 Không — 2 addon hoạt động độc lập, có thể chỉ mua Spaceship Traffic mà không cần BlendReal®.</p>
 <p><strong>Tàu bay sai hướng (lộn ngược/ngang) sau khi Generate Traffic?</strong>
