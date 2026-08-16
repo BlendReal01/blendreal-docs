@@ -242,45 +242,61 @@
 <li><strong>Batch Export FBX</strong>:<br> 
 🔸With Animation via Sequencer or static FBX, with automatic <strong>Nanite Settings</strong> applied on import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) and Apply Two Sided — all in one click.<br> 
 🔸With full PBR Texture support (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion).<br>
-🔸Có 3 luồng Export:<br>
+🔸There are 3 Export workflows:<br>
 <img src="images/xuathangloat.png" width="48%"><br></li>
 </ul>
 </blockquote>
 <hr />
 <blockquote>
 <blockquote>
-<p>◇ <strong>Export to Unreal</strong>: Được dùng với dự án nhỏ khi bạn muốn UE tự động tạo folder <strong>BlenderExports</strong> chứa assets được xuất từ Blender và import vào UE.<br>
+<p>◇ <strong>Export to Unreal</strong>: Used for small projects when you want UE to automatically create a <strong>BlenderExports</strong> folder containing assets exported from Blender and imported into UE.<br>
 <img src="images/luong1.png" width="100%"><br></p>
 </blockquote>
 </blockquote>
 <hr />
 <blockquote>
 <blockquote>
-<p>◇ <strong>Add New/Update Folder and Export</strong>: Thường được sử dụng phổ biến nhất khi bạn muốn quản lý rõ ràng nhiều scene/shot của dự án.<br>
+<p>◇ <strong>Add New/Update Folder and Export</strong>: Most commonly used when you want to clearly organize and manage multiple scenes/shots within a project.<br>
 <img src="images/luong2.png" width="100%"><br></p>
 </blockquote>
 </blockquote>
 <hr />
 <blockquote>
 <blockquote>
-<p>◇ <strong>Import into Folder</strong>: Được sự dụng khi 1 folder đã có sẵn ở UE và bạn muốn xuất thêm assets vào đúng folder đó.<br>
-<img src="images/luong2.png" width="100%"><br></p>
+<p>◇ <strong>Import into Folder</strong>: Used when a folder already exists in UE and you want to export additional assets directly into that folder.<br>
+<img src="images/luong3.png" width="100%"><br></p>
 </blockquote>
 </blockquote>
 <hr />
 <blockquote>
 <ul>
+<li>Create a Camera with a <strong>Track To Constraint</strong> in one click, automatically bake the Camera + Animation before export — with <strong>Restore Baked Constraint</strong> to restore the original constraint and adjust the camera movement at any time. Transfer Camera Animation from Blender to Unreal Engine<br><blockquote>
+<p><img src="images/bakeanimation.png" width="60%"><br></p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<hr />
+<blockquote>
+<ul>
+<li>Bake animation for meshes with Constraints (Track To, Follow Path, Damped Track, etc.) with a single click, with the option to restore the original animation.<br><blockquote>
+<p><img src="images/bakeanimationMesh.png" width="60%"><br></p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<hr />
+<blockquote>
+<ul>
 <li>
-<p>Create a Camera with a <strong>Track To Constraint</strong> in one click, automatically bake the Camera + Animation before export — with <strong>Restore Baked Constraint</strong> to restore the original constraint and adjust the camera movement at any time.</p>
+<p>Tự tạo sẵn PBR Master Material và Glass Master Material, dùng ngay trong UE</p>
+<blockquote>
+<p><img src="images/PBR.png" width="60%"><br></p>
+</blockquote>
 </li>
 <li>
-<p>Transfer Camera Animation from Blender to Unreal Engine</p>
+<p>Tuỳ chọn áp trực tiếp vào UE project qua Remote Execution — bỏ qua bước import thủ công</p>
 </li>
-<li>
-<p>Bake animation cho mesh có gắn Constraint (Track To, Follow Path, Damped Track...) chỉ 1 click, có thể Restore lại animation gốc</p>
-</li>
-<li>Tự tạo sẵn PBR Master Material và Glass Master Material, dùng ngay trong UE</li>
-<li>Tuỳ chọn áp trực tiếp vào UE project qua Remote Execution — bỏ qua bước import thủ công</li>
 <li>Có hướng dẫn thiết lập sẵn để kết nối project Blender với thư mục UE project</li>
 <li>Đổi tên Mesh hàng loạt, tự phân loại theo Island/Building/Landscape kèm số thứ tự, chỉ 1 click</li>
 <li>Apply Rotation hàng loạt (giữ nguyên Location + Scale)</li>
