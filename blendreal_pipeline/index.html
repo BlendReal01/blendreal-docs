@@ -440,21 +440,69 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>VDB Fill Light</strong> — Directional Light riêng chuyên chiếu sáng VDB, cường độ tự nội suy theo đường cong Ngày/Đêm bám Time of Day của Ultra Dynamic Sky (hoặc override thủ công)</li>
+<li><strong>VDB Fill Light</strong> — Directional Light riêng chuyên chiếu sáng VDB mà không chiếu sáng môi trường xung quanh, cường độ tự nội suy theo đường cong Ngày/Đêm bám Time of Day của Ultra Dynamic Sky (hoặc override thủ công)</li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/VDBchuoi.png" width="50%">
+  <img src="images/VDVfillLight.png" width="60%">
 </p>
 <hr />
 <blockquote>
 <ul>
-<li><strong>VDB Shadow Light</strong> — Directional Light riêng đổ bóng VDB xuống mặt đất, không xung đột với bóng Sun/Moon của UDS</li>
+<li><strong>VDB Shadow Light</strong> — Directional Light riêng đổ bóng VDB xuống mặt đất mà không đổ bóng môi trường xung quanh, không xung đột với bóng Sun/Moon của UDS</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/VDBShadowLight.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
 <li><strong>Point Light bám theo VDB</strong>, đồng bộ 2 chiều thật với UE — đọc animation Intensity/Location trực tiếp từ UE Sequencer về Blender</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PointLight.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
 <li><strong>Apply Flicker to Light</strong> — hiệu ứng nhấp nháy lửa/nổ bằng Noise Modifier (Scale/Strength/Depth) kết hợp Auto-ramp không đều (lên nhanh, tắt chậm)</li>
-<li><strong>3 preset vật liệu</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — tham số Density/Albedo/Blackbody/Temperature (Kelvin) tinh chỉnh theo chuẩn vật lý màu lửa thật</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/FlickerLight.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li><strong>Bạn hãy tạo preset vật liệu cho riêng mình</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — tham số Density/Albedo/Blackbody/Temperature (Kelvin) tinh chỉnh theo chuẩn vật lý màu lửa thật</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PresetLuaKhoi.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
 <li><strong>Cinematic Setup</strong> — dialog thiết lập nhanh cho Console Variables (chất lượng render Heterogeneous Volumes), DirectionalLight, Material VDB, ExponentialHeightFog — tự cảnh báo nếu xung đột với hệ Sky/Fog của UDS</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/CinematicSetup.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
 <li><strong>Diagnose Sequencer Bindings</strong> (chỉ đọc) + <strong>Clean Orphaned Bindings</strong> — dọn dữ liệu rác nếu UE crash giữa lúc Place VDB</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/Diagnose.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
 <li>Lưu/tải/xoá preset riêng cho Cinematic Setup, Material, Point Light</li>
 </ul>
 </blockquote>
@@ -463,8 +511,8 @@
 <p><img src="images/License.png" width="100%"><br></p>
 <blockquote>
 <ul>
-<li>BlendReal® được phát hành theo GPL-2.0-or-later. Gói cài đặt bao gồm <strong>init</strong>.py và các thành phần lõi được phân phối dưới dạng Python bytecode (.pyc)<br></li>
-<li>Khách hàng có thể yêu cầu mã nguồn tương ứng (.py) của addon. Mã nguồn sẽ được cung cấp khi có yêu cầu theo các điều khoản được quy định trong LICENSE đi kèm sản phẩm.</li>
+<li>You should have received a copy of the GNU General Public License along with this program.  If not, see <strong>[GPL]<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></strong>. </li>
+<li>Gói cài đặt bao gồm các file py được đóng gói zip</li>
 </ul>
 </blockquote>
 <hr />
