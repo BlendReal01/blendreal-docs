@@ -117,14 +117,26 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="blendreal-spaceship-traffic">BlendReal® Spaceship Traffic</h1>
+<ul>
+<li>
 <p>Addon Blender tạo giao thông tàu vũ trụ theo thủ tục (procedural) — tự sinh mạng lưới làn đường/giao lộ, tự né tòa nhà bằng raycast, và tự né tàu-với-tàu bằng hệ đặt-chỗ không-thời-gian (Space-Time Reservation) thật. Đi kèm bộ công cụ tạo đường bay (7 preset NURBS Path + Follow Curve + Auto Bank), bộ tiện ích mesh, và tuỳ chọn xuất hiệu ứng khói động cơ sang Unreal Niagara qua BlendReal®.</p>
-<p><strong>Không bắt buộc cần Unreal Engine</strong> — toàn bộ tính năng traffic chạy độc lập trong Blender. Chỉ tính năng Spaceship Exhaust Trail mới cần thêm BlendReal® (để đẩy dữ liệu sang UE Niagara).</p>
+</li>
+<li>
+<p>Addon hoạt động mà ở chế độ <strong>Không bắt buộc cần Unreal Engine</strong> — toàn bộ tính năng traffic chạy độc lập trong Blender</p>
+</li>
+<li>
+<p>Hoặc hoạt động với tính năng <strong>Spaceship Trail (Export to UE)</strong> mới cần kết hợp thêm với addon <strong>BlendReal® - Cinematic Pipeline UE5</strong> (để chuyển dữ liệu sang UE Niagara).</p>
+</li>
+</ul>
+<p align="center">
+  <img src="images/01.png" width="60%">
+</p>
 <hr />
 <h2 id="yeu-cau-he-thong">Yêu cầu hệ thống</h2>
 <ul>
-<li><strong>Blender</strong>: 4.4, 5.0, hoặc 5.2 (LTS) — <em>[cần xác nhận lại: <code>bl_info</code> trong code hiện khai tối thiểu 5.0, chưa khớp với 4.4]</em></li>
+<li><strong>Blender</strong>: 4.5, 5.0, hoặc 5.2 (LTS)</li>
 <li>Không bắt buộc cần Unreal Engine cho tính năng traffic chính</li>
-<li>Cần <strong>BlendReal®</strong> (addon riêng) nếu muốn dùng tính năng Spaceship Exhaust Trail</li>
+<li>Cần <strong>BlendReal®</strong> (addon riêng) nếu muốn dùng tính năng Spaceship Trail</li>
 </ul>
 <hr />
 <h2 id="cai-at-installation">Cài đặt (Installation)</h2>
@@ -147,13 +159,16 @@
 <li>Muốn xem báo cáo hệ thống: bấm <strong>🔍 Check Collections</strong> (in ra System Console)</li>
 </ol>
 <hr />
-<p><img alt="Ảnh minh hoạ Spaceship Traffic" src="images/01.png" /></p>
 <h2 id="tinh-nang-chi-tiet">Tính năng chi tiết</h2>
 <h3 id="che-o-luong-streams">Chế độ luồng (Streams)</h3>
 <ul>
 <li><strong>Single Stream</strong> (tắt "Split Into 3 Separate Streams"): tất cả tàu dùng chung 1 Collection</li>
 <li><strong>3 Streams</strong> (mặc định bật): tách riêng Civilian / Cargo / Military — mỗi luồng có Collection riêng, hệ số tốc độ riêng (mặc định: Civilian ×0.85, Cargo ×0.6, Military ×1.35), khu vực làn riêng không chồng lấn (lệch ngang theo <strong>Distance Between Streams</strong>), nhưng vẫn dùng chung 1 hệ Space-Time Reservation nên vẫn né nhau đúng tại các điểm giao cắt giữa luồng</li>
 </ul>
+<p align="center">
+  <img src="images/Streams.png" width="60%">
+</p>
+<hr />
 <h3 id="traffic-lane-engine-mang-luoi-lan-uong">Traffic Lane Engine — Mạng lưới làn đường</h3>
 <ul>
 <li><strong>Intersection Grid</strong>: số hàng × số cột tuỳ chỉnh (<strong>Number Of Rows/Columns</strong>), khoảng cách giữa các giao lộ liền kề (<strong>Distance Between Adjacent Intersections</strong>)</li>
@@ -162,6 +177,10 @@
 <li><strong>Number Of Altitude Levels</strong>: số tầng độ cao (Z) bay cùng lúc, có <strong>Distance Between Levels</strong> và <strong>Horizontal Offset Between Levels</strong> (lệch ngang xen kẽ giữa tầng chẵn/lẻ cho tự nhiên hơn)</li>
 <li><strong>Random Seed</strong>: đổi để có bố cục tàu khác mà không cần chỉnh tham số nào khác</li>
 </ul>
+<p align="center">
+  <img src="images/Lane.png" width="60%">
+</p>
+<hr />
 <h3 id="building-avoidance-ne-toa-nha">Building Avoidance — Né tòa nhà</h3>
 <p>Dò đường bằng raycast + kiểm tra AABB thật giữa 2 điểm. Khi phát hiện bị chặn, addon thử theo thứ tự:
 1. Bay VƯỢT nóc tòa nhà (cao hơn <strong>Building Overflight Height</strong>), kiểm tra lại cả 2 đoạn đường mới có sạch không
