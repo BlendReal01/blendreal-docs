@@ -69,7 +69,11 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#ship-ship-avoidance-space-time-reservation">Ship-Ship Avoidance — Space-Time Reservation</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flight-speed">Flight Speed</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#import-ship-organization">Import &amp; Ship Organization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#live-layout-preview">👁️ Live Layout Preview</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#flight-path-tools-flight-path-creation-tools">Flight Path Tools — Flight Path Creation Tools</a>
     </li>
@@ -119,7 +123,7 @@
                 <h1 id="blendreal-spaceship-traffic">BlendReal® Spaceship Traffic</h1>
 <ul>
 <li>
-<p>Procedural Blender add-on for spaceship traffic — automatically generates lane/intersection networks, avoids buildings using raycasts, and performs true ship-to-ship avoidance using a Space-Time Reservation system. Includes a flight path toolkit (7 NURBS Path presets + Follow Curve + Auto Bank), mesh utilities, and an optional engine exhaust effect export to Unreal Niagara via BlendReal®.</p>
+<p>Procedural Blender add-on for spaceship traffic — automatically generates lane/intersection networks, avoids buildings using real raycasts, and performs true ship-to-ship avoidance using a Space-Time Reservation system. Includes a flight path toolkit (7 NURBS Path presets + Follow Curve + Auto Bank), mesh utilities, and an optional engine exhaust effect export to Unreal Niagara via BlendReal®.</p>
 </li>
 <li>
 <p>The add-on operates in <strong>Standalone Mode — Unreal Engine is not required</strong> — all traffic features run entirely within Blender.</p>
@@ -154,30 +158,45 @@
 <li><strong>Create Collections</strong>: click <strong>Create Collections (Ships + Buildings)</strong> to automatically create the required Collections with the correct names (automatically based on Single Stream or 3 Streams mode)</li>
 <li><strong>Import Ships</strong>: select the folder containing the spaceship <code>.blend</code> files in <strong>Ship File Folder</strong>, choose which stream to import them into (<strong>Import Into Stream</strong>), then click <strong>Import Ships From Folder</strong></li>
 <li><strong>Add Buildings to the Collection</strong>: manually drag and drop the building objects into the created Collection in the Outliner</li>
-<li><strong>Adjust Parameters</strong>: configure lanes, intersections, speed, collision avoidance, etc. (see the detailed settings below)</li>
-<li>Click <strong>▶ Generate Traffic</strong> — the add-on automatically generates animation for all ships</li>
+<li><strong>Click 🪄 Auto-Fill Lane Spacing</strong> (details below) — this is the <strong>recommended first step</strong>: the add-on automatically pre-computes most of the lane spacing values based on the actual size of the ships you imported, instead of you having to guess numbers by hand</li>
+<li><strong>Preview the layout (optional)</strong>: click <strong>Create Wireframe</strong>, then adjust the Lane/Streams/Formation fields to see whether the ship placeholder boxes are arranged the way you want (see <strong>Live Layout Preview</strong> below)</li>
+<li>Click <strong>▶ Generate Traffic</strong> — the add-on automatically generates animation for all ships, with real building and ship avoidance</li>
 <li>To start over: click <strong>✕ Clear Animation</strong></li>
 <li>To view the system report: click <strong>🔍 Check Collections</strong> (output is displayed in the System Console)</li>
 </ol>
+<blockquote>
+<p>💡 <strong>Tip for new users</strong>: if you don't want to hand-tune every parameter, simply follow <strong>Import Ships → Auto-Fill Lane Spacing → Generate Traffic</strong> and you'll immediately get a reasonable traffic layout. The sections below are only needed when you want to fine-tune things further.</p>
+</blockquote>
 <hr />
 <h2 id="detailed-features">✨Detailed Features</h2>
 <h3 id="stream-modes">Stream Modes</h3>
 <ul>
-<li><strong>Single Stream</strong> (disable "Split Into 3 Separate Streams"): all ships use a single Collection</li>
-<li><strong>3 Streams</strong> (enabled by default): separate Civilian / Cargo / Military into their own Collections — each stream has its own speed multiplier (default: Civilian ×0.85, Cargo ×0.6, Military ×1.35), with separate non-overlapping lane areas (offset horizontally by <strong>Distance Between Streams</strong>), while still sharing a single Space-Time Reservation system to ensure proper avoidance at intersections between streams</li>
+<li><strong>Single Stream</strong> (disable "Split Into 3 Separate Streams"): all ships use a single Collection and a single speed multiplier</li>
+<li><strong>3 Streams</strong> (enabled by default): separate Civilian / Cargo / Military into their own Collections — each stream has its own speed multiplier (default: Civilian ×0.85, Cargo ×0.6, Military ×1.35), with separate non-overlapping lane areas, while still sharing a single Space-Time Reservation system to ensure proper avoidance at intersections between streams</li>
 </ul>
+<p><strong>Related fields:</strong>
+- <strong>Split Into 3 Separate Streams</strong> — toggles the 3-stream mode on/off
+- <strong>Speed × (Civilian / Cargo / Military)</strong> — a per-stream speed multiplier, applied on top of the shared random speed range (see the Flight Speed section below)
+- <strong>Distance Between Streams</strong> — the horizontal spacing between the lane areas of the 3 streams, so they don't overlap</p>
 <p align="center">
   <img src="images/Streams.png" width="40%">
 </p>
 <hr />
 <h3 id="traffic-lane-engine-lane-network">Traffic Lane Engine — Lane Network</h3>
+<p>This is the most important group of fields — it defines the shape of the entire traffic network.</p>
 <ul>
-<li><strong>Intersection Grid</strong>: customizable number of rows × columns (<strong>Number Of Rows/Columns</strong>), with adjustable spacing between adjacent intersections (<strong>Distance Between Adjacent Intersections</strong>)</li>
-<li><strong>Lanes Per Road Cluster</strong>: number of lanes in EACH row/column of the grid (not the total number of lanes in the entire scene) — always use an EVEN number; every 2 adjacent lanes are paired to form one two-way "road"</li>
-<li><strong>Two-Way Distance</strong>: distance between 2 opposing lanes within the same "road" — should be MUCH smaller than <strong>Distance Between Lanes</strong> (the distance to another road)</li>
-<li><strong>Number Of Altitude Levels</strong>: number of altitude levels (Z) flying simultaneously, with <strong>Distance Between Levels</strong> and <strong>Horizontal Offset Between Levels</strong> (alternating horizontal offset between even/odd levels for a more natural layout)</li>
-<li><strong>Random Seed</strong>: change this value to generate a different ship layout without adjusting any other parameters</li>
+<li><strong>Number Of Rows / Number Of Columns</strong> — the number of rows × columns of the Intersection Grid. The higher these values, the wider the traffic map and the more intersection points it will have</li>
+<li><strong>Distance Between Adjacent Intersections</strong> — the spacing between two neighboring intersections in the grid. This is the single parameter with the biggest impact on overall scale — adjust it first, based on the size of your scene</li>
+<li><strong>Lanes Per Road Cluster</strong> — the number of lanes in <strong>EACH</strong> row/column of the grid (not the total number of lanes in the entire scene) — always use an EVEN number, since every 2 adjacent lanes are paired to form one two-way "road" (one direction each way)</li>
+<li><strong>Distance Between Lanes</strong> — the distance between two neighboring two-way "roads". Increase this if the roads look too close together in the preview</li>
+<li><strong>Two-Way Distance</strong> — the distance between the 2 opposing lanes within the SAME "road" — should be set MUCH smaller than <strong>Distance Between Lanes</strong>, so it still reads as "one two-way road" rather than two separate roads</li>
+<li><strong>Number Of Altitude Levels</strong> — the number of altitude (Z) levels flying simultaneously within one stream</li>
+<li><strong>Distance Between Levels</strong> — the spacing between two adjacent altitude levels</li>
+<li><strong>Horizontal Offset Between Levels</strong> — the alternating horizontal offset between even/odd levels, giving the layout a more natural look instead of levels stacked in rigid straight columns</li>
+<li><strong>Lowest Level Altitude (Z)</strong> — the lowest altitude, used as the base from which the levels above it are stacked</li>
+<li><strong>Random Seed</strong> — change this value to get a different traffic layout (ship-to-lane assignment, phase offsets...) without adjusting any other parameter</li>
 </ul>
+<p><strong>🪄 Auto-Fill Lane Spacing (recommended):</strong> instead of manually computing the spacing values above, click this button to have the add-on automatically calculate <strong>Distance Between Lanes</strong>, <strong>Distance Between Levels</strong>, and <strong>Two-Way Distance</strong> based on the actual radius of the largest ship in each stream (Civilian/Cargo/Military computed separately). This should always be the <strong>first step</strong> after all your ships are imported — hand-picked numbers are usually either too small (ships overlapping) or too large (a sparse, wasteful layout) compared to your actual ship sizes.</p>
 <p align="center">
   <img src="images/Lane.png" width="40%">
 </p>
@@ -187,22 +206,36 @@
 1. Fly OVER the building (above the <strong>Building Overflight Height</strong>), then re-check both newly created path segments to ensure they are clear
 2. If still blocked, gradually shift horizontally (<strong>Horizontal Offset Step</strong>), testing both sides
 3. As a final fallback, fly to a safe altitude above both the start and end points</p>
-<p><strong>Building Collision Margin</strong> defines the safety margin around the building.</p>
+<p><strong>Related fields:</strong>
+- <strong>Building Overflight Height</strong> — the minimum height that must be cleared above a building's roof when flying over it
+- <strong>Horizontal Offset Step</strong> — the step size used each time the add-on tries to sidestep a building horizontally
+- <strong>Building Collision Margin</strong> — the safety margin around a building; the larger it is, the further ships will fly from the building</p>
 <p align="center">
   <img src="images/BuildingAvoidance.png" width="40%">
 </p>
 <hr />
 <h3 id="ship-ship-avoidance-space-time-reservation">Ship-Ship Avoidance — Space-Time Reservation</h3>
 <p>This is NOT simple randomization — each newly spawned ship is checked against the minimum distance from ALL previously "reserved" ship trajectories, calculated correctly based on overlapping time intervals (not just static distance).</p>
-<ul>
-<li><strong>Safety Distance (Ship Hull Outer Edge)</strong>: safety distance measured from the OUTER EDGE of the ship hull (automatically adds the actual radius of both ships, calculated from bounding box × scale) — NOT center-to-center</li>
-<li><strong>Staggered Slots — Horizontal/Vertical</strong>: staggered formation dimensions allowing multiple ships to share a single lane without overlapping</li>
-<li><strong>Fallback Delay Step / Max Delay Attempts</strong>: fallback delay mechanism used ONLY when 2 ships occupy exactly the same formation position (the primary avoidance mechanism is spatial, not temporal)</li>
-<li>After <strong>Generate Traffic</strong>, the add-on clearly reports the number of ships that could not fully avoid collisions + suggests which parameters to increase</li>
-</ul>
+<p><strong>Related fields:</strong>
+- <strong>Safety Distance (Ship Hull Outer Edge)</strong> — safety distance measured from the OUTER EDGE of the ship hull (automatically adds the actual radius of both ships, calculated from bounding box × scale) — NOT center-to-center
+- <strong>Staggered Slots — Horizontal / Vertical</strong> — staggered formation dimensions allowing multiple ships to share a single lane without overlapping
+- <strong>Vertical/Horizontal Step Ratio</strong> — the ratio between the vertical and horizontal step of the staggered formation — lower this value if the staggered altitude levels are being pushed up too high
+- <strong>Fallback Delay Step / Max Delay Attempts</strong> — a fallback delay mechanism used ONLY when 2 ships would occupy exactly the same formation slot (the primary avoidance mechanism is spatial, not temporal)
+- <strong>Group Ships By Size</strong> + <strong>percentage threshold</strong> — when enabled, ships of similar size are grouped into the same lane, avoiding a situation where a lane full of small ships gets spaced out according to the largest ship in the whole stream</p>
+<p>After <strong>Generate Traffic</strong>, the add-on clearly reports the number of ships that could not fully avoid collisions + suggests which parameters to increase.</p>
 <p align="center">
   <img src="images/ShipAvoidance.png" width="40%">
 </p>
+<hr />
+<h3 id="flight-speed">Flight Speed</h3>
+<ul>
+<li><strong>Speed Min / Speed Max</strong> — the random speed-factor range applied to each individual ship (multiplied further by the per-stream <strong>Speed ×</strong> described in Stream Modes)</li>
+<li><strong>Base Frame Count</strong> — the "reference" number of frames it takes a ship to fly an entire lane at a speed factor of 1</li>
+<li><strong>Timeline Length (frame_min)</strong> — the length, in frames, of the displayed animation window</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Important note when increasing speed</strong>: if you push <strong>Speed Min/Max</strong> or <strong>Speed ×</strong> much higher relative to <strong>Timeline Length</strong>, a ship may finish flying its entire lane in just a few dozen frames — while the displayed timeline window might be several hundred or thousand frames long. The result is that ship will "flash by" very quickly at its own moment in time, then sit FROZEN for most of the remaining timeline — making it look, overall, like "most ships are moving slowly or not moving at all." This isn't a bug — if you want to see many ships moving clearly throughout the whole video, either <strong>keep speed moderate</strong> or <strong>shorten Timeline Length</strong> accordingly whenever you raise the speed.</p>
+</blockquote>
 <hr />
 <h3 id="import-ship-organization">Import &amp; Ship Organization</h3>
 <ul>
@@ -212,6 +245,18 @@
 <p align="center">
   <img src="images/Import.png" width="40%">
 </p>
+<hr />
+<h3 id="live-layout-preview">👁️ Live Layout Preview</h3>
+<p>This group of features lets you <strong>quickly preview</strong> how ships will be arranged according to Lane/Streams/Formation, <strong>before</strong> running the full (heavier) collision-avoidance system on a scene with many ships.</p>
+<ul>
+<li><strong>Create Wireframe</strong> — creates wireframe boxes sized exactly to each ship, at each ship's current position; the real ships are temporarily hidden while previewing</li>
+<li>Once the boxes exist, adjust any field in <strong>Traffic Lane Engine / Stream Modes / Ship-Ship Avoidance</strong> above — the layout updates live on the boxes</li>
+<li>You can also click <strong>▶ Generate Traffic</strong> while previewing — the add-on will run the full collision-avoidance pass ON THE BOXES (much faster than running it on real, detailed-mesh ships), while still using the ships' REAL radius for safety calculations</li>
+<li><strong>Apply Wireframe Preview</strong> — once you're happy with the layout, click this to bring back the real ships and apply the final result to them</li>
+</ul>
+<blockquote>
+<p>💡 Live Layout Preview is a tool for <strong>previewing a reasonable arrangement</strong> (lane spacing, altitude levels, density...) — the <strong>final, accurate result</strong> (real collision avoidance, real animation) always comes from clicking <strong>▶ Generate Traffic</strong> on the real ships (via Apply Wireframe Preview, or directly if you're not using the preview).</p>
+</blockquote>
 <hr />
 <h3 id="flight-path-tools-flight-path-creation-tools">Flight Path Tools — Flight Path Creation Tools</h3>
 <ul>
@@ -278,14 +323,16 @@ Change the <strong>Ship Nose Axis</strong> value to match the actual nose direct
 <p>✅<strong>After Generate Traffic, it reports "X ship(s) COULD NOT fully avoid collisions"?</strong><br>
 Increase <strong>Staggered Slots Horizontal/Vertical</strong>, or increase <strong>Max Delay Attempts</strong> / <strong>Fallback Delay Step</strong>.</p>
 <p>✅<strong>Is there a way to optimize the setup time for the add-on parameters?</strong><br>
-Yes — most parameter values are already optimized, so you only need to adjust the key parameters:</p>
+Yes — the fastest way is to click <strong>🪄 Auto-Fill Lane Spacing</strong> right after importing your ships; the add-on will automatically compute most of the lane spacing based on your actual ship sizes. If you'd still like to fine-tune things by hand, just focus on a few key parameters:</p>
 <blockquote>
 <ul>
-<li>Spaceship speed, Distance Between Streams (Streams &amp; Collections).<br></li>
-<li>Lowest Level Altitude (Z), Distance Between Levels (Lanes).<br></li>
+<li>Ship speed, Distance Between Streams (Streams &amp; Collections)</li>
+<li>Lowest Level Altitude (Z), Distance Between Levels (Lanes)</li>
 <li>Distance Between Adjacent Intersections (Intersection Grid)</li>
 </ul>
 </blockquote>
+<p>✅<strong>Is the layout shown by Live Layout Preview (Create Wireframe) the final result?</strong><br>
+Not exactly — it's a quick way to preview whether the spacing, altitude levels, and density look reasonable before running the real thing. The final, accurate result (real collision avoidance + real animation) always comes from clicking <strong>▶ Generate Traffic</strong> on the real ships.</p>
               
             </div>
           </div><footer>
