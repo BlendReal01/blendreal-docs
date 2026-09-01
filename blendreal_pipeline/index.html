@@ -130,7 +130,7 @@
 <p>🔶 Complete Documentation — Full documentation covering installation, setup, usage, troubleshooting, and FAQs.</p>
 <p>🔶 Continuous Development — Your purchase helps fund ongoing development, testing, and optimization of the product.</p>
 <p>🔶 Your Feedback Matters — Report bugs, suggest improvements, or request features. User feedback directly influences future development priorities.</p>
-<p>🔶 One Purchase, Ongoing Value — You’re not just buying a file. Your license includes the product, updates, documentation, and support throughout the continued development of BlendReal®.</p>
+<p>🔶 One Purchase, Ongoing Value — You're not just buying a file. Your license includes the product, updates, documentation, and support throughout the continued development of BlendReal®.</p>
 </blockquote>
 <h2 id="2blendreal-cinematic-pipeline-ue5"><span class="toc-only">2.BlendReal® - Cinematic Pipeline UE5</span></h2>
 <h2 id="_1"><img src="images/cinematicpipeline.png" width="100%"></h2>
@@ -138,14 +138,14 @@
 <p>✦<strong>Automated Blender → Unreal Engine 5 Cinematic Pipeline</strong><br>
 ✦<strong>13 Steps. 3 Integrated Systems. 1 Complete Pipeline.</strong></p>
 <p>📌 BlendReal® transforms the <strong>Blender → Unreal Engine 5</strong> process into a <strong>step-by-step guided workflow</strong>, taking you from a Blender Scene to a cinematic-ready Unreal Engine Scene <strong>without requiring you to master complex technical setups in Unreal Engine</strong>.</p>
-<p>📌 <strong>13-Step Guided Workflow</strong> — BlendReal® guides you through every step, from configuring <strong>Remote Execution, Movie Render Queue, creating PBR/Glass Master Materials, setting up the Master Sequence, exporting Meshes &amp; Animation, configuring Camera, FPS, Draw Distance, Two Sided</strong>, all the way to <strong>VDB export and setup</strong>. You don't need to memorize countless settings or search for individual steps in UE.</p>
+<p>📌 <strong>13-Step Guided Workflow</strong> — BlendReal® guides you through every step, from a <strong>one-time, per-UE-install Remote Execution setup</strong>, enabling Movie Render Queue, creating PBR/Glass Master Materials, setting up the Master Sequence, exporting Meshes &amp; Animation, configuring Camera/FPS/Draw Distance, Two Sided, saving Level + Content, all the way to <strong>VDB export and Cinematic Setup</strong>. You don't need to memorize countless settings or search for individual steps in UE.</p>
 <p>📌 <strong>More than just an Export tool</strong>. BlendReal® is a pipeline consisting of <strong>3 integrated systems that communicate with each other</strong><br></p>
 <blockquote>
-<p>▣ <strong>Blender → Unreal Pipeline</strong>— Export, Camera, Animation, Materials, Sequencer<br>
+<p>▣ <strong>Blender → Unreal Pipeline</strong>— Export, Camera, Animation, Mesh Prep, Materials, Sequencer, Render-to-MP4<br>
 ▣ <strong>UDS — Cinematic Sky &amp; Lighting</strong>— Sky, Time of Day, Lighting, Fog &amp; Presets<br>
 ▣ <strong>VDB — Cinematic Volume</strong>— VDB, SVT, Volume, Materials &amp; Lighting</p>
 </blockquote>
-<p>📌 From a single <strong>Sidebar (N-panel) in Blender</strong>, BlendReal® automates tasks that would normally require manual setup in UE: <strong>FBX, Camera, Animation, Materials, Sequencer, Sky, Lighting, VDB, and Movie Render Queue</strong>.</p>
+<p>📌 From a single <strong>Sidebar (N-panel) in Blender</strong>, BlendReal® automates tasks that would normally require manual setup in UE: <strong>FBX, Camera, Animation, Mesh cleanup, Materials, Sequencer, Sky, Lighting, VDB, Movie Render Queue, and even converting your rendered sequence to a shareable MP4</strong>.</p>
 <p>📌 <strong>You don't need to be an Unreal Engine expert</strong>. If you already have Blender skills and only basic Unreal Engine knowledge, BlendReal® provides a clear workflow to guide you step by step from bringing your scene into UE to setting up a cinematic render.</p>
 <p>📌 For experienced Unreal Engine users, BlendReal® helps <strong>eliminate repetitive tasks</strong>, batch processing, and manual setup — especially useful for <strong>Wide Shot / Extreme Wide Shot</strong> scenes with multiple meshes, cameras, animations, lighting, and VDBs.</p>
 <p>📌 <strong>13 Steps. 3 Integrated Systems. 1 Complete Blender → Unreal Pipeline.</strong></p>
@@ -161,26 +161,24 @@
 <blockquote>
 <h3 id="blendreal-main-pipeline">🔷 BlendReal - Main Pipeline</h3>
 <ul>
-<li>Batch export FBX Animation or static FBX, automatically apply <strong>Nanite Settings</strong> — including PBR Textures</li>
-<li>Create Cameras with <strong>Track To Constraint</strong>, automatically bake Camera + Animation, and use <strong>Restore Baked Constraint</strong> to adjust camera movement at any time</li>
-<li>Transfer Camera Animation from Blender to Unreal Engine</li>
-<li>Bake animation for FBX with Constraints (Track To, Follow Path, Damped Track, etc.) with a single click, with the option to restore the original animation</li>
-<li>Create PBR Master Material and Glass Master Material, ready to use in UE</li>
-<li>Built-in setup guide for connecting the Blender project to the UE project folder</li>
-<li>Batch rename Meshes, automatically categorize or use custom names with sequential numbering, with a single click</li>
-<li>Batch Apply Rotation (preserving Location + Scale)</li>
-<li>Batch Apply Scale (preserving Location + Rotation)</li>
-<li>Batch Recalculate Normals per UV Island (radial outward)</li>
-<li>Automatically create a Sequencer for actors with animation</li>
-<li>Automatically create and manage dedicated Mesh, Camera, and VDB folders in the UE Outliner</li>
-<li>Batch export Niagara System Trail values and import them into UE with a single click: this feature requires the <strong>BlendReal_SpaceshipTraffic</strong> add-on</li>
-<li>1-click batch setup: Filmback/Sensor, Focal Length for all CineCameraActors, Master Sequence FPS, Max Draw Distance, Force Always Loaded to prevent World Partition culling during rendering, Motion Blur, Exposure, and Emissive brightness</li>
+<li>🌐 <strong>Global Remote Execution</strong> — enable once per UE install and it applies to every project opened with that UE, instead of repeating setup per project; original settings are backed up automatically and can be restored</li>
+<li>🗂️ <strong>Split configuration</strong> — global settings (paths, ffmpeg, etc.) are saved once, while per-project settings now live in a dedicated file next to each <code>.blend</code>, so switching between multiple <code>.blend</code>/UE projects no longer carries over the wrong values</li>
+<li>💾 <strong>Export / Import Config Backup</strong> — save a backup copy of your configuration to any folder (cloud, USB, etc.) and restore it any time</li>
+<li>🔍 <strong>Detect Running UE Project</strong> — auto-fills the <code>.uproject</code> path by scanning for an already-open UE Editor</li>
+<li>📳 <strong>Add Camera Shake</strong> — one-click handheld-style camera shake (amplitude / frequency / pulses) layered on top of existing camera animation, non-destructive and re-runnable</li>
+<li>🧰 <strong>Mesh Utilities panel</strong> — new one-click tools: <strong>Create Proxy Collision (Convex Hull)</strong> auto-named for UE to detect, <strong>Convert Triangles to Quads</strong>, <strong>Join Meshes</strong>, and <strong>Split Joined Mesh by Loose Parts</strong></li>
+<li>🕘 <strong>Folder Name / Subfolder history</strong> — remembers previously used export folder and subfolder-sequence names for quick reuse</li>
+<li>🎬 <strong>Explicit Master Sequence tools</strong> — dedicated <strong>Create/Update Master Sequence</strong> and <strong>Bind Camera to Camera Cuts Track</strong> buttons, plus a <strong>Refresh Camera List</strong></li>
+<li>🪟 <strong>Reworked Glass Material system</strong> — auto-detects glass materials, supports Global Defaults + Per-Material Override, adds <strong>Apply Glass Material</strong>, <strong>Select All Glass Objects</strong>, <strong>Update Glass Reflection</strong>, <strong>Force UDS Sky Reflection</strong>, and an optional <strong>Fix Glass Flicker in Movie Render Queue</strong> fix</li>
+<li>🔍✅ <strong>Two Sided — Dry Run then Apply</strong> — preview how many Materials/Material Instances would be affected before committing, instead of applying blind</li>
+<li>🗂️✔ <strong>Save All — Level + Content</strong> — one click forces Always Loaded on every actor and saves the entire Level + Content (including External Actors)</li>
+<li>🎞️ <strong>Convert Render Sequence to MP4 (ffmpeg)</strong> — turn your Movie Render Queue EXR/PNG sequence directly into an MP4, with correct Linear EXR → sRGB color conversion, quality presets, and an optional glass-edge fringing fix</li>
+<li>🚀 <strong>Live Trail updates</strong> — push new Niagara trail parameter or position values to already-spawned ships in UE without re-exporting (requires the <strong>BlendReal_SpaceshipTraffic</strong> add-on)</li>
 </ul>
 <h3 id="uds-ultra-dynamic-sky-control">🔷 UDS - Ultra Dynamic Sky Control</h3>
 <ul>
-<li>13 built-in cinematic sky presets (Golden Hour, Overcast, Night, Blue Moon, Dust Storm, etc.) — instantly choose a ready-made mood</li>
+<li>🎨 <strong>13 built-in cinematic sky presets</strong>, now themed around story beats (Hope, Loss, Stillness, Beginning, Tension, Reminiscence...) — instantly choose a ready-made mood that matches the emotional tone of your shot</li>
 <li>Complete Cinematic Setup: light color temperature, intensity, volumetric scattering, shadow distance, fog density, and fog falloff</li>
-<li>Synchronize Ultra Dynamic Sky with Blender's Directional Light — light color/rotation</li>
 <li>Save/load/back up your custom presets</li>
 <li>Export sky parameters to the UE project as JSON, import them back from UE into Blender, or apply them directly via Remote Execution</li>
 </ul>
@@ -193,8 +191,9 @@
 <li><strong>Point Light follows VDB</strong>, with true two-way synchronization with UE — reads Intensity/Location animation directly from the UE Sequencer into Blender</li>
 <li><strong>Apply Flicker to Light</strong> — fire/explosion flickering effect using a Noise Modifier (Scale/Strength/Depth) combined with an uneven Auto-ramp (fast rise, slow fall)</li>
 <li><strong>Create Material Presets</strong>: 🔥 Fire / 💨 Smoke / ☁️ Cloud — Density/Albedo/Blackbody/Temperature (Kelvin) parameters tuned for physically accurate fire color</li>
-<li><strong>Cinematic Setup</strong> — quick setup dialog for Console Variables (Heterogeneous Volumes render quality), DirectionalLight, VDB Material, ExponentialHeightFog — automatically warns of conflicts with the UDS Sky/Fog system</li>
-<li><strong>Diagnose Sequencer Bindings</strong> (read-only) + <strong>Clean Orphaned Bindings</strong> — clean up orphaned data if UE crashes during Place VDB</li>
+<li><strong>Cinematic Setup</strong> — quick setup dialog for Console Variables (Heterogeneous Volumes render quality), DirectionalLight, VDB Material, ExponentialHeightFog — now <strong>auto-detects an existing Ultra Dynamic Sky actor</strong> to avoid double clouds/fog conflicts instead of just warning about them</li>
+<li>🏛️ <strong>Cinematic Setup (Architecture / Landscape)</strong> — a new lightweight version of Cinematic Setup for non-VDB scenes: DirectionalLight + Fog only, no VDB-only console variables</li>
+<li><strong>Clean Orphaned Bindings</strong> — one-click cleanup of leftover Sequencer bindings if UE crashed during a previous Place VDB run</li>
 <li>Save/load/delete custom presets for Cinematic Setup, Material, and Point Light</li>
 </ul>
 </blockquote>
@@ -209,7 +208,8 @@
 <li><strong>Operating System:</strong> <strong>Windows 10/11 64-bit</strong></li>
 <li><strong>Blender:</strong> 4.5, 5.0, or 5.2 (LTS)</li>
 <li><strong>Unreal Engine:</strong> <strong>UE 5.6+, 5.7+, or 5.8+</strong>. However, VDB shadow functionality may not work correctly in <strong>UE 5.6 and 5.7</strong>, and shadows may be missing. <strong>UE 5.8+</strong> provides proper VDB shadow support for both static VDBs and VDB animation sequences.</li>
-<li>Remote Execution features (directly applying Materials, Sky, Camera, etc. to UE) require <strong>Python Remote Execution</strong> to be enabled in the UE project (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>). BlendReal® includes a built-in setup guide, so you don't need to configure it manually.</li>
+<li>Remote Execution features (directly applying Materials, Sky, Camera, etc. to UE) require <strong>Python Remote Execution</strong> to be enabled in the UE project (<code>Edit &gt; Project Settings &gt; Plugins &gt; Python</code>). BlendReal® includes a built-in, one-time setup guide, so you don't need to configure it manually.</li>
+<li>Converting rendered sequences to MP4 requires an <strong>ffmpeg</strong> executable path configured in Settings.</li>
 </ul>
 </blockquote>
 <hr />
@@ -238,7 +238,7 @@
 
 <blockquote>
 <ul>
-<li>Before updating, back up your <strong>Presets</strong> and <strong>personal configuration</strong>.</li>
+<li>Before updating, back up your <strong>Presets</strong> and <strong>personal configuration</strong> (use <strong>Export Config Backup</strong> in the Settings box).</li>
 <li>Remove the current version from <strong>Preferences &gt; Add-ons</strong> → expand <strong>BlendReal®</strong> → click <strong>Remove</strong>.</li>
 <li>Install the latest <code>.zip</code> file following the installation steps above, then restart Blender.</li>
 </ul>
@@ -252,14 +252,74 @@
 <h3 id="blendreal-main-pipeline_1">🔷 BlendReal - Main Pipeline</h3>
 <blockquote>
 <ul>
-<li><strong>Batch Export FBX</strong>:<br> 
-🔸With Animation via Sequencer or static FBX, with automatic <strong>Nanite Settings</strong> applied on import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) and Apply Two Sided — all in one click.<br> 
-🔸With full PBR Texture support (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion).<br>
-🔸There are 3 Export workflows:<br></li>
+<li><strong>Bake Animation tools</strong>:<br>
+🔸 Create a Camera with a <strong>Track To Constraint</strong> in one click, automatically bake the Camera + Animation before export.<br>
+🔸 📳 <strong>Add Camera Shake</strong> — layer a short handheld-style shake (Amplitude / Frequency / Pulses) on top of the camera's existing Location animation, starting at the current frame. Re-running it on an overlapping range replaces the previous shake automatically.<br>
+🔸 Bake animation for meshes with Constraints (Track To, Follow Path, Damped Track, etc.) with a single click.<br>
+🔸 <strong>Restore Baked Constraint</strong> to restore the original constraint and adjust the camera/mesh movement at any time.<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/xuathangloat.png" width="50%">
+  <img src="images/PLACEHOLDER_bakeAnimationCameraShake.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li>🧰 <strong>Mesh Utilities</strong> — one-click cleanup tools for exported meshes:<br>
+🔸 Batch <strong>Apply Rotation</strong> (preserving Location + Scale) and <strong>Apply Scale</strong> (preserving Location + Rotation).<br>
+🔸 <strong>Apply MNEMO Naming Convention</strong> — batch-rename selected meshes with an Island_/Building_/Landscape_ prefix + original name + index.<br>
+🔸 <strong>Fix Normals Per UV Island</strong> (radial outward) — more precise than standard Recalculate Normals.<br>
+🔸 🧱 <strong>Create Proxy Collision (Convex Hull)</strong> — duplicates the selected mesh and replaces each separate piece with its own Convex Hull, named so UE auto-detects it, enables Collision, and hides it from render. A Voxel Remesh fallback is also available.<br>
+🔸 ◻️ <strong>Convert Triangles to Quads</strong> — merges adjacent triangle faces back into quads, fixing visible diagonal seams (e.g. on glass panes).<br>
+🔸 🔗 <strong>Join Meshes</strong> and ✂️ <strong>Split Joined Mesh (by Loose Parts)</strong> — quickly combine or separate mesh pieces without leaving the panel.<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_meshUtilitiesPanel.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li><strong>UE Project Setup Checklist (13 steps, follow in order)</strong> — walks you from a bare UE project to a fully configured cinematic scene:<br>
+🔸 🌐 <strong>1. Enable Global Remote</strong> — one-time, per-UE-install Remote Execution setup; applies to every project opened with that install, original settings backed up automatically, with a <strong>Restore Remote to Original</strong> option.<br>
+🔸 <strong>2. Open / Reopen UE</strong> — launches UE directly from Blender, or opens UE's Project Browser if no project is set yet.<br>
+🔸 <strong>3. Enable Movie Render Queue Plugin</strong>, with an optional <strong>Glass Materials</strong> toggle that reveals all glass-related settings only when needed.<br>
+🔸 <strong>4. Create PBR / Glass Master Material</strong> (run once per project).<br>
+🔸 <strong>5–6. Close and Reopen UE</strong> so the new plugin/materials take effect.<br>
+🔸 <strong>7. Export Methods</strong> — pick one of 3 workflows (see below), with 🕘 folder-name history, Nanite Settings, and a per-export Two Sided option.<br>
+🔸 🎬 <strong>8. Create/Update Master Sequence</strong> (camera + meshes) and <strong>Bind Camera to Camera Cuts Track</strong>.<br>
+🔸 <strong>9. Set Filmback + FPS + Max Draw Distance</strong> (see dialog below).<br>
+🔸 <strong>10. Two Sided — Dry Run then Apply</strong>.<br>
+🔸 <strong>11. Save All — Level + Content</strong>.<br>
+🔸 <strong>12. Optional Add-ons</strong> (Trail Package) and <strong>13. Export VDB + Cinematic Setup</strong> (VDB tab).<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_projectSetupChecklist.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li>💾 <strong>Settings box</strong> — one place to configure and protect your setup:<br>
+🔸 Paste or <strong>auto-detect</strong> the <code>.uproject</code> path from a currently running UE Editor.<br>
+🔸 <strong>Save / Reload Config</strong>, plus <strong>Export Config Backup</strong> and <strong>Import Config Backup</strong> to move your configuration between machines or back it up externally.<br>
+🔸 Global paths (UE Editor, ffmpeg, Trail package folder) are shared across projects; per-project settings (Master Sequence path, MRQ/MP4 folders, FPS, color mode...) are saved next to each individual <code>.blend</code> file, so different projects never overwrite each other's values.<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_settingsConfigBackup.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li><strong>Batch Export FBX</strong>:<br>
+🔸 With Animation via Sequencer or static FBX, with automatic <strong>Nanite Settings</strong> applied on import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) and Apply Two Sided — all in one click.<br>
+🔸 With full PBR Texture support (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion).<br>
+🔸 There are 3 Export workflows, with 🕘 <strong>remembered folder/subfolder history</strong> so you don't have to retype names for recurring shots:<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_exportMethods3Workflows.png" width="50%">
 </p>
 <hr />
 <blockquote>
@@ -268,7 +328,7 @@
 </blockquote>
 </blockquote>
 <p align="center">
-  <img src="images/luong1.png" width="90%">
+  <img src="images/PLACEHOLDER_exportToUnrealFlow.png" width="90%">
 </p>
 <hr />
 <blockquote>
@@ -277,7 +337,7 @@
 </blockquote>
 </blockquote>
 <p align="center">
-  <img src="images/luong2.png" width="90%">
+  <img src="images/PLACEHOLDER_addFolderExportFlow.png" width="90%">
 </p>
 <hr />
 <blockquote>
@@ -286,71 +346,18 @@
 </blockquote>
 </blockquote>
 <p align="center">
-  <img src="images/luong3.png" width="90%">
+  <img src="images/PLACEHOLDER_importIntoFolderFlow.png" width="90%">
 </p>
 <hr />
 <blockquote>
 <ul>
-<li>Create a Camera with a <strong>Track To Constraint</strong> in one click, automatically bake the Camera + Animation before export — with <strong>Restore Baked Constraint</strong> to restore the original constraint and adjust the camera movement at any time. Transfer Camera Animation from Blender to Unreal Engine<br></li>
+<li>🎬 <strong>Master Sequence &amp; Camera tools</strong>:<br>
+🔸 <strong>Create / Update Master Sequence</strong> — merges related Level Sequences (camera + meshes, whether exported separately or together).<br>
+🔸 <strong>Bind Camera to Camera Cuts Track</strong> and <strong>Refresh Camera List</strong> — scans all CineCameraActors in the current UE Level and binds the one you pick.<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/bakeanimation.png" width="50%">
-</p>
-<hr />
-<blockquote>
-<ul>
-<li>Bake animation for meshes with Constraints (Track To, Follow Path, Damped Track, etc.) with a single click, with the option to restore the original animation.<br></li>
-</ul>
-</blockquote>
-<p align="center">
-  <img src="images/bakeanimationMesh.png" width="50%">
-</p>
-<hr />
-<blockquote>
-<ul>
-<li>Automatically create <strong>PBR Master Material</strong> and <strong>Glass Master Material</strong>, ready to use in UE</li>
-</ul>
-</blockquote>
-<p align="center">
-  <img src="images/PBR.png" width="50%">
-</p>
-<hr />
-<blockquote>
-<ul>
-<li>Batch rename Meshes, automatically categorize them by Island/Building/Landscape or a custom name with sequential numbering, with a single click</li>
-</ul>
-</blockquote>
-<p align="center">
-  <img src="images/doiten.png" width="50%">
-</p>
-<hr />
-<blockquote>
-<ul>
-<li>Batch Apply Rotation (preserving Location + Scale)</li>
-<li>Batch Apply Scale (preserving Location + Rotation)<br></li>
-</ul>
-</blockquote>
-<p align="center">
-  <img src="images/apply.png" width="50%">
-</p>
-<hr />
-<blockquote>
-<ul>
-<li>Batch Recalculate Normals per UV Island (radial outward) — more precise than standard Recalculate Normals<br></li>
-</ul>
-</blockquote>
-<p align="center">
-  <img src="images/Recalculate.png" width="50%">
-</p>
-<hr />
-<blockquote>
-<ul>
-<li>Automatically create a <strong>Sequencer</strong> for actors with animation<br></li>
-</ul>
-</blockquote>
-<p align="center">
-  <img src="images/seq.png" width="70%">
+  <img src="images/PLACEHOLDER_masterSequenceCameraBind.png" width="70%">
 </p>
 <hr />
 <blockquote>
@@ -359,35 +366,86 @@
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/quanlyfolder.png" width="50%">
+  <img src="images/PLACEHOLDER_outlinerFolders.png" width="50%">
 </p>
 <hr />
 <blockquote>
 <ul>
-<li>Batch export Niagara System Trail values and import them into UE with a single click. This feature requires the <strong>BlendReal_SpaceshipTraffic</strong> add-on<br></li>
+<li>Batch export Niagara System Trail values and import them into UE with a single click, plus <strong>live updates without re-export</strong>: push new <strong>Trail Params</strong> or <strong>Trail Positions</strong> to already-spawned ships. This feature requires the <strong>BlendReal_SpaceshipTraffic</strong> add-on<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/xuatparamtrail.png" width="50%">
+  <img src="images/PLACEHOLDER_trailPackageLiveUpdate.png" width="50%">
 </p>
 <hr />
 <blockquote>
 <ul>
-<li>1-click batch setup: Filmback/Sensor (16:9 or 9:16), Focal Length for all CineCameraActors, Master Sequence FPS, Max Draw Distance (with Force Always Loaded to prevent World Partition culling during rendering), Motion Blur, Exposure, and Emissive brightness<br></li>
+<li><strong>Set Filmback + FPS + Max Draw Distance</strong> — a single dialog to batch-configure:<br>
+🔸 Filmback/Sensor (16:9 Landscape or 9:16 Portrait for Shorts/Reels) and Focal Length for all CineCameraActors.<br>
+🔸 Master Sequence FPS and Max Draw Distance, with <strong>Force Always Loaded</strong> to prevent World Partition culling during rendering.<br>
+🔸 Motion Blur reduction and locked Manual Exposure, to prevent Auto Exposure from flickering the frame.<br>
+🔸 Batch Emissive Brightness for materials BlendReal previously baked emissive into (e.g. glowing windows).<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/filmback.png" width="50%">
+  <img src="images/PLACEHOLDER_filmbackDialogFull.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li>🪟 <strong>Glass Material system</strong>:<br>
+🔸 <strong>Create Glass Master Material</strong> (run once) and <strong>Apply Glass Material</strong> to instantly turn the active slot into glass.<br>
+🔸 Auto-detects glass materials by their Transmission value, with <strong>Global Defaults</strong> and <strong>Per-Material Override</strong> (tint, roughness, thickness, IOR...).<br>
+🔸 <strong>Select All Glass Objects</strong> to quickly re-select every glass mesh in the scene.<br>
+🔸 <strong>Update Glass Reflection</strong> and <strong>Force UDS Sky Reflection</strong> — refresh the Sky Light cubemap and correct the UDS Sky Light Mode on the currently open UE level, without re-exporting.<br>
+🔸 Optional <strong>Fix Glass Flicker in Movie Render Queue</strong> — removes flicker on glass surfaces during MRQ renders (trade-off: glass stops reflecting off-screen objects).<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_glassMaterialSystem.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li><strong>Two Sided workflow</strong>:<br>
+🔸 A safer <strong>per-export</strong> Two Sided option inside Export Methods, applied only to the meshes you're exporting right now.<br>
+🔸 A global <strong>Dry Run</strong> (preview how many Materials/Material Instances would be affected) followed by <strong>Apply</strong>, for when you need to fix Two Sided across the whole project at once.<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_twoSidedDryRunApply.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li>🗂️✔ <strong>Save All — Level + Content</strong> — one click forces Always Loaded on every actor in the level and saves the entire Level + Content, including External Actors, so nothing is left unsaved before closing UE.<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_saveAllLevelContent.png" width="50%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li>🎞️ <strong>Convert Render Sequence to MP4 (ffmpeg)</strong> — turn the EXR/PNG image sequence rendered by Movie Render Queue directly into a shareable MP4, without leaving Blender:<br>
+🔸 Auto-detects the MRQ output folder from your project, or point to a custom one.<br>
+🔸 Correct <strong>Linear EXR → sRGB</strong> color conversion so the result matches the UE Editor Preview, VLC, and After Effects.<br>
+🔸 Quality presets (Draft / Standard / High / Custom CRF) and an optional fix for glass/transparent edge fringing.<br>
+🔸 <strong>Delete Rendered Sequence</strong> afterward to free up disk space once you've confirmed the MP4 looks right.<br></li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_convertRenderSequenceMp4.png" width="50%">
 </p>
 <hr />
 <h3 id="uds-ultra-dynamic-sky-control_1">🔷 UDS - Ultra Dynamic Sky Control</h3>
 <blockquote>
 <ul>
-<li><strong>13 built-in cinematic sky presets</strong> (Golden Hour, Overcast, Night, Blue Moon, Dust Storm, etc.) — instantly choose a ready-made mood<br></li>
+<li><strong>13 built-in cinematic sky presets</strong>, now written around story beats to match your narrative's mood — from <em>Golden Hour — Hope</em> to <em>Overcast Heavy — Loss</em>, <em>Dust Storm — Violent Loss</em>, <em>Blue Moon — Tension</em>, and more — instantly choose a ready-made mood instead of dialing in dozens of sliders<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/presetUDS.png" width="50%">
+  <img src="images/PLACEHOLDER_udsPresetsMNEMO.png" width="50%">
 </p>
 <hr />
 <blockquote>
@@ -483,7 +541,7 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Cinematic Setup</strong> — quick setup dialog for Console Variables (Heterogeneous Volumes render quality), DirectionalLight, VDB Material, ExponentialHeightFog — automatically warns of conflicts with the UDS Sky/Fog system</li>
+<li><strong>Cinematic Setup</strong> — quick setup dialog for Console Variables (Heterogeneous Volumes render quality), DirectionalLight, VDB Material, ExponentialHeightFog — <strong>auto-detects an existing Ultra Dynamic Sky actor</strong> in the level to avoid double clouds/fog instead of just warning about it. Includes DirectionalLight sync from Blender (color + rotation), using a physically-verified sun-path formula for accurate shadow matching.</li>
 </ul>
 </blockquote>
 <p align="center">
@@ -492,11 +550,20 @@
 <hr />
 <blockquote>
 <ul>
-<li><strong>Diagnose Sequencer Bindings</strong> (read-only) + <strong>Clean Orphaned Bindings</strong> — clean up orphaned data if UE crashes during Place VDB</li>
+<li>🏛️ <strong>Cinematic Setup (Architecture / Landscape)</strong> — a new, lightweight one-shot version of Cinematic Setup for scenes that don't use VDB: sets up only the DirectionalLight and ExponentialHeightFog, with none of the VDB-only console variables or lighting</li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/Diagnose.png" width="60%">
+  <img src="images/PLACEHOLDER_cinematicSetupArchLandscape.png" width="60%">
+</p>
+<hr />
+<blockquote>
+<ul>
+<li><strong>Clean Orphaned Bindings</strong> — clean up leftover Sequencer bindings with a single click if UE crashed during a previous Place VDB run</li>
+</ul>
+</blockquote>
+<p align="center">
+  <img src="images/PLACEHOLDER_cleanOrphanedBindings.png" width="60%">
 </p>
 <hr />
 <blockquote>
@@ -524,7 +591,7 @@
 <p><img src="images/FAQ.png" width="100%"></p>
 <p><strong>✅ Does the add-on require Unreal Engine to use?</strong></p>
 <blockquote>
-<p>Not all features require Unreal Engine. Some features can be used directly in Blender. Features that use <strong>Remote Execution</strong> to directly apply Materials, Sky, Camera, and other settings to Unreal Engine require an Unreal Engine project to be open with <strong>Python Remote Execution</strong> enabled using the automatic setup button provided in the add-on UI.</p>
+<p>Not all features require Unreal Engine. Some features can be used directly in Blender. Features that use <strong>Remote Execution</strong> to directly apply Materials, Sky, Camera, and other settings to Unreal Engine require an Unreal Engine project to be open with <strong>Python Remote Execution</strong> enabled using the automatic, one-time setup button provided in the add-on UI.</p>
 </blockquote>
 <p align="center">
   <img src="images/faq01.png" width="48%">
@@ -556,7 +623,7 @@
 </blockquote>
 <p><strong>✅ How do I update the add-on?</strong></p>
 <blockquote>
-<p>Before updating, we recommend backing up your <strong>Presets</strong> and <strong>personal configuration</strong>. Then remove the current version of the add-on and install the latest version from the product page.</p>
+<p>Before updating, we recommend backing up your <strong>Presets</strong> and <strong>personal configuration</strong> (via <strong>Export Config Backup</strong>). Then remove the current version of the add-on and install the latest version from the product page.</p>
 </blockquote>
 <h2 id="11what-you-can-create"><span class="toc-only">11.What You Can Create</span></h2>
 <p><img src="images/whatyoucancreate.png" width="100%"></p>
