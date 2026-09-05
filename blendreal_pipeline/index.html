@@ -311,19 +311,24 @@
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/PLACEHOLDER_settingsConfigBackup.png" width="50%">
+  <img src="images/a02Global_vs_Local_fieldFn.png" width="90%">
 </p>
 <hr />
 <blockquote>
 <ul>
 <li><strong>Batch Export FBX</strong>:<br>
 🔸 With Animation via Sequencer or static FBX, with automatic <strong>Nanite Settings</strong> applied on import (Enable Nanite Support, Explicit Tangents, Lerp UVs, Shape Preservation = Preserve Area, Preserve Area for Opacity) and Apply Two Sided — all in one click.<br>
-🔸 With full PBR Texture support (Base Color, Metallic, Roughness, Normal, Specular, Emission, Alpha, Ambient Occlusion).<br>
-🔸 There are 3 Export workflows, with 🕘 <strong>remembered folder/subfolder history</strong> so you don't have to retype names for recurring shots:<br></li>
+🔸 With full PBR Texture support — 8 channels: BaseColor, Normal, Roughness, Metallic, AmbientOcclusion, Emissive, Opacity, Specular.<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/PLACEHOLDER_exportMethods3Workflows.png" width="50%">
+  <img src="images/a06channel8Fn.png" width="60%">
+</p>
+<blockquote>
+<p>🔸 There are 3 Export workflows, with 🕘 <strong>remembered folder/subfolder history</strong> so you don't have to retype names for recurring shots:<br></p>
+</blockquote>
+<p align="center">
+  <img src="images/a08ExportMethodFn.png" width="90%">
 </p>
 <hr />
 <blockquote>
@@ -361,12 +366,12 @@
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/PLACEHOLDER_masterSequenceCameraBind.png" width="70%">
+  <img src="images/a05Master_SequenceFn.png" width="90%">
 </p>
 <hr />
 <blockquote>
 <ul>
-<li>Automatically create dedicated Mesh, Camera, and VDB folders in the <strong>UE Outliner</strong> and organize the corresponding actors automatically.<br></li>
+<li>Automatically organize the <strong>UE Outliner</strong> — every actor an export spawns or updates (meshes and cameras together) is placed into one Outliner folder named after that export's destination folder, so nothing needs manual sorting afterward.<br></li>
 </ul>
 </blockquote>
 <p align="center">
@@ -402,11 +407,12 @@
 🔸 Auto-detects glass materials by their Transmission value, with <strong>Global Defaults</strong> and <strong>Per-Material Override</strong> (tint, roughness, thickness, IOR...).<br>
 🔸 <strong>Select All Glass Objects</strong> to quickly re-select every glass mesh in the scene.<br>
 🔸 <strong>Update Glass Reflection</strong> and <strong>Force UDS Sky Reflection</strong> — refresh the Sky Light cubemap and correct the UDS Sky Light Mode on the currently open UE level, without re-exporting.<br>
-🔸 Optional <strong>Fix Glass Flicker in Movie Render Queue</strong> — removes flicker on glass surfaces during MRQ renders (trade-off: glass stops reflecting off-screen objects).<br></li>
+🔸 Optional <strong>Fix Glass Flicker in Movie Render Queue</strong> — removes flicker on glass surfaces during MRQ renders (trade-off: glass stops reflecting off-screen objects).<br>
+🔸 ℹ️ For distant objects (e.g. far mountains) to reflect on glass, both steps matter: <strong>Cinematic Setup (Architecture / Landscape)</strong> keeps them from being culled out of the scene, then <strong>Update Glass Reflection</strong> makes Lumen actually trace and capture that far. Skip either one and the reflection stays empty.<br></li>
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/PLACEHOLDER_glassMaterialSystem.png" width="50%">
+  <img src="images/a04GlassReflectionFn.png" width="90%">
 </p>
 <hr />
 <blockquote>
@@ -486,7 +492,7 @@
 </ul>
 </blockquote>
 <p align="center">
-  <img src="images/3buocVDB.png" width="50%">
+  <img src="images/a07VDBFn.png" width="90%">
 </p>
 <hr />
 <blockquote>
@@ -554,7 +560,7 @@
 <hr />
 <blockquote>
 <ul>
-<li>🏛️ <strong>Cinematic Setup (Architecture / Landscape)</strong> — a new, lightweight one-shot version of Cinematic Setup for scenes that don't use VDB: sets up only the DirectionalLight and ExponentialHeightFog, with none of the VDB-only console variables or lighting</li>
+<li>🏛️ <strong>Cinematic Setup (Architecture / Landscape)</strong> — a lightweight one-shot version of Cinematic Setup for scenes that don't use VDB: sets up the DirectionalLight and ExponentialHeightFog, and applies the same scene-wide <strong>View Distance Scale</strong> and <strong>Ray Tracing Culling</strong> console variables as the main Cinematic Setup (needed so distant geometry like far mountains isn't culled out of the scene) — without any of the VDB-specific material or lighting settings</li>
 </ul>
 </blockquote>
 <p align="center">
