@@ -653,6 +653,7 @@
 <blockquote>
 <p>This one-time setup gets a brand-new project ready for every BlendReal export that follows</p>
 </blockquote>
+<p><a href="https://www.youtube.com/watch?v=Bp0I6JN2934"><img alt="Connecting Blender to Your UE Project" src="images/zConnecting.png" /></a></p>
 <p><strong>🔸Global vs. Local Fields</strong></p>
 <blockquote>
 <p><strong>Global vs. Local Settings — What Gets Saved Where</strong></p>
@@ -721,6 +722,16 @@
 <p><a href="https://www.youtube.com/watch?v=t3Yod5hqbmk"><img alt="How to Export Large Spaceship Traffic Scenes to Unreal Engine | BlendReal" src="images/zExportLargeSpaceshipTraffic.png" /></a></p>
 <p><a href="https://www.youtube.com/watch?v=nZIB8Hrkt7I"><img alt="Vegetation &amp; foliage showcase rendered in Unreal Engine 5 using the BlendReal® addon" src="images/z03Treesc.png" /></a></p>
 <p><a href="https://www.youtube.com/watch?v=WVp3RxxFmDA"><img alt="Export vegetation and complex plant assets from Blender to UE5" src="images/zExportVegetation.png" /></a></p>
+<blockquote>
+<p><strong>Pick one of 3 export methods.</strong> Export to Unreal — a straight export of whatever's currently selected, for quick single shots. Add New/Update Folder — exports into a brand-new or existing named folder, ideal for organizing a multi-shot project as it grows. Import into Folder — exports into an existing folder you've already used before, picked from history, so repeat exports into the same place take one click.</p>
+<p><strong>Batch Export Settings.</strong> Legacy (Single Shot) sends everything to UE in one call — simplest, no overhead. Batched by Poly Count splits a very large export into chunks by a poly-count threshold you set, fully finishing each batch in UE (import + material + actor spawn) and freeing memory before starting the next — slower overall, but keeps peak RAM/VRAM lower on huge scenes.</p>
+<p><strong>Nanite Settings.</strong> Enable Nanite Support is on by default for imported StaticMeshes — disable it only for meshes that need Vertex Animation Texture or complex World Position Offset. With Nanite on, you also get: Explicit Tangents (preserves original tangents instead of letting Nanite recompute them — recommended for ComfyUI/Trellis meshes with tiny or irregular UVs), Lerp UVs (smoother UV interpolation on fallback LOD meshes), Shape Preservation = Preserve Area (stops foliage thinning out at a distance), and — only shown when Glass Materials is enabled — Auto-disable Nanite on Glass (forces Nanite off specifically on glass materials, since Nanite re-triangulates geometry its own way and can leave a visible diagonal seam in Lumen reflections on flat glass panes).</p>
+<p><strong>Preserve Area for Opacity.</strong> Auto-enables mip scaling on Opacity/Alpha textures so foliage using Masked materials doesn't visibly fade out at a distance.</p>
+<p><strong>Advanced Import Settings (Collision / Lightmap UV).</strong> Two manual override switches for UE's own automatic Auto Generate Collision and Generate Lightmap UVs import steps. These are troubleshooting switches, not a guaranteed fix for any specific slow-import case — use them if you suspect one of these two importer steps is the reason a particular mesh is importing unusually slowly, and check the tooltip in-app for the current recommended default for each.</p>
+<p><strong>Two Sided (current export only).</strong> Sets Two Sided=True on Material Instances of just the meshes in this export — safer than the separate, addon-wide Two Sided tool further below, since it can never touch unrelated assets elsewhere in your project.</p>
+<p><strong>Combine Meshes.</strong> Available whenever more than one object is selected — merges everything into a single exported mesh instead of one FBX per object.</p>
+<p><strong>Animation Export.</strong> Appears automatically for skeletal meshes or objects with animation. Turn on Export Animations, then choose Animation Sample Mode: Every Frame always matches Blender exactly (including Bezier easing) but is heavier with many animated meshes at once; Original Keyframes Only is lighter but will drift from Blender if your keyframes use Bezier easing. Choose Level Sequence mode: Shared Sequence puts everything animated in this export into one sequence; Separate Sequence Per Object gives each object its own, so you can combine multiple shots later with a Shot Track. The Subfolder Sequence field remembers all of these settings per name, so reusing the same subfolder auto-fills them again next time.</p>
+</blockquote>
               
             </div>
           </div><footer>
