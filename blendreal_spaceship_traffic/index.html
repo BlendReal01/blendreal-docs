@@ -101,15 +101,17 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#blendreal-spaceship-traffic-tutorial-videos">BlendReal® Spaceship Traffic Tutorial Videos</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#1basic-traffic-setup-saving-presets">1.Basic Traffic Setup &amp; Saving Presets</a>
+    <li class="toctree-l3"><a class="reference internal" href="#1blendreal-camera-system-track-to-follow-curve-camera-shake-100-consistent-in-blender-ue5">1.BlendReal Camera System: Track-To, Follow Curve &amp; Camera Shake - 100% Consistent in Blender &amp; UE5</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2configuring-traffic-streams-lane-grid">2.Configuring Traffic Streams &amp; Lane Grid</a>
+    <li class="toctree-l3"><a class="reference internal" href="#2basic-traffic-setup-saving-presets">2.Basic Traffic Setup &amp; Saving Presets</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#3building-ship-avoidance-explained">3.Building &amp; Ship Avoidance Explained</a>
+    <li class="toctree-l3"><a class="reference internal" href="#3configuring-traffic-streams-lane-grid">3.Configuring Traffic Streams &amp; Lane Grid</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#4flight-path-tools">4.Flight Path Tools</a>
+    <li class="toctree-l3"><a class="reference internal" href="#4building-ship-avoidance-explained">4.Building &amp; Ship Avoidance Explained</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#5troubleshooting">5.Troubleshooting</a>
+    <li class="toctree-l3"><a class="reference internal" href="#5flight-path-tools">5.Flight Path Tools</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6troubleshooting">6.Troubleshooting</a>
     </li>
         </ul>
     </li>
@@ -285,8 +287,11 @@
 <ul>
 <li><strong>Staggered Slots — Horizontal</strong> / <strong>— Vertical (Z)</strong> — the number of horizontal/vertical offset positions in a lane's staggered formation, letting multiple ships share a lane without overlapping</li>
 <li><strong>Vertical / Horizontal Step Ratio</strong> — the vertical (Z) step = this ratio × the horizontal step — usually kept below 1, since the Z gap between levels is limited</li>
-<li><strong>Group Ships By Size</strong> — OFF (default, same as previous versions): ships are spread across lanes in list order, and the staggered step is computed once from the largest ship radius in the WHOLE stream. ON: ships are first grouped by size (see <strong>Size Grouping Threshold (%)</strong> — e.g. 50 = up to 1.5x that group's smallest radius), each group gets its own lane(s), keeping small-ship lanes tightly packed instead of matching the stream's largest ship</li>
+<li><strong>Group Ships By Size</strong> — OFF (default, same as previous versions): the staggered step is computed once from the largest ship radius in the WHOLE stream. ON: ships are first grouped by size (see <strong>Size Grouping Threshold (%)</strong> — e.g. 50 = up to 1.5x that group's smallest radius), tightening the Staggered Formation spacing per lane based on whichever ships actually ended up there, instead of always sizing for the stream's single largest ship</li>
 </ul>
+<blockquote>
+<p>ℹ️ <strong>When buildings exist in the scene</strong>, Gap-Fit (see <strong>Building Avoidance</strong> below) already assigns ships to lanes by their real size automatically — Group Ships By Size no longer decides <em>which</em> lane a ship goes to in that case, but it still tightens the Staggered Formation spacing per lane the same way described above.</p>
+</blockquote>
 <p align="center">
   <img src="images/ShipAvoidance.png" width="40%">
 </p>
@@ -398,8 +403,17 @@ No — this is the <strong>Boundary Lane</strong> fallback described in <strong>
 <p>✅<strong>Why are there Camera Track-To / Camera Shake buttons in a spaceship traffic add-on?</strong><br>
 They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipeline UE5</strong>, included here too so you don't need to switch add-ons for basic camera work. Both add-ons share the same Bake/Restore data format, so a camera baked in one can be restored in the other.</p>
 <h2 id="blendreal-spaceship-traffic-tutorial-videos">BlendReal® Spaceship Traffic Tutorial Videos</h2>
-<h3 id="1basic-traffic-setup-saving-presets">1.Basic Traffic Setup &amp; Saving Presets</h3>
+<h3 id="1blendreal-camera-system-track-to-follow-curve-camera-shake-100-consistent-in-blender-ue5">1.BlendReal Camera System: Track-To, Follow Curve &amp; Camera Shake - 100% Consistent in Blender &amp; UE5</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
+<p>The same Camera toolkit shared with <strong>BlendReal® - Cinematic Pipeline UE5</strong> — set up a Track-To camera, send it flying along any curve, add a handheld shake, bake it, and export straight to Unreal Engine 5 with a 1:1 match.</p>
+<p><strong>Create Camera Track-To Constraint.</strong> One click spawns a Camera + a target Empty ("CameraTarget") already linked with a Track To constraint — more stable to preview live than a Damped Track constraint.</p>
+<p><strong>Follow Curve (Camera).</strong> Attach the Camera to any of the 7 NURBS Path presets (or a hand-drawn curve) — Follow Path only drives its POSITION along the curve, leaving 100% of the aim/rotation to the Track To constraint, so the camera keeps looking exactly where you pointed it while flying the path.</p>
+<p><strong>Bake Animation.</strong> Converts the live Camera Track-To + Follow Curve setup into real keyframes with one click, backing up every Constraint present (Follow Path + Track To together) so nothing is lost.</p>
+<p><strong>Restore Baked Constraint.</strong> Brings back the exact original Constraint(s) + Target(s) afterward, so you can re-edit the camera move and re-bake instead of starting over.</p>
+<p><strong>Add Camera Shake.</strong> Layers a short handheld-style shake on top of the Camera's existing Location animation — Amplitude, Frequency, Pulses, plus <strong>Target Shake Ratio</strong> so the Track-To target wobbles too (phase-shifted, so the aim direction drifts naturally instead of staying locked dead-on target).</p>
+<p><strong>Export to Unreal Engine 5.</strong> The Camera appears in the UE Outliner automatically organized, with zero manual setup — matching the Blender camera's position, rotation, and timing exactly.</p>
+<hr />
+<h3 id="2basic-traffic-setup-saving-presets">2.Basic Traffic Setup &amp; Saving Presets</h3>
 <p><strong>From importing ships to generating a full traffic simulation, then saving your setup as a reusable preset.</strong></p>
 <p><strong>Ship Collection / Building Collection.</strong> Two named Collections that define which objects in your scene count as "ships" versus "buildings" for the entire system.</p>
 <p><strong>Create Collections (Ships + Buildings)</strong>. One click creates both collections if they don't exist yet.</p>
@@ -409,8 +423,7 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Check Collections.</strong> A read-only sanity check that reports how many ships and buildings your current collections actually contain before you commit to Generate Traffic.</p>
 <p><strong>Save / Load / Delete Preset.</strong> Save your entire configuration — every panel, not just this one — as a named preset, and switch between different setups for different scenes in seconds via Choose &amp; Load Preset / Choose &amp; Delete Preset.</p>
 <hr />
-<h3 id="2configuring-traffic-streams-lane-grid">2.Configuring Traffic Streams &amp; Lane Grid</h3>
-<p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
+<h3 id="3configuring-traffic-streams-lane-grid">3.Configuring Traffic Streams &amp; Lane Grid</h3>
 <p>Split your traffic into 3 independently-tuned streams and control exactly how many lanes, intersections, and altitude levels your traffic system generates.</p>
 <p><strong>Split Into 3 Separate Streams (Civilian / Cargo / Military).</strong> Routes ships into 3 separate collections, each with its own Speed Factor (Civilian 0.85, Cargo 0.6, Military 1.35 by default) and its own non-overlapping lanes, while still avoiding each other at intersections.</p>
 <p><strong>Distance Between Streams.</strong> Keeps the 3 streams physically separated so they never fly through one another.</p>
@@ -420,8 +433,7 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Group Ships By Size.</strong> An optional toggle (with its own Size Grouping Threshold %) that groups similarly-sized ships together, so a tiny fighter isn't forced into the same lane spacing as a capital ship.</p>
 <p><strong>Auto-Fill From Ship Sizes.</strong> Automatically calculates sensible lane-spacing values by scanning the actual size of the ships already in your collection, instead of guessing numbers by hand.</p>
 <hr />
-<h3 id="3building-ship-avoidance-explained">3.Building &amp; Ship Avoidance Explained</h3>
-<p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
+<h3 id="4building-ship-avoidance-explained">4.Building &amp; Ship Avoidance Explained</h3>
 <p>See how BlendReal's raycast-based building avoidance and Space-Time Reservation ship avoidance work together.</p>
 <p><strong>Gap-Fit Building Avoidance.</strong> Before any ship moves, the add-on sweeps every lane to find the narrowest real gap between buildings a ship passing through it would face, accounting for the Building Collision Margin (default 5.0) and the Staggered Formation's worst-case sideways reach — then only assigns ships to lanes wide enough for their own size, so every ship flies one straight line with zero mid-flight direction changes.</p>
 <p><strong>Boundary Lane.</strong> Ships too wide for any real gap in the lane grid (or blocked outright by a building sitting on the centerline) are automatically routed around the entire building cluster instead, on an auto-generated lane placed just outside its footprint.</p>
@@ -429,14 +441,12 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Fallback Delay Step / Max Delay Attempts.</strong> If a ship's path still conflicts after checking, it's delayed by a set number of frames (Fallback Delay Step) and retried, up to Max Delay Attempts times, before the system reports a conflict it couldn't resolve.</p>
 <p><strong>Random Seed.</strong> Makes the entire avoidance/generation result reproducible — running Generate Traffic again with the same seed gives you the exact same layout.</p>
 <hr />
-<h3 id="4flight-path-tools">4.Flight Path Tools</h3>
-<p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
+<h3 id="5flight-path-tools">5.Flight Path Tools</h3>
 <p>7 built-in NURBS path presets plus Follow Curve and Bake Auto Bank for custom ship movement</p>
 <p><strong>7 NURBS Path Presets.</strong> Straight, Arc, Loop, S-Curve, Zigzag, Spiral, and Figure-8, each spawned at your active object's location (or the 3D Cursor), with shape-specific controls — Arc Angle for Arc, Amplitude/Wave Cycles for S-Curve and Zigzag, Turns/Height for Spiral.</p>
 <p><strong>Follow Curve.</strong> Attaches a ship — or a Camera — to any of these paths (or a hand-drawn curve) as a Follow Path target.</p>
 <hr />
-<h3 id="5troubleshooting">5.Troubleshooting</h3>
-<p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
+<h3 id="6troubleshooting">6.Troubleshooting</h3>
 <p>Fix ships flying in the wrong direction and resolve collision-avoidance warnings.</p>
 <p><strong>Ship Nose Axis (Local).</strong> If ships fly upside-down or sideways after Generate Traffic, this tells the system which local axis on your ship model actually points "forward" — fixing the orientation without needing to re-model or re-orient every ship by hand.</p>
 <p><strong>Staggered Slots / Max Delay Attempts (increase these).</strong> If you see a collision-avoidance warning after Generate Traffic, raising these two values gives the Space-Time Reservation system more room and more attempts to find a conflict-free path before it reports failure.</p>
