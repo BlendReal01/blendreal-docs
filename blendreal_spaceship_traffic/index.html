@@ -370,6 +370,17 @@ Yes — the fastest way is to click <strong>⚡ Auto-Fill From Ship Sizes</stron
 Not exactly — it's a quick way to preview whether the spacing, altitude levels, and density look reasonable before running the real thing. The final, accurate result (real collision avoidance + real animation) always comes from clicking <strong>▶ Generate Traffic</strong> on the real ships.</p>
 <p>✅<strong>Where is Bake Auto Bank (automatic banking based on the flight path's curvature)?</strong><br>
 This feature is currently an internal work-in-progress and is not yet shown in the panel in this build — for now, adjust <strong>Follow Path Tilt</strong> manually via keyframes to create a banking effect.</p>
+<h1 id="blendreal-spaceship-traffic-tutorial">BlendReal® Spaceship Traffic Tutorial</h1>
+<h2 id="1basic-traffic-setup-saving-presets">1.Basic Traffic Setup &amp; Saving Presets</h2>
+<p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
+<p><strong>From importing ships to generating a full traffic simulation, then saving your setup as a reusable preset.</strong></p>
+<p><strong>Ship Collection / Building Collection.</strong> Two named Collections that define which objects in your scene count as "ships" versus "buildings" for the entire system.</p>
+<p><strong>Create Collections (Ships + Buildings)</strong>. One click creates both collections if they don't exist yet.</p>
+<p><strong>Import Ships From Folder.</strong> Batch-imports every ship .blend file in a chosen folder straight into the Ship Collection, instead of appending each one by hand.</p>
+<p><strong>Generate Traffic. The main button</strong> — runs the entire pipeline (lanes, avoidance, animation) in one pass and animates every ship at once, based on every other setting across the addon's panels.</p>
+<p><strong>Clear Animation.</strong> Removes the generated animation so you can regenerate cleanly after changing settings, instead of it stacking on top of the previous result.</p>
+<p><strong>Check Collections.</strong> A read-only sanity check that reports how many ships and buildings your current collections actually contain before you commit to Generate Traffic.</p>
+<p><strong>Save / Load / Delete Preset.</strong> Save your entire configuration — every panel, not just this one — as a named preset, and switch between different setups for different scenes in seconds via Choose &amp; Load Preset / Choose &amp; Delete Preset.</p>
               
             </div>
           </div><footer>
