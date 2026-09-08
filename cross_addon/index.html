@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Cross - Addon - BlendReal Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Cross - Addon";
+        var mkdocs_page_input_path = "cross_addon\\index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> BlendReal Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">BlendReal</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../blendreal_pipeline/">Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">BlendReal Spaceship Traffic</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../blendreal_spaceship_traffic/">Overview</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">BlendReal Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Cross - Addon</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="cross-addon">Cross - Addon</h1>
+<h2 id="cross-addon-tutorial-videos">Cross - addon Tutorial Videos</h2>
+<h3 id="1mesh-utilities-works-in-both-add-ons">1.Mesh Utilities (works in both add-ons)</h3>
+<p>Batch rename, apply rotation/scale, recalculate normals, and create collision proxies — the same toolset, available standalone in either add-on.</p>
+<blockquote>
+<p><strong>Apply Rotation / Apply Scale.</strong> Bakes Rotation (or Scale) into the mesh data on every selected object while preserving the other transforms, across a multi-selection at once.</p>
+<p><strong>Fix Normals Per UV Island.</strong> Recalculates normals outward per UV island using a radial direction, independent of mesh topology — works even when a few bad faces are surrounded by correct ones (non-manifold gaps), which is exactly where Blender's own Recalculate Outside or Merge+Recalculate tends to fail.</p>
+<p><strong>Apply MNEMO Naming Convention.</strong> Batch-renames selected meshes with the MNEMO prefix system (Island_ / Building_ / Landscape_) plus the original name and an index, so exported meshes get their Tag and Collision behavior auto-assigned in UE. A Custom mode is also available for a freeform prefix with no auto-assignment.</p>
+<p><strong>Create Proxy Collision (Convex Hull).</strong> Duplicates a selected MNEMO-named mesh and replaces each separate piece with its own Convex Hull — always clean regardless of errors in the source mesh. It's named so UE auto-detects it, enables Collision, and hides it from render.</p>
+<p><strong>Convert Triangles to Quads.</strong> Merges adjacent triangle faces back into quads (same as Blender's own Tris to Quads) — fixes visible diagonal seams across rectangular faces such as glass panes.</p>
+<p><strong>Join Meshes (Ctrl+J) / Split Joined Mesh (by Loose Parts).</strong> A matched pair: Join combines selected meshes into one object; Split reverses a Join back into its original separate pieces — only works on parts that weren't actually welded together.</p>
+<p>Note: this exact toolset is shared code between BlendReal — Cinematic Pipeline UE5 and BlendReal — Spaceship Traffic, which is why it's covered once here instead of twice.</p>
+</blockquote>
+<hr />
+<h3 id="2exhaust-trail-export-spaceship-traffic-unreal-niagara">2.Exhaust Trail Export — Spaceship Traffic → Unreal Niagara</h3>
+<p>Transfer spaceship engine exhaust trails from Blender straight into Unreal Engine's Niagara system.</p>
+<blockquote>
+<p><strong>Compute &amp; Preview Trail Points.</strong> Scans selected ships (or whole collections) and computes exhaust trail marker points along their already-baked flight paths, previewable directly in Blender before exporting anything.</p>
+<p><strong>Trail Include/Exclude Checklist.</strong> Pick exactly which ships or collections should get a trail, instead of an all-or-nothing switch — useful when only some ships in a shot need visible exhaust.</p>
+<p><strong>Niagara Parameters.</strong> Trail Height Ratio, Trail Side Ratio, Hot Phase Duration, Noise Intensity, Trail Lifetime, Trail Opacity, and Ribbon Width Ratio, plus separate trail colors per stream (Civilian/Cargo/Military) or a single Trail Color if you're not using the 3-stream split.</p>
+<p><strong>Export to Niagara System.</strong> Sends the computed trail data directly into your UE project's Niagara System at the path you specify — requires both BlendReal add-ons installed.</p>
+<p><strong>Update Trail Params / Update Trail Positions (Live).</strong> After the first export, push new parameter values or respawn marker positions straight into the already-running UE session without a full re-export.</p>
+<p><strong>Scan for Trail Systems / Recompute ALL Ships.</strong> Utility tools to find existing trail setups already exported to a folder and reuse them, or force-recompute every ship's marker positions from scratch if something changed upstream — for example, if flight paths were re-baked after the trail was first computed.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
