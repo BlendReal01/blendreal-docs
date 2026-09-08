@@ -408,6 +408,7 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Clear Animation.</strong> Removes the generated animation so you can regenerate cleanly after changing settings, instead of it stacking on top of the previous result.</p>
 <p><strong>Check Collections.</strong> A read-only sanity check that reports how many ships and buildings your current collections actually contain before you commit to Generate Traffic.</p>
 <p><strong>Save / Load / Delete Preset.</strong> Save your entire configuration — every panel, not just this one — as a named preset, and switch between different setups for different scenes in seconds via Choose &amp; Load Preset / Choose &amp; Delete Preset.</p>
+<hr />
 <h3 id="2configuring-traffic-streams-lane-grid">2.Configuring Traffic Streams &amp; Lane Grid</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>Split your traffic into 3 independently-tuned streams and control exactly how many lanes, intersections, and altitude levels your traffic system generates.</p>
@@ -418,6 +419,7 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Staggered Slots &amp; Step Ratio.</strong> Staggered Slots — Horizontal/Vertical and the Vertical/Horizontal Step Ratio fine-tune how ships queue at intersections so they don't visibly bunch up.</p>
 <p><strong>Group Ships By Size.</strong> An optional toggle (with its own Size Grouping Threshold %) that groups similarly-sized ships together, so a tiny fighter isn't forced into the same lane spacing as a capital ship.</p>
 <p><strong>Auto-Fill From Ship Sizes.</strong> Automatically calculates sensible lane-spacing values by scanning the actual size of the ships already in your collection, instead of guessing numbers by hand.</p>
+<hr />
 <h3 id="3building-ship-avoidance-explained">3.Building &amp; Ship Avoidance Explained</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>See how BlendReal's raycast-based building avoidance and Space-Time Reservation ship avoidance work together.</p>
@@ -426,11 +428,13 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Space-Time Reservation Ship Avoidance.</strong> This is the real avoidance engine, and it's the addon's core selling point: it doesn't offset ships randomly. It reserves each ship's exact path as a function of both position and frame (time), then checks every new ship's path for its closest distance to already-reserved paths within the overlapping time window — genuinely keeping a Safety Distance (Ship Hull Outer Edge) rather than guessing.</p>
 <p><strong>Fallback Delay Step / Max Delay Attempts.</strong> If a ship's path still conflicts after checking, it's delayed by a set number of frames (Fallback Delay Step) and retried, up to Max Delay Attempts times, before the system reports a conflict it couldn't resolve.</p>
 <p><strong>Random Seed.</strong> Makes the entire avoidance/generation result reproducible — running Generate Traffic again with the same seed gives you the exact same layout.</p>
+<hr />
 <h3 id="4flight-path-tools">4.Flight Path Tools</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>7 built-in NURBS path presets plus Follow Curve and Bake Auto Bank for custom ship movement</p>
 <p><strong>7 NURBS Path Presets.</strong> Straight, Arc, Loop, S-Curve, Zigzag, Spiral, and Figure-8, each spawned at your active object's location (or the 3D Cursor), with shape-specific controls — Arc Angle for Arc, Amplitude/Wave Cycles for S-Curve and Zigzag, Turns/Height for Spiral.</p>
 <p><strong>Follow Curve.</strong> Attaches a ship — or a Camera — to any of these paths (or a hand-drawn curve) as a Follow Path target.</p>
+<hr />
 <h3 id="5troubleshooting">5.Troubleshooting</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>Fix ships flying in the wrong direction and resolve collision-avoidance warnings.</p>
