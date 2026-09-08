@@ -103,10 +103,22 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#1basic-traffic-setup-saving-presets">1.Basic Traffic Setup &amp; Saving Presets</a>
     </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#save-load-delete-preset-save-your-entire-configuration-every-panel-not-just-this-one-as-a-named-preset-and-switch-between-different-setups-for-different-scenes-in-seconds-via-choose-load-preset-choose-delete-preset">Save / Load / Delete Preset. Save your entire configuration — every panel, not just this one — as a named preset, and switch between different setups for different scenes in seconds via Choose &amp; Load Preset / Choose &amp; Delete Preset.</a>
+        <ul>
     <li class="toctree-l3"><a class="reference internal" href="#2configuring-traffic-streams-lane-grid">2.Configuring Traffic Streams &amp; Lane Grid</a>
     </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#auto-fill-from-ship-sizes-automatically-calculates-sensible-lane-spacing-values-by-scanning-the-actual-size-of-the-ships-already-in-your-collection-instead-of-guessing-numbers-by-hand">Auto-Fill From Ship Sizes. Automatically calculates sensible lane-spacing values by scanning the actual size of the ships already in your collection, instead of guessing numbers by hand.</a>
+        <ul>
     <li class="toctree-l3"><a class="reference internal" href="#3building-ship-avoidance-explained">3.Building &amp; Ship Avoidance Explained</a>
     </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#random-seed-makes-the-entire-avoidancegeneration-result-reproducible-running-generate-traffic-again-with-the-same-seed-gives-you-the-exact-same-layout">Random Seed. Makes the entire avoidance/generation result reproducible — running Generate Traffic again with the same seed gives you the exact same layout.</a>
+        <ul>
     <li class="toctree-l3"><a class="reference internal" href="#4flight-path-tools">4.Flight Path Tools</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#5troubleshooting">5.Troubleshooting</a>
@@ -143,7 +155,7 @@
                 <h1 id="blendreal-spaceship-traffic">BlendReal® Spaceship Traffic</h1>
 <ul>
 <li>
-<p>Procedural Blender add-on for spaceship traffic — automatically generates lane/intersection networks, avoids buildings using real raycasts, and performs true ship-to-ship avoidance using a Space-Time Reservation system. Includes a flight path toolkit (7 NURBS Path presets + Follow Curve), a Bake Animation/Restore Constraint toolkit, mesh utilities, and an optional engine exhaust effect export to Unreal Niagara via BlendReal®.</p>
+<p>Procedural Blender add-on for spaceship traffic — automatically generates lane/intersection networks, avoids buildings by pre-checking real gaps between them so every ship flies a single straight line with zero mid-flight direction changes, and performs true ship-to-ship avoidance using a Space-Time Reservation system. Includes a flight path toolkit (7 NURBS Path presets + Follow Curve for Mesh or Camera), a shared Camera Track-To / Camera Shake / Bake Animation / Restore Constraint toolkit, mesh utilities, and an optional engine exhaust effect export to Unreal Niagara via BlendReal®.</p>
 </li>
 <li>
 <p>The add-on operates in <strong>Standalone Mode — Unreal Engine is not required</strong> — all traffic features run entirely within Blender.</p>
@@ -179,7 +191,7 @@
 <li><strong>Import Ships</strong>: still in <strong>📦 Streams &amp; Collections</strong> — select the folder containing the spaceship <code>.blend</code> files in <strong>Ship File Folder</strong>, choose which stream to import them into (<strong>Import Into Stream</strong>), then click <strong>📥 Import Ships From Folder</strong>. Ships can all sit on top of each other at the origin at this point — Generate Traffic will redistribute them automatically</li>
 <li><strong>Add Buildings to the Collection</strong>: manually drag and drop the building objects into the created Collection in the Outliner</li>
 <li><strong>Click ⚡ Auto-Fill From Ship Sizes</strong> (inside the <strong>🛣️ Lanes</strong> section) — this is the <strong>recommended first step</strong>: the add-on automatically computes most of the lane/altitude spacing values based on the actual size of your imported ships instead of you guessing numbers by hand. Everything stays freely editable afterward — Generate Traffic will NOT overwrite these values</li>
-<li><strong>Preview the layout (optional)</strong>: also inside <strong>🛣️ Lanes</strong>, click <strong>👁 Create Wireframe</strong>, then adjust the Lane/Streams/Formation fields to see whether the ship placeholder boxes are arranged the way you want (see <strong>Live Layout Preview</strong> below)</li>
+<li><strong>Preview the layout (optional)</strong>: also inside <strong>🛣️ Lanes</strong>, click <strong>👁 Create ShipProxy</strong>, then adjust the Lane/Streams/Formation fields to see whether the ship placeholder boxes are arranged the way you want (see <strong>Live Layout Preview</strong> below)</li>
 <li>Click <strong>▶ Generate Traffic</strong> — the add-on automatically generates animation for all ships, with real building and ship avoidance</li>
 <li>To start over: click <strong>✕ Clear Animation</strong></li>
 <li>To view the system report: click <strong>🔍 Check Collections</strong> (found inside Streams &amp; Collections; output is displayed in the System Console)</li>
@@ -198,8 +210,9 @@
 - <strong>Arc Angle</strong> — Arc only: how many degrees the arc sweeps
 - <strong>Amplitude</strong> / <strong>Wave Cycles</strong> — S-Curve/Zigzag only: how far the path swings side to side, and how many oscillations
 - <strong>Turns</strong> / <strong>Height</strong> — Spiral only: number of full rotations and total distance travelled</p>
-<p><strong>Follow Curve</strong>: select exactly 1 mesh + 1 curve, then click — automatically adds a Follow Path constraint (named "BlendReal Follow Path"), along with <strong>Curve Resolution</strong> (how smooth the curve itself is). You only need to keyframe the 2 values that appear right below while that ship is selected: <strong>Follow Path Distance</strong> (actual distance in Blender units, not a 0–1 ratio) and <strong>Follow Path Tilt</strong> (additional banking angle).</p>
+<p><strong>Follow Curve</strong>: select exactly 1 mesh <strong>or camera</strong> + 1 curve (any order), then click — automatically adds a Follow Path constraint (named "BlendReal Follow Path"), along with <strong>Curve Resolution</strong> (how smooth the curve itself is). You only need to keyframe the 2 values that appear right below while that object is selected: <strong>Follow Path Distance</strong> (actual distance in Blender units, not a 0–1 ratio) and <strong>Follow Path Tilt</strong> (additional banking angle).</p>
 <blockquote>
+<p>🎥 <strong>Camera-specific behavior</strong>: if the followed object is a Camera, Follow Path only drives its POSITION along the curve — it does <strong>not</strong> rotate the camera to match the curve's tangent, and Follow Path Tilt has no visible effect. This is on purpose: it leaves 100% of the aim/rotation to whatever the Camera already has (typically a Track To constraint from <strong>Create Camera Track-To Constraint</strong>, see the Bake Animation section below), so the camera keeps looking exactly where you pointed it while still flying along the curve.</p>
 <p>⚠️ The <strong>Bake Auto Bank</strong> feature (automatically computing the banking angle from the curve's curvature) is currently an <strong>internal work-in-progress (WIP)</strong> and is <strong>not shown in the panel</strong> in this build — for now, adjust Tilt manually via keyframes.</p>
 </blockquote>
 <p align="center">
@@ -208,9 +221,11 @@
 <hr />
 <h3 id="bake-animation-locationrotationscale">🎬 Bake Animation (Location/Rotation/Scale)</h3>
 <ul>
-<li><strong>Remove Constraint After Bake</strong> — after baking, automatically removes the original Constraint (Follow Path, Track To...) to avoid double-transform conflicts; disable this if you still need to edit the Constraint afterward</li>
-<li><strong>Bake Animation</strong> — bakes Location/Rotation/Scale of any selected Mesh, Camera, or Empty into real keyframes with one click, automatically backing up the original Constraint before baking</li>
-<li><strong>Restore Baked Constraint</strong> — restores the exact original Constraint + Target + Action from before the last bake (only works on objects previously baked via the button above)</li>
+<li><strong>Remove Constraint After Bake</strong> — after baking, automatically removes the original Constraint(s) (Follow Path, Track To...) to avoid double-transform conflicts; disable this if you still need to edit the Constraint(s) afterward</li>
+<li><strong>Bake Animation</strong> — bakes Location/Rotation/Scale of any selected Mesh, Camera, or Empty into real keyframes with one click, automatically backing up <strong>every</strong> supported Constraint present on the object before baking (e.g. a Camera using both Follow Path + Track To together — not just one of them)</li>
+<li><strong>Restore Baked Constraint</strong> — restores <strong>all</strong> the original Constraint(s) + Target(s) + Action from before the last bake (only works on objects previously baked via the button above); this data is shared with <strong>BlendReal® - Cinematic Pipeline UE5</strong>, so baking in one add-on can be restored from the other</li>
+<li><strong>Create Camera Track-To Constraint</strong> — one click creates a Camera + a target Empty (named "CameraTarget") with a Track To constraint already set up between them (more stable than Damped Track during live preview); shared feature also found in <strong>BlendReal® - Cinematic Pipeline UE5</strong></li>
+<li><strong>Add Camera Shake</strong> — adds a short, keyframed handheld-style shake to the selected Camera starting at the current frame, with <strong>Amplitude</strong>, <strong>Frequency</strong>, <strong>Pulses</strong>, and <strong>Target Shake Ratio</strong> (if the Camera has a Track To / Damped Track constraint, its target Empty shakes too — phase-shifted by 1/4 cycle so the aim direction wobbles naturally instead of staying locked dead-on target; set to 0 to shake only the Camera). Re-running this on an overlapping frame range replaces the previous shake there automatically</li>
 </ul>
 <hr />
 <h3 id="mesh-utilities-standalone-no-blendreal-required">🔧 Mesh Utilities — standalone, no BlendReal® required</h3>
@@ -269,13 +284,13 @@
 <p><strong>⚡ Auto-Fill From Ship Sizes (recommended):</strong> a one-time action — automatically fills Distance Between Lanes / Distance Between Levels / Two-Way Distance / Extra Distance for each stream based on its largest ship's radius, and lowers the Vertical/Horizontal Step Ratio to a safe value (≤0.4) so Vertical Staggered Slot never gets clamped, regardless of ship size. Lowest Level Altitude Z is stacked in order Civilian → Cargo → Military (each step taking the LARGER of Distance Between Streams or the stream-below's own vertical span) — guaranteeing no altitude overlap between streams without an oversized gap for normal-sized fleets. Horizontal Offset Between Levels is copied as-is from Civilian (purely cosmetic, not size-related). Everything stays freely editable afterward — Generate Traffic will NOT overwrite these values again.</p>
 <h3 id="live-layout-preview-lives-inside-the-lanes-section">👁️ Live Layout Preview (lives inside the Lanes section)</h3>
 <ul>
-<li><strong>👁 Create Wireframe</strong> — creates wireframe boxes sized exactly to each ship, at each ship's current position; the real ships are temporarily hidden</li>
+<li><strong>👁 Create ShipProxy</strong> — creates lightweight proxy boxes sized exactly to each ship, at each ship's current position; the real ships are temporarily hidden</li>
 <li>Once the boxes exist, adjust any Lane/Streams/Formation field — the layout updates live on the boxes</li>
 <li>You can also click <strong>▶ Generate Traffic</strong> while previewing — the add-on runs the full collision-avoidance pass ON THE BOXES (faster than running it on real, detailed-mesh ships), while still using the ships' REAL radius for safety calculations</li>
-<li><strong>✅ Apply Wireframe</strong> — once you're happy with it, brings back the real ships and applies the final result to them</li>
+<li><strong>✅ Apply ShipProxy</strong> — once you're happy with it, brings back the real ships and applies the final result to them</li>
 </ul>
 <blockquote>
-<p>💡 This is a tool for <strong>previewing a reasonable layout</strong> — the <strong>final, accurate result</strong> always comes from clicking <strong>▶ Generate Traffic</strong> on the real ships (via Apply Wireframe, or directly if you're not using the preview).</p>
+<p>💡 This is a tool for <strong>previewing a reasonable layout</strong> — the <strong>final, accurate result</strong> always comes from clicking <strong>▶ Generate Traffic</strong> on the real ships (via Apply ShipProxy, or directly if you're not using the preview).</p>
 </blockquote>
 <hr />
 <h3 id="staggered-formation">✈️ Staggered Formation</h3>
@@ -305,12 +320,18 @@
 </ul>
 <hr />
 <h3 id="building-avoidance">🏢 Building Avoidance</h3>
-<p>Raycast-based path detection + actual AABB checks between the two points. When a path is blocked, the add-on attempts, in order: (1) fly OVER the building's roof, then re-check both new path segments, (2) if still blocked, shift horizontally step by step, testing both sides, (3) as a final fallback, fly to a safe altitude above both the start and end points.</p>
-<ul>
-<li><strong>Building Collision Margin</strong> — the safety buffer around a building</li>
-<li><strong>Building Overflight Height</strong> — how much higher than the building's roof to fly when passing over</li>
-<li><strong>Horizontal Offset Step</strong> — the horizontal shift per step when searching for a detour</li>
-</ul>
+<p>Every ship flies <strong>exactly 1 straight line, with zero direction changes mid-flight</strong> — building avoidance is entirely decided <strong>before</strong> a ship starts moving, not reacted to along the way:</p>
+<ol>
+<li>For every lane, the add-on sweeps its full length and works out the narrowest real gap between buildings that a ship would have to pass through — accounting for the Building Collision Margin AND the worst-case sideways reach of the Staggered Formation (so a ship can never be nudged into a building it was assigned to safely clear)</li>
+<li>Each ship is only assigned to a lane whose gap is wide enough for its own width, widest ships first, spread across the least-used valid lanes</li>
+<li>If NO lane in the grid is wide enough for a ship (e.g. an oversized capital ship in a dense building cluster), the add-on automatically creates a <strong>Boundary Lane</strong> just outside the entire building cluster's footprint and routes it there instead — guaranteed clear, at the same altitude levels as normal traffic</li>
+<li>
+<p>A building sitting directly on a lane's centerline (a true dead end, not just a tight squeeze) removes that lane from consideration entirely, the same way as an insufficient gap</p>
+</li>
+<li>
+<p><strong>Building Collision Margin</strong> — the safety buffer kept around every building's actual bounds, used throughout the gap calculation above</p>
+</li>
+</ol>
 <p align="center">
   <img src="images/BuildingAvoidance.png" width="40%">
 </p>
@@ -380,10 +401,14 @@ Yes — the fastest way is to click <strong>⚡ Auto-Fill From Ship Sizes</stron
 <li>Distance Between Adjacent Intersections (Intersection Grid)</li>
 </ul>
 </blockquote>
-<p>✅<strong>Is the layout shown by Live Layout Preview (Create Wireframe) the final result?</strong><br>
+<p>✅<strong>Is the layout shown by Live Layout Preview (Create ShipProxy) the final result?</strong><br>
 Not exactly — it's a quick way to preview whether the spacing, altitude levels, and density look reasonable before running the real thing. The final, accurate result (real collision avoidance + real animation) always comes from clicking <strong>▶ Generate Traffic</strong> on the real ships.</p>
 <p>✅<strong>Where is Bake Auto Bank (automatic banking based on the flight path's curvature)?</strong><br>
 This feature is currently an internal work-in-progress and is not yet shown in the panel in this build — for now, adjust <strong>Follow Path Tilt</strong> manually via keyframes to create a banking effect.</p>
+<p>✅<strong>Some ships fly all the way around a whole cluster of buildings instead of through it — is that a bug?</strong><br>
+No — this is the <strong>Boundary Lane</strong> fallback described in <strong>Building Avoidance</strong> above, working as intended. It only triggers for ships whose width can't fit through ANY real gap in that lane (accounting for the Staggered Formation's sideways reach). If you'd rather see more ships weaving between buildings, try lowering <strong>Staggered Slots — Horizontal</strong>, or spacing buildings further apart in your scene.</p>
+<p>✅<strong>Why are there Camera Track-To / Camera Shake buttons in a spaceship traffic add-on?</strong><br>
+They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipeline UE5</strong>, included here too so you don't need to switch add-ons for basic camera work. Both add-ons share the same Bake/Restore data format, so a camera baked in one can be restored in the other.</p>
 <h2 id="blendreal-spaceship-traffic-tutorial-videos">BlendReal® Spaceship Traffic Tutorial Videos</h2>
 <h3 id="1basic-traffic-setup-saving-presets">1.Basic Traffic Setup &amp; Saving Presets</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
@@ -394,8 +419,7 @@ This feature is currently an internal work-in-progress and is not yet shown in t
 <p><strong>Generate Traffic. The main button</strong> — runs the entire pipeline (lanes, avoidance, animation) in one pass and animates every ship at once, based on every other setting across the addon's panels.</p>
 <p><strong>Clear Animation.</strong> Removes the generated animation so you can regenerate cleanly after changing settings, instead of it stacking on top of the previous result.</p>
 <p><strong>Check Collections.</strong> A read-only sanity check that reports how many ships and buildings your current collections actually contain before you commit to Generate Traffic.</p>
-<p><strong>Save / Load / Delete Preset.</strong> Save your entire configuration — every panel, not just this one — as a named preset, and switch between different setups for different scenes in seconds via Choose &amp; Load Preset / Choose &amp; Delete Preset.</p>
-<hr />
+<h2 id="save-load-delete-preset-save-your-entire-configuration-every-panel-not-just-this-one-as-a-named-preset-and-switch-between-different-setups-for-different-scenes-in-seconds-via-choose-load-preset-choose-delete-preset"><strong>Save / Load / Delete Preset.</strong> Save your entire configuration — every panel, not just this one — as a named preset, and switch between different setups for different scenes in seconds via Choose &amp; Load Preset / Choose &amp; Delete Preset.</h2>
 <h3 id="2configuring-traffic-streams-lane-grid">2.Configuring Traffic Streams &amp; Lane Grid</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>Split your traffic into 3 independently-tuned streams and control exactly how many lanes, intersections, and altitude levels your traffic system generates.</p>
@@ -405,20 +429,20 @@ This feature is currently an internal work-in-progress and is not yet shown in t
 <p><strong>Intersection Grid.</strong> Number of Rows/Columns and Distance Between Adjacent Intersections control how many intersections exist in your scene and how far apart they sit.</p>
 <p><strong>Staggered Slots &amp; Step Ratio.</strong> Staggered Slots — Horizontal/Vertical and the Vertical/Horizontal Step Ratio fine-tune how ships queue at intersections so they don't visibly bunch up.</p>
 <p><strong>Group Ships By Size.</strong> An optional toggle (with its own Size Grouping Threshold %) that groups similarly-sized ships together, so a tiny fighter isn't forced into the same lane spacing as a capital ship.</p>
-<p><strong>Auto-Fill From Ship Sizes.</strong> Automatically calculates sensible lane-spacing values by scanning the actual size of the ships already in your collection, instead of guessing numbers by hand.</p>
+<h2 id="auto-fill-from-ship-sizes-automatically-calculates-sensible-lane-spacing-values-by-scanning-the-actual-size-of-the-ships-already-in-your-collection-instead-of-guessing-numbers-by-hand"><strong>Auto-Fill From Ship Sizes.</strong> Automatically calculates sensible lane-spacing values by scanning the actual size of the ships already in your collection, instead of guessing numbers by hand.</h2>
 <h3 id="3building-ship-avoidance-explained">3.Building &amp; Ship Avoidance Explained</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>See how BlendReal's raycast-based building avoidance and Space-Time Reservation ship avoidance work together.</p>
-<p><strong>Raycast Building Detection.</strong> Each ship's path is checked with a raycast against the Building Collection, with a safety Building Collision Margin (default 5.0) computed around every building's actual bounds.</p>
-<p><strong>Building Overflight Height.</strong> If a ship's path would clip a building, it's rerouted to fly this much higher (default 10.0) than the rooftop, instead of simply stopping or colliding.</p>
+<p><strong>Gap-Fit Building Avoidance.</strong> Before any ship moves, the add-on sweeps every lane to find the narrowest real gap between buildings a ship passing through it would face, accounting for the Building Collision Margin (default 5.0) and the Staggered Formation's worst-case sideways reach — then only assigns ships to lanes wide enough for their own size, so every ship flies one straight line with zero mid-flight direction changes.</p>
+<p><strong>Boundary Lane.</strong> Ships too wide for any real gap in the lane grid (or blocked outright by a building sitting on the centerline) are automatically routed around the entire building cluster instead, on an auto-generated lane placed just outside its footprint.</p>
 <p><strong>Space-Time Reservation Ship Avoidance.</strong> This is the real avoidance engine, and it's the addon's core selling point: it doesn't offset ships randomly. It reserves each ship's exact path as a function of both position and frame (time), then checks every new ship's path for its closest distance to already-reserved paths within the overlapping time window — genuinely keeping a Safety Distance (Ship Hull Outer Edge) rather than guessing.</p>
 <p><strong>Fallback Delay Step / Max Delay Attempts.</strong> If a ship's path still conflicts after checking, it's delayed by a set number of frames (Fallback Delay Step) and retried, up to Max Delay Attempts times, before the system reports a conflict it couldn't resolve.</p>
-<p><strong>Random Seed.</strong> Makes the entire avoidance/generation result reproducible — running Generate Traffic again with the same seed gives you the exact same layout.</p>
+<h2 id="random-seed-makes-the-entire-avoidancegeneration-result-reproducible-running-generate-traffic-again-with-the-same-seed-gives-you-the-exact-same-layout"><strong>Random Seed.</strong> Makes the entire avoidance/generation result reproducible — running Generate Traffic again with the same seed gives you the exact same layout.</h2>
 <h3 id="4flight-path-tools">4.Flight Path Tools</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>7 built-in NURBS path presets plus Follow Curve and Bake Auto Bank for custom ship movement</p>
 <p><strong>7 NURBS Path Presets.</strong> Straight, Arc, Loop, S-Curve, Zigzag, Spiral, and Figure-8, each spawned at your active object's location (or the 3D Cursor), with shape-specific controls — Arc Angle for Arc, Amplitude/Wave Cycles for S-Curve and Zigzag, Turns/Height for Spiral.</p>
-<p><strong>Follow Curve.</strong> Attaches a ship to any of these paths (or a hand-drawn curve) as a Follow Path target.</p>
+<p><strong>Follow Curve.</strong> Attaches a ship — or a Camera — to any of these paths (or a hand-drawn curve) as a Follow Path target.</p>
 <h3 id="5troubleshooting">5.Troubleshooting</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
 <p>Fix ships flying in the wrong direction and resolve collision-avoidance warnings.</p>
