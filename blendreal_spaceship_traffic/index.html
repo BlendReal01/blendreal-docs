@@ -115,8 +115,6 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-the-addon-works-overall-read-this-first-before-supporting">How the addon works overall (read this first before supporting)</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#spaceship-traffic-addon-ui-field-reference">Spaceship Traffic Addon — UI Field Reference</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#how-the-addon-works-overall-read-this-first">How the addon works overall (read this first)</a>
@@ -496,16 +494,6 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p><strong>Staggered Slots / Max Delay Attempts (increase these).</strong> If you see a collision-avoidance warning after Generate Traffic, raising these two values gives the Space-Time Reservation system more room and more attempts to find a conflict-free path before it reports failure.</p>
 <p><strong>Vertical Staggered Slot Step Capped.</strong> A second, separate warning that can appear after Generate Traffic — it means the Vertical Staggered Slot step a lane needs for its largest ship exceeded the safe cap for that stream (0.4× its Distance Between Levels), so the addon clamped it instead. Fix by raising Distance Between Levels, or lowering the Vertical/Horizontal Step Ratio.</p>
 <hr />
-<h2 id="how-the-addon-works-overall-read-this-first-before-supporting">How the addon works overall (read this first before supporting)</h2>
-<p>The addon generates spaceship traffic in 3 main steps:</p>
-<ol>
-<li><strong>Build the Intersection Grid</strong> — a row × column grid; each grid point is where "roads" cross.</li>
-<li><strong>Build lanes</strong> on each row/column of the grid — each lane has a fixed flight direction (<code>+1</code> or <code>-1</code>), and lanes are offset from each other to form two-way "roads".</li>
-<li><strong>Assign ships to lanes</strong> — if Buildings exist, the addon uses <strong>Gap-Fit</strong>: ships are only placed in a lane with enough real clearance (won't clip a building); if there are no buildings, ships are assigned via a simple round-robin.</li>
-<li><strong>Animate</strong> — each ship flies a single straight path (no mid-flight steering), with staggered departure times so it looks natural, and collision avoidance against other ships via the Space-Time Reservation system.</li>
-</ol>
-<p>The most important button is <strong>▶ Generate Traffic</strong> at the bottom of the panel — this is the ONLY place that guarantees a 100% accurate result. The live preview (when typing into a Lanes/Formation field) is only meant to preview a reasonable layout while adjusting, not a guaranteed-accurate result.</p>
-<hr />
 <h2 id="spaceship-traffic-addon-ui-field-reference">Spaceship Traffic Addon — UI Field Reference</h2>
 <blockquote>
 <p>This guide walks through <strong>every field on the panel</strong>, in the exact order they appear in the <code>🚀 Spaceship Traffic</code> panel (View3D &gt; sidebar N &gt; "Spaceship Traffic" tab). Use it to understand what a field does, or to figure out which field to adjust when troubleshooting an unusual result.</p>
@@ -523,602 +511,161 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <hr />
 <h3 id="1-nurbs-path-presets">1. 🛤️ NURBS Path Presets</h3>
 <p>A secondary toolset, not directly tied to the traffic system — used to quickly create a curve as a flight path for a single standalone object (not a whole traffic stream).</p>
-<table>
-<thead>
-<tr>
-<th>Field / Button</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Straight / Arc / Loop / S-Curve / Zigzag / Spiral / Figure-8</td>
-<td>Each button creates that curve shape, spawned at the currently selected object (or the 3D Cursor if nothing is selected). After clicking, adjust Size/Points/etc. in the "Adjust Last Operation" panel (bottom-left of the viewport).</td>
-</tr>
-<tr>
-<td><strong>Follow Curve</strong></td>
-<td>Select 1 mesh/camera + 1 curve, then click — adds a "Follow Path" Constraint so that object follows the curve.</td>
-</tr>
-<tr>
-<td>Distance / Tilt (appear after Follow Path is added)</td>
-<td>These are properties on the object itself (not addon fields) — drag to move the object along the curve, and to tilt it. Used to hand-keyframe motion along the path.</td>
-</tr>
-<tr>
-<td>Curve Resolution</td>
-<td>Smoothness of the target curve — higher = smoother curve but heavier on performance.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Straight / Arc / Loop / S-Curve / Zigzag / Spiral / Figure-8</strong> — Each button creates that curve shape, spawned at the currently selected object (or the 3D Cursor if nothing is selected). After clicking, adjust Size/Points/etc. in the "Adjust Last Operation" panel (bottom-left of the viewport).</li>
+<li><strong>Follow Curve</strong> — Select 1 mesh/camera + 1 curve, then click — adds a "Follow Path" Constraint so that object follows the curve.</li>
+<li><strong>Distance / Tilt</strong> (appear after Follow Path is added) — These are properties on the object itself (not addon fields) — drag to move the object along the curve, and to tilt it. Used to hand-keyframe motion along the path.</li>
+<li><strong>Curve Resolution</strong> — Smoothness of the target curve — higher = smoother curve but heavier on performance.</li>
+</ul>
 <p><strong>Note:</strong> this is a standalone tool and does not share any data with the main Generate Traffic system.</p>
 <hr />
 <h3 id="2-bake-animation-locationrotationscale">2. 🎬 Bake Animation (Location/Rotation/Scale)</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Remove Constraint After Bake</strong></td>
-<td>On</td>
-<td>After baking the animation to keyframes, automatically removes the original Constraint (Follow Path, Track To…) to prevent a double-transform conflict. Turn off if you still need to edit the Constraint afterward.</td>
-</tr>
-<tr>
-<td><strong>Bake Animation</strong> (button)</td>
-<td>—</td>
-<td>Bakes the object's current animation into real keyframes (Location/Rotation/Scale).</td>
-</tr>
-<tr>
-<td><strong>Restore Constraint</strong> (button)</td>
-<td>—</td>
-<td>Only works on objects previously baked via this exact button (or via the BlendReal_Core.py addon, since both addons share the same custom property key) — restores the original Constraint so it can be re-edited and re-baked.</td>
-</tr>
-<tr>
-<td><strong>Create Camera Track To</strong></td>
-<td>—</td>
-<td>Quickly adds a Track To Constraint for a camera.</td>
-</tr>
-<tr>
-<td><strong>Add Camera Shake</strong></td>
-<td>—</td>
-<td>Adds a camera shake effect.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Remove Constraint After Bake</strong> (default: On) — After baking the animation to keyframes, automatically removes the original Constraint (Follow Path, Track To…) to prevent a double-transform conflict. Turn off if you still need to edit the Constraint afterward.</li>
+<li><strong>Bake Animation</strong> (button) — Bakes the object's current animation into real keyframes (Location/Rotation/Scale).</li>
+<li><strong>Restore Constraint</strong> (button) — Only works on objects previously baked via this exact button (or via the BlendReal_Core.py addon, since both addons share the same custom property key) — restores the original Constraint so it can be re-edited and re-baked.</li>
+<li><strong>Create Camera Track To</strong> (button) — Quickly adds a Track To Constraint for a camera.</li>
+<li><strong>Add Camera Shake</strong> (button) — Adds a camera shake effect.</li>
+</ul>
 <hr />
 <h3 id="3-mesh-utilities">3. 🔧 Mesh Utilities</h3>
 <p>A set of mesh utilities, <strong>fully independent</strong> from the BlendReal_Core.py addon (no cross-calls — you can use this even if you only own one of the two addons).</p>
-<table>
-<thead>
-<tr>
-<th>Button</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Apply Rotation / Apply Scale</strong></td>
-<td>Applies (bakes) the current rotation/scale into the base mesh, resetting the transform to 0/1 default.</td>
-</tr>
-<tr>
-<td><strong>Apply MNEMO Naming (Island/Building/Landscape)</strong></td>
-<td>Automatically renames objects following the MNEMO project naming convention.</td>
-</tr>
-<tr>
-<td><strong>Fix Normals Per UV Island</strong></td>
-<td>Fixes normal direction separately for each UV island.</td>
-</tr>
-<tr>
-<td><strong>Create Proxy Collision (Convex Hull)</strong></td>
-<td>Generates a simple collision mesh (convex hull) from the base mesh — used as lightweight collision when exporting to UE.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Apply Rotation / Apply Scale</strong> — Applies (bakes) the current rotation/scale into the base mesh, resetting the transform to 0/1 default.</li>
+<li><strong>Apply MNEMO Naming (Island/Building/Landscape)</strong> — Automatically renames objects following the MNEMO project naming convention.</li>
+<li><strong>Fix Normals Per UV Island</strong> — Fixes normal direction separately for each UV island.</li>
+<li><strong>Create Proxy Collision (Convex Hull)</strong> — Generates a simple collision mesh (convex hull) from the base mesh — used as lightweight collision when exporting to UE.</li>
+</ul>
 <hr />
 <h3 id="4-streams-collections">4. 📦 Streams &amp; Collections</h3>
 <p>This is where you declare <strong>which Collection ships are pulled from</strong>.</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Split Into 3 Separate Streams (Civilian / Cargo / Military)</strong></td>
-<td><strong>On</strong></td>
-<td>On: ships are pulled from <strong>3 separate Collections</strong>, each type flying its own altitude (Z) band and speed, never mixing — while still sharing one Space-Time Reservation ledger, so they still avoid each other correctly at the points where two streams cross. Off: falls back to a <strong>single Collection</strong>, exactly like the old addon version (v6/v7).</td>
-</tr>
-<tr>
-<td>Civilian / Cargo / Military Collection</td>
-<td><code>Spaceships_Civilian</code> / <code>Spaceships_Cargo</code> / <code>Spaceships_Military</code></td>
-<td>Collection name holding each ship type (only shown when Split Into 3 Streams is on).</td>
-</tr>
-<tr>
-<td>Speed Factor — Civilian / Cargo / Military</td>
-<td>0.85 / 0.6 / 1.35</td>
-<td>An EXTRA multiplier applied on top of the random speed (Min/Max Speed under Speed &amp; Timing) for that specific stream. Cargo ships are usually bigger &amp; slower, hence a lower factor; Military ships are usually more compact &amp; faster, hence a higher factor.</td>
-</tr>
-<tr>
-<td><strong>Ship Collection</strong></td>
-<td><code>Spaceships</code></td>
-<td>Collection holding the ships (only shown when Split Into 3 Streams is OFF).</td>
-</tr>
-<tr>
-<td><strong>Building Collection</strong></td>
-<td><code>Buildings</code></td>
-<td>Collection holding buildings/obstacles. If this Collection is empty or doesn't exist, the addon treats the scene as having NO buildings at all (the entire Gap-Fit building-avoidance mechanism is skipped).</td>
-</tr>
-<tr>
-<td><strong>Create Collections</strong> (button)</td>
-<td>—</td>
-<td>Automatically creates the Collections using the names currently declared above (if they don't already exist).</td>
-</tr>
-<tr>
-<td><strong>Check Collections</strong> (button)</td>
-<td>—</td>
-<td>Prints a quick diagnostic summary to the Console: ship count, building count, sizes of each — handy for double-checking your setup.</td>
-</tr>
-<tr>
-<td><strong>Import Into Stream</strong></td>
-<td>Civilian</td>
-<td>When clicking "Import Ships From Folder", which stream's Collection the imported ships get added to (only shown when Split Into 3 Streams is on).</td>
-</tr>
-<tr>
-<td><strong>Ship File Folder (.blend)</strong></td>
-<td>—</td>
-<td>Path to a folder containing multiple <code>.blend</code> files, each holding 1 (or a few) ships — click the Import button below to append all of them into the Collection at once, no need to drag and drop each file.</td>
-</tr>
-<tr>
-<td><strong>Import Ships From Folder</strong> (button)</td>
-<td>—</td>
-<td>Performs the bulk import described above.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Split Into 3 Separate Streams (Civilian / Cargo / Military)</strong> (default: On) — On: ships are pulled from <strong>3 separate Collections</strong>, each type flying its own altitude (Z) band and speed, never mixing — while still sharing one Space-Time Reservation ledger, so they still avoid each other correctly at the points where two streams cross. Off: falls back to a <strong>single Collection</strong>, exactly like the old addon version (v6/v7).</li>
+<li><strong>Civilian / Cargo / Military Collection</strong> (default: <code>Spaceships_Civilian</code> / <code>Spaceships_Cargo</code> / <code>Spaceships_Military</code>) — Collection name holding each ship type (only shown when Split Into 3 Streams is on).</li>
+<li><strong>Speed Factor — Civilian / Cargo / Military</strong> (default: 0.85 / 0.6 / 1.35) — An EXTRA multiplier applied on top of the random speed (Min/Max Speed under Speed &amp; Timing) for that specific stream. Cargo ships are usually bigger &amp; slower, hence a lower factor; Military ships are usually more compact &amp; faster, hence a higher factor.</li>
+<li><strong>Ship Collection</strong> (default: <code>Spaceships</code>) — Collection holding the ships (only shown when Split Into 3 Streams is OFF).</li>
+<li><strong>Building Collection</strong> (default: <code>Buildings</code>) — Collection holding buildings/obstacles. If this Collection is empty or doesn't exist, the addon treats the scene as having NO buildings at all (the entire Gap-Fit building-avoidance mechanism is skipped).</li>
+<li><strong>Create Collections</strong> (button) — Automatically creates the Collections using the names currently declared above (if they don't already exist).</li>
+<li><strong>Check Collections</strong> (button) — Prints a quick diagnostic summary to the Console: ship count, building count, sizes of each — handy for double-checking your setup.</li>
+<li><strong>Import Into Stream</strong> (default: Civilian) — When clicking "Import Ships From Folder", which stream's Collection the imported ships get added to (only shown when Split Into 3 Streams is on).</li>
+<li><strong>Ship File Folder (.blend)</strong> — Path to a folder containing multiple <code>.blend</code> files, each holding 1 (or a few) ships — click the Import button below to append all of them into the Collection at once, no need to drag and drop each file.</li>
+<li><strong>Import Ships From Folder</strong> (button) — Performs the bulk import described above.</li>
+</ul>
 <hr />
 <h3 id="5-intersection-grid-per-stream">5. 🚦 Intersection Grid (per stream)</h3>
 <p>Defines the <strong>intersection grid</strong> — the number of crossing points between "roads".</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Number Of Rows (Y)</strong></td>
-<td>3</td>
-<td>Number of horizontal rows in the intersection grid.</td>
-</tr>
-<tr>
-<td><strong>Number Of Columns (X)</strong></td>
-<td>3</td>
-<td>Number of vertical columns in the intersection grid.</td>
-</tr>
-<tr>
-<td><strong>Distance Between Adjacent Intersections</strong></td>
-<td>400</td>
-<td>Distance between the centers of 2 adjacent intersections (same row or same column).</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Number Of Rows (Y)</strong> (default: 3) — Number of horizontal rows in the intersection grid.</li>
+<li><strong>Number Of Columns (X)</strong> (default: 3) — Number of vertical columns in the intersection grid.</li>
+<li><strong>Distance Between Adjacent Intersections</strong> (default: 400) — Distance between the centers of 2 adjacent intersections (same row or same column).</li>
+</ul>
 <p><strong>Important:</strong> The total number of intersections is <strong>always Rows × Columns</strong> — since every road axis runs the full length of the grid, you <strong>cannot</strong> get an arbitrary intersection count like 3, 5, 7 (unless it's a 1-row/column grid). The panel already shows a live info line with the actual intersection count, so you can cross-check it directly.</p>
 <hr />
 <h3 id="6-lanes-per-rowcolumn">6. 🛣️ Lanes (per row/column)</h3>
 <p>This is the <strong>most important</strong> group of fields — it drives the actual flight-path layout.</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Lanes Per Road Cluster</strong></td>
-<td>4</td>
-<td>Number of lanes WITHIN each row/column of the grid — <strong>not</strong> the total lane count for the whole scene. Every 2 adjacent lanes pair up into 1 two-way "road". Default 4 = each row/column has 2 parallel two-way roads. Set to 2 for just 1 road per row/column. <strong>ALWAYS keep this an EVEN number</strong> — an odd number leaves 1 lane with no opposing pair.</td>
-</tr>
-<tr>
-<td><strong>Number Of Altitude Levels</strong></td>
-<td>3</td>
-<td>Number of flight levels by altitude (Z).</td>
-</tr>
-<tr>
-<td><strong>Distance Between Lanes</strong></td>
-<td>25</td>
-<td>Distance between 2 parallel lanes (2 DIFFERENT roads, not the two directions of the same road).</td>
-</tr>
-<tr>
-<td><strong>Distance Between Levels</strong></td>
-<td>20</td>
-<td>Vertical (Z) distance between 2 adjacent altitude levels.</td>
-</tr>
-<tr>
-<td><strong>Lowest Level Altitude (Z)</strong></td>
-<td>15</td>
-<td>Z altitude of the lowest level.</td>
-</tr>
-<tr>
-<td><strong>Horizontal Offset Between Levels</strong></td>
-<td>8</td>
-<td>Even/odd levels get an extra sideways offset along the perpendicular axis — creates a more natural zig-zag feel between levels.</td>
-</tr>
-<tr>
-<td><strong>Two-Way Distance Within 1 Road</strong></td>
-<td>8</td>
-<td>Distance between the <strong>2 opposing lanes sitting right next to each other within the SAME road</strong> (e.g. lane 0 forward, lane 1 reverse, forming 1 pair). Should be much SMALLER than "Distance Between Lanes" (which is the distance to a DIFFERENT road).</td>
-</tr>
-<tr>
-<td><strong>Extra Distance Between 2 Roads</strong></td>
-<td>15</td>
-<td>An EXTRA gap (added on top of Distance Between Lanes) between 2 adjacent lane PAIRS (= 2 different roads) — not the distance between the two directions within the same road.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Lanes Per Road Cluster</strong> (default: 4) — Number of lanes WITHIN each row/column of the grid — <strong>not</strong> the total lane count for the whole scene. Every 2 adjacent lanes pair up into 1 two-way "road". Default 4 = each row/column has 2 parallel two-way roads. Set to 2 for just 1 road per row/column. <strong>ALWAYS keep this an EVEN number</strong> — an odd number leaves 1 lane with no opposing pair.</li>
+<li><strong>Number Of Altitude Levels</strong> (default: 3) — Number of flight levels by altitude (Z).</li>
+<li><strong>Distance Between Lanes</strong> (default: 25) — Distance between 2 parallel lanes (2 DIFFERENT roads, not the two directions of the same road).</li>
+<li><strong>Distance Between Levels</strong> (default: 20) — Vertical (Z) distance between 2 adjacent altitude levels.</li>
+<li><strong>Lowest Level Altitude (Z)</strong> (default: 15) — Z altitude of the lowest level.</li>
+<li><strong>Horizontal Offset Between Levels</strong> (default: 8) — Even/odd levels get an extra sideways offset along the perpendicular axis — creates a more natural zig-zag feel between levels.</li>
+<li><strong>Two-Way Distance Within 1 Road</strong> (default: 8) — Distance between the <strong>2 opposing lanes sitting right next to each other within the SAME road</strong> (e.g. lane 0 forward, lane 1 reverse, forming 1 pair). Should be much SMALLER than "Distance Between Lanes" (which is the distance to a DIFFERENT road).</li>
+<li><strong>Extra Distance Between 2 Roads</strong> (default: 15) — An EXTRA gap (added on top of Distance Between Lanes) between 2 adjacent lane PAIRS (= 2 different roads) — not the distance between the two directions within the same road.</li>
+</ul>
 <p><strong>When Split Into 3 Separate Streams is on</strong>, the last 6 fields (Dist. Lanes / Dist. Levels / Lowest Alt Z / Hor. Offset / 2-Way Dist. / Extra Dist.) each have a <strong>separate copy per stream</strong> — Civilian / Cargo / Military (shown as 3 columns) — since each ship type has a different size and therefore needs different spacing.</p>
-<table>
-<thead>
-<tr>
-<th>Button / info</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>⚡ Auto-Fill From Ship Sizes</strong></td>
-<td>Automatically recalculates 4 fields (Distance Between Lanes / Levels / Two-Way / Extra) based on the <strong>largest ship's width</strong> of each stream (measured perpendicular to the flight direction, not a 3D bounding radius) — and also lowers the <strong>Vertical/Horizontal Step Ratio</strong> (under Staggered Formation) to a safe ≤0.4 value if it's currently higher. This is a one-time action; you can freely edit the values afterward — Generate Traffic will NOT overwrite them again.</td>
-</tr>
-<tr>
-<td>"i Each adjacent lane pair..." info line</td>
-<td>Reminder: every adjacent lane pair forms 1 two-way road.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>⚡ Auto-Fill From Ship Sizes</strong> (button) — Automatically recalculates 4 fields (Distance Between Lanes / Levels / Two-Way / Extra) based on the <strong>largest ship's width</strong> of each stream (measured perpendicular to the flight direction, not a 3D bounding radius) — and also lowers the <strong>Vertical/Horizontal Step Ratio</strong> (under Staggered Formation) to a safe ≤0.4 value if it's currently higher. This is a one-time action; you can freely edit the values afterward — Generate Traffic will NOT overwrite them again.</li>
+<li>"i Each adjacent lane pair..." info line — Reminder: every adjacent lane pair forms 1 two-way road.</li>
+</ul>
 <h4 id="shipproxy-buttons-at-the-bottom-of-the-lanes-section">ShipProxy buttons (at the bottom of the Lanes section)</h4>
-<table>
-<thead>
-<tr>
-<th>Button</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Create ShipProxy</strong></td>
-<td>Replaces ALL ships (every stream) with a lightweight box (a Geometry Nodes point cloud), spawned at each ship's current position. Used to quickly test the layout without touching the real (heavy) ship meshes. Click again anytime to rebuild the boxes at the ships' current position.</td>
-</tr>
-<tr>
-<td><strong>Apply ShipProxy</strong></td>
-<td>Only enabled while ShipProxy boxes exist. Removes the boxes, shows the real ships again, and (if Generate Traffic was run while the boxes existed) transfers the computed animation onto the matching real ships.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Create ShipProxy</strong> (button) — Replaces ALL ships (every stream) with a lightweight box (a Geometry Nodes point cloud), spawned at each ship's current position. Used to quickly test the layout without touching the real (heavy) ship meshes. Click again anytime to rebuild the boxes at the ships' current position.</li>
+<li><strong>Apply ShipProxy</strong> (button) — Only enabled while ShipProxy boxes exist. Removes the boxes, shows the real ships again, and (if Generate Traffic was run while the boxes existed) transfers the computed animation onto the matching real ships.</li>
+</ul>
 <p><strong>Important:</strong> while ShipProxy is active, <strong>adjusting any Lanes/Streams/Formation field live-updates the box positions immediately</strong> — no extra action needed. And clicking <strong>▶ Generate Traffic</strong> at this point runs <strong>on the boxes</strong> (fast), leaving the real ships untouched until you click Apply ShipProxy.</p>
 <hr />
 <h3 id="7-staggered-formation">7. ✈️ Staggered Formation</h3>
 <p>Controls how ships <strong>spread out in parallel formation</strong> within the same lane, instead of stacking into a single rigid line.</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Staggered Slots — Horizontal</strong></td>
-<td>3</td>
-<td>Number of sideways offset positions (perpendicular to the flight direction) available in a lane's formation.</td>
-</tr>
-<tr>
-<td><strong>Staggered Slots — Vertical (Z)</strong></td>
-<td>3</td>
-<td>Number of offset positions along the Z axis in the formation.</td>
-</tr>
-<tr>
-<td><strong>Vertical / Horizontal Step Ratio</strong></td>
-<td>0.6</td>
-<td>The vertical (Z) offset step = this ratio × the horizontal offset step. Should generally stay below 1, since the vertical gap between levels (Distance Between Levels) is limited. <strong>If set too high, the addon automatically caps it — with a warning shown in the log when generating.</strong></td>
-</tr>
-<tr>
-<td><strong>Group Ships By Size</strong></td>
-<td>Off</td>
-<td>Off (default, same as previous versions): ships are spread across lanes in list order, and the formation's offset step is computed once from the LARGEST ship in the WHOLE stream — simple, and lets large and small ships mix together naturally. On: ships are first grouped by size (see the field below), each group gets its own lane(s), and each lane's offset step is computed only from the ships actually placed in it — keeps small-ship lanes tightly packed instead of matching the stream's largest ship, and reduces leftover collisions between very mismatched sizes.</td>
-</tr>
-<tr>
-<td><strong>Size Grouping Threshold (%)</strong></td>
-<td>50</td>
-<td>Only used when Group Ships By Size is on. Ships are grouped so that no ship's radius exceeds the group's smallest-ship radius by more than this percentage (e.g. 50 = up to 1.5× that group's smallest radius). Lower = tighter, more size-uniform groups (needs more lanes); higher = looser groups, closer to the Off behavior.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Staggered Slots — Horizontal</strong> (default: 3) — Number of sideways offset positions (perpendicular to the flight direction) available in a lane's formation.</li>
+<li><strong>Staggered Slots — Vertical (Z)</strong> (default: 3) — Number of offset positions along the Z axis in the formation.</li>
+<li><strong>Vertical / Horizontal Step Ratio</strong> (default: 0.6) — The vertical (Z) offset step = this ratio × the horizontal offset step. Should generally stay below 1, since the vertical gap between levels (Distance Between Levels) is limited. <strong>If set too high, the addon automatically caps it — with a warning shown in the log when generating.</strong></li>
+<li><strong>Group Ships By Size</strong> (default: Off) — Off (default, same as previous versions): ships are spread across lanes in list order, and the formation's offset step is computed once from the LARGEST ship in the WHOLE stream — simple, and lets large and small ships mix together naturally. On: ships are first grouped by size (see the field below), each group gets its own lane(s), and each lane's offset step is computed only from the ships actually placed in it — keeps small-ship lanes tightly packed instead of matching the stream's largest ship, and reduces leftover collisions between very mismatched sizes.</li>
+<li><strong>Size Grouping Threshold (%)</strong> (default: 50) — Only used when Group Ships By Size is on. Ships are grouped so that no ship's radius exceeds the group's smallest-ship radius by more than this percentage (e.g. 50 = up to 1.5× that group's smallest radius). Lower = tighter, more size-uniform groups (needs more lanes); higher = looser groups, closer to the Off behavior.</li>
+</ul>
 <p><strong>Note:</strong> the "Ships have a FIXED offset..." info line is a reminder that the PRIMARY collision-avoidance mechanism today is spatial (a fixed formation offset), not the older time-stretching approach.</p>
 <hr />
 <h3 id="8-speed-timing">8. ⚡ Speed &amp; Timing</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Minimum Speed</strong> / <strong>Maximum Speed</strong></td>
-<td>0.7 / 1.5</td>
-<td>Random speed factor applied to each ship (combined with that stream's own Speed Factor, if Split Into 3 Streams is on).</td>
-</tr>
-<tr>
-<td><strong>Frames To Cross Scene (Speed 1.0)</strong></td>
-<td>650</td>
-<td>Number of frames it takes a ship to travel the full scene length, AT a speed factor of 1.0. This is an indirect way of setting actual speed: actual speed = (lane length) ÷ this value.</td>
-</tr>
-<tr>
-<td><strong>Total Animation Frames</strong></td>
-<td>700</td>
-<td>Every single ship's animation spans exactly from frame 0 to this frame — a ship is always flying through the central area at any moment within this range (including near the very last frame), with no "not yet appeared / already gone" gaps.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Minimum Speed / Maximum Speed</strong> (default: 0.7 / 1.5) — Random speed factor applied to each ship (combined with that stream's own Speed Factor, if Split Into 3 Streams is on).</li>
+<li><strong>Frames To Cross Scene (Speed 1.0)</strong> (default: 650) — Number of frames it takes a ship to travel the full scene length, AT a speed factor of 1.0. This is an indirect way of setting actual speed: actual speed = (lane length) ÷ this value.</li>
+<li><strong>Total Animation Frames</strong> (default: 700) — Every single ship's animation spans exactly from frame 0 to this frame — a ship is always flying through the central area at any moment within this range (including near the very last frame), with no "not yet appeared / already gone" gaps.</li>
+</ul>
 <p><strong>Common issue:</strong> if the ratio of (lane length ÷ speed) is much larger than "Total Animation Frames", ships will look like "2 groups charging toward each other" at the start of the video before gradually mixing — this is not a bug, it's the natural consequence of a lane that's too long / a speed that's too slow relative to the video length. Quick fix: <strong>increase "Frames To Cross Scene"</strong>, or increase the Min/Max Speed.</p>
 <hr />
 <h3 id="9-scene-size">9. 🌐 Scene Size</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Scene Radius</strong></td>
-<td>150</td>
-<td>Radius of the boundary area — ships depart from and fly toward/beyond this boundary.</td>
-</tr>
-<tr>
-<td><strong>Push Back Beyond Boundary</strong></td>
-<td>20</td>
-<td>Ships depart/end an extra distance beyond the boundary above, rather than stopping exactly at the boundary.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Scene Radius</strong> (default: 150) — Radius of the boundary area — ships depart from and fly toward/beyond this boundary.</li>
+<li><strong>Push Back Beyond Boundary</strong> (default: 20) — Ships depart/end an extra distance beyond the boundary above, rather than stopping exactly at the boundary.</li>
+</ul>
 <hr />
 <h3 id="10-building-avoidance">10. 🏢 Building Avoidance</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Building Collision Margin</strong></td>
-<td>5</td>
-<td>The BASE safety buffer around buildings — the addon <strong>automatically adds</strong> each ship's own actual width on top of this value when checking for a building collision, so this field only needs to be a small extra margin, <strong>not</strong> the ship's full size.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Building Collision Margin</strong> (default: 5) — The BASE safety buffer around buildings — the addon <strong>automatically adds</strong> each ship's own actual width on top of this value when checking for a building collision, so this field only needs to be a small extra margin, <strong>not</strong> the ship's full size.</li>
+</ul>
 <p><strong>Note:</strong> this is the only field in this section. If ships are still clipping or grazing a building, try increasing this value first; if increasing it a lot still doesn't help, buildings are likely placed too densely, leaving no lane with enough real clearance (check the warning line shown when generating: <em>"N ship(s) still had a building-overlap risk..."</em>).</p>
 <hr />
 <h3 id="11-ship-ship-collision-avoidance-outer-edge">11. 🛸 Ship-Ship Collision Avoidance (Outer Edge)</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Safety Distance (Ship Hull Outer Edge)</strong></td>
-<td>6</td>
-<td>Minimum GAP measured from the <strong>OUTER EDGE of the ship hull</strong> (not center-to-center like the old version) — the addon automatically adds each ship's own radius when: (1) checking space-time conflicts between ships, and (2) computing the staggered formation grid's offset step. <strong>Increasing this value does NOT stretch ships further apart along the lane</strong> — it only widens the sideways formation grid.</td>
-</tr>
-<tr>
-<td><strong>Fallback Delay Step (Frames)</strong></td>
-<td>20</td>
-<td>ONLY used when 2 ships land on the exact same formation slot — the PRIMARY collision-avoidance mechanism today is spatial (Staggered Formation), no longer mainly time-based.</td>
-</tr>
-<tr>
-<td><strong>Max Delay Attempts</strong></td>
-<td>30</td>
-<td>Maximum number of fallback delay attempts before the addon gives up and accepts the conflict.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Safety Distance (Ship Hull Outer Edge)</strong> (default: 6) — Minimum GAP measured from the <strong>OUTER EDGE of the ship hull</strong> (not center-to-center like the old version) — the addon automatically adds each ship's own radius when: (1) checking space-time conflicts between ships, and (2) computing the staggered formation grid's offset step. <strong>Increasing this value does NOT stretch ships further apart along the lane</strong> — it only widens the sideways formation grid.</li>
+<li><strong>Fallback Delay Step (Frames)</strong> (default: 20) — ONLY used when 2 ships land on the exact same formation slot — the PRIMARY collision-avoidance mechanism today is spatial (Staggered Formation), no longer mainly time-based.</li>
+<li><strong>Max Delay Attempts</strong> (default: 30) — Maximum number of fallback delay attempts before the addon gives up and accepts the conflict.</li>
+</ul>
 <p><strong>Tip:</strong> if the generate log reports <em>"N ship(s) COULD NOT fully avoid collisions"</em>, try increasing the Staggered Slots (section 7) or increasing Max Delay Attempts/Fallback Delay Step here.</p>
 <hr />
 <h3 id="12-options">12. ⚙️ Options</h3>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Random Seed</strong></td>
-<td>42</td>
-<td>Change this number to get a different ship layout (departure order, lane tie-break results when tied, random speed, etc.). The ship count and lane/level layout stay identical — only the random elements change.</td>
-</tr>
-<tr>
-<td><strong>Ship Nose Axis (Local)</strong></td>
-<td>+Y</td>
-<td>The model's LOCAL axis that points toward the ship's nose (NOT the world-space flight direction!). In Object Mode, enable Local Axes display (N-panel or Viewport Overlays &gt; Axes) to see which local axis the model's nose points along in that specific model, then pick that same axis here. If, after generating, ships fly "nose backwards" or "sideways", try changing this field.</td>
-</tr>
-<tr>
-<td><strong>Interpolation Type</strong></td>
-<td>Linear (100% Match With UE)</td>
-<td>Interpolation type between position keyframes. <strong>Linear</strong>: constant motion, unchanging speed — exports to UE matching exactly regardless of which BlendReal mode is used ("Original Keyframes Only" or "Every Frame"). <strong>Bezier</strong>: smoother, with acceleration/deceleration at the start/end of each segment — ONLY matches UE exactly when BlendReal uses "Every Frame" mode; with "Original Keyframes Only", the UE result will be off because UE and Blender interpolate Bezier curves using different formulas.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Random Seed</strong> (default: 42) — Change this number to get a different ship layout (departure order, lane tie-break results when tied, random speed, etc.). The ship count and lane/level layout stay identical — only the random elements change.</li>
+<li><strong>Ship Nose Axis (Local)</strong> (default: +Y) — The model's LOCAL axis that points toward the ship's nose (NOT the world-space flight direction!). In Object Mode, enable Local Axes display (N-panel or Viewport Overlays &gt; Axes) to see which local axis the model's nose points along in that specific model, then pick that same axis here. If, after generating, ships fly "nose backwards" or "sideways", try changing this field.</li>
+<li><strong>Interpolation Type</strong> (default: Linear (100% Match With UE)) — Interpolation type between position keyframes. <strong>Linear</strong>: constant motion, unchanging speed — exports to UE matching exactly regardless of which BlendReal mode is used ("Original Keyframes Only" or "Every Frame"). <strong>Bezier</strong>: smoother, with acceleration/deceleration at the start/end of each segment — ONLY matches UE exactly when BlendReal uses "Every Frame" mode; with "Original Keyframes Only", the UE result will be off because UE and Blender interpolate Bezier curves using different formulas.</li>
+</ul>
 <hr />
 <h3 id="13-spaceship-trail-export-to-ue">13. 🔥 Spaceship Trail (Export to UE)</h3>
 <p>Fields controlling the engine exhaust trail (Niagara trail) when exporting to Unreal Engine via the separate BlendReal addon (this is an independent addon — it only reads shared data through the Scene's custom properties).</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Enable Spaceship Trail</strong></td>
-<td>Off</td>
-<td>Master switch. When off, "Compute &amp; Preview Trail Points" still works, but BlendReal will skip spawning any trail in UE.</td>
-</tr>
-<tr>
-<td><strong>Niagara System Path (UE)</strong></td>
-<td>(empty)</td>
-<td>Content Browser path in UE to the Niagara System asset for the trail (e.g. <code>/Game/VFX/NS_SpaceshipTrail</code>) — must already be built in UE beforehand.</td>
-</tr>
-<tr>
-<td>Trail Package Folder + search button (magnifier)</td>
-<td>—</td>
-<td>Scans an installed <code>Content/Trail_Package</code> folder on disk to find <code>NS_SpaceshipTrail*</code> Niagara System assets, for quick selection instead of typing the path by hand.</td>
-</tr>
-<tr>
-<td><strong>Trail Height Ratio</strong></td>
-<td>0.25</td>
-<td>Vertical attach position of the trail point, along the ship's local Z axis, 0 = bottom, 1 = top. Ignored if Nose Axis is Z/-Z, since Z is then the nose-to-tail axis itself.</td>
-</tr>
-<tr>
-<td><strong>Trail Side Ratio</strong></td>
-<td>1.0</td>
-<td>Sideways offset for a symmetric PAIR of trail points, as a ratio of that <strong>specific ship's own actual width</strong> (not a fixed number) — automatically scales correctly per ship size. 1.0 = right at the hull edge, &lt;1.0 = inset, &gt;1.0 = beyond the hull edge. 0 = a single trail point at the center.</td>
-</tr>
-<tr>
-<td><strong>Ribbon Width Ratio</strong></td>
-<td>10.0</td>
-<td>Trail ribbon width, as a ratio of the ship's own half-width — also scales automatically per ship.</td>
-</tr>
-<tr>
-<td>Hot Phase Duration (sec)</td>
-<td>0.3</td>
-<td>Real seconds (not a % of trail length) the white-hot → red engine glow lasts before fading to smoke — matches Niagara User.HotPhaseSeconds.</td>
-</tr>
-<tr>
-<td>Noise Intensity</td>
-<td>3.0</td>
-<td>Overall turbulence strength multiplier — matches Niagara User.NoiseIntensity.</td>
-</tr>
-<tr>
-<td>Trail Lifetime (sec)</td>
-<td>9.0</td>
-<td>Total particle lifetime = total visible trail length over time — matches Niagara User.TrailLifetime.</td>
-</tr>
-<tr>
-<td>Trail Opacity</td>
-<td>0.1</td>
-<td>Overall trail opacity multiplier — matches Niagara User.TrailOpacity.</td>
-</tr>
-<tr>
-<td>Civilian/Cargo/Military Trail Color (or Trail Color, if Split Into 3 Streams is off)</td>
-<td>White (1,1,1,1)</td>
-<td>Trail tint per ship type — matches Niagara User.TrailColor.</td>
-</tr>
-<tr>
-<td><strong>Recompute ALL Ships</strong></td>
-<td>Off (safe)</td>
-<td>Off: "Compute &amp; Preview Trail Points" only computes ships that do NOT yet have trail data — ships you've already hand-adjusted (e.g. multi-engine ships) are left untouched. On: forces a full recompute of EVERY ship, discarding any manual adjustments not yet Applied — asks for confirmation first.</td>
-</tr>
-<tr>
-<td><strong>Compute &amp; Preview Trail Points</strong></td>
-<td>—</td>
-<td>Computes marker positions and shows a preview for you to check and drag-adjust if needed.</td>
-</tr>
-<tr>
-<td><strong>Clear Trail Preview</strong></td>
-<td>—</td>
-<td>Clears the current preview (without saving).</td>
-</tr>
-<tr>
-<td><strong>Apply Trail Preview</strong></td>
-<td>—</td>
-<td>Locks in the marker positions (including any manual adjustments) — must be clicked before exporting to UE.</td>
-</tr>
-<tr>
-<td>Trail Include / Exclude list</td>
-<td>—</td>
-<td>List of individual ships or whole Collections explicitly turned ON or OFF for trail. Final result = Include minus Exclude (Exclude always wins). Both empty = no ship gets a trail.</td>
-</tr>
-<tr>
-<td>Refresh (button)</td>
-<td>—</td>
-<td>Refreshes the cached ship list used by both the Include/Exclude checklists.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Enable Spaceship Trail</strong> (default: Off) — Master switch. When off, "Compute &amp; Preview Trail Points" still works, but BlendReal will skip spawning any trail in UE.</li>
+<li><strong>Niagara System Path (UE)</strong> (default: empty) — Content Browser path in UE to the Niagara System asset for the trail (e.g. <code>/Game/VFX/NS_SpaceshipTrail</code>) — must already be built in UE beforehand.</li>
+<li><strong>Trail Package Folder</strong> + search button (magnifier) — Scans an installed <code>Content/Trail_Package</code> folder on disk to find <code>NS_SpaceshipTrail*</code> Niagara System assets, for quick selection instead of typing the path by hand.</li>
+<li><strong>Trail Height Ratio</strong> (default: 0.25) — Vertical attach position of the trail point, along the ship's local Z axis, 0 = bottom, 1 = top. Ignored if Nose Axis is Z/-Z, since Z is then the nose-to-tail axis itself.</li>
+<li><strong>Trail Side Ratio</strong> (default: 1.0) — Sideways offset for a symmetric PAIR of trail points, as a ratio of that <strong>specific ship's own actual width</strong> (not a fixed number) — automatically scales correctly per ship size. 1.0 = right at the hull edge, &lt;1.0 = inset, &gt;1.0 = beyond the hull edge. 0 = a single trail point at the center.</li>
+<li><strong>Ribbon Width Ratio</strong> (default: 10.0) — Trail ribbon width, as a ratio of the ship's own half-width — also scales automatically per ship.</li>
+<li><strong>Hot Phase Duration (sec)</strong> (default: 0.3) — Real seconds (not a % of trail length) the white-hot → red engine glow lasts before fading to smoke — matches Niagara User.HotPhaseSeconds.</li>
+<li><strong>Noise Intensity</strong> (default: 3.0) — Overall turbulence strength multiplier — matches Niagara User.NoiseIntensity.</li>
+<li><strong>Trail Lifetime (sec)</strong> (default: 9.0) — Total particle lifetime = total visible trail length over time — matches Niagara User.TrailLifetime.</li>
+<li><strong>Trail Opacity</strong> (default: 0.1) — Overall trail opacity multiplier — matches Niagara User.TrailOpacity.</li>
+<li><strong>Civilian/Cargo/Military Trail Color</strong> (or <strong>Trail Color</strong>, if Split Into 3 Streams is off) (default: White, 1,1,1,1) — Trail tint per ship type — matches Niagara User.TrailColor.</li>
+<li><strong>Recompute ALL Ships</strong> (default: Off, safe) — Off: "Compute &amp; Preview Trail Points" only computes ships that do NOT yet have trail data — ships you've already hand-adjusted (e.g. multi-engine ships) are left untouched. On: forces a full recompute of EVERY ship, discarding any manual adjustments not yet Applied — asks for confirmation first.</li>
+<li><strong>Compute &amp; Preview Trail Points</strong> (button) — Computes marker positions and shows a preview for you to check and drag-adjust if needed.</li>
+<li><strong>Clear Trail Preview</strong> (button) — Clears the current preview (without saving).</li>
+<li><strong>Apply Trail Preview</strong> (button) — Locks in the marker positions (including any manual adjustments) — must be clicked before exporting to UE.</li>
+<li><strong>Trail Include / Exclude list</strong> — List of individual ships or whole Collections explicitly turned ON or OFF for trail. Final result = Include minus Exclude (Exclude always wins). Both empty = no ship gets a trail.</li>
+<li><strong>Refresh</strong> (button) — Refreshes the cached ship list used by both the Include/Exclude checklists.</li>
+</ul>
 <hr />
 <h3 id="14-main-action-buttons-bottom-of-the-panel-before-the-preset-section">14. Main action buttons (bottom of the panel, before the Preset section)</h3>
-<table>
-<thead>
-<tr>
-<th>Button</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>▶ Generate Traffic</strong></td>
-<td>Runs the entire real pipeline — lane assignment, formation spreading, animation generation. This is the ONE accurate result, not a live preview.</td>
-</tr>
-<tr>
-<td><strong>✕ Clear</strong></td>
-<td>Deletes the previously generated traffic/animation.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>▶ Generate Traffic</strong> (button) — Runs the entire real pipeline — lane assignment, formation spreading, animation generation. This is the ONE accurate result, not a live preview.</li>
+<li><strong>✕ Clear</strong> (button) — Deletes the previously generated traffic/animation.</li>
+</ul>
 <hr />
 <h3 id="15-config-preset">15. 📋 Config Preset</h3>
-<table>
-<thead>
-<tr>
-<th>Field / Button</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Preset Name</strong> + save button (💾)</td>
-<td>Name it, then save every current field value as a preset (saved to a JSON file on disk, not inside the <code>.blend</code> file).</td>
-</tr>
-<tr>
-<td><strong>Load Preset</strong></td>
-<td>Pick a saved preset and apply every field value from it.</td>
-</tr>
-<tr>
-<td><strong>Delete</strong></td>
-<td>Deletes a saved preset.</td>
-</tr>
-<tr>
-<td>"N preset(s) saved" line</td>
-<td>Informational only.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Preset Name</strong> + save button (💾) — Name it, then save every current field value as a preset (saved to a JSON file on disk, not inside the <code>.blend</code> file).</li>
+<li><strong>Load Preset</strong> (button) — Pick a saved preset and apply every field value from it.</li>
+<li><strong>Delete</strong> (button) — Deletes a saved preset.</li>
+<li>"N preset(s) saved" line — Informational only.</li>
+</ul>
 <hr />
 <h3 id="good-to-know">Good to know</h3>
 <ul>
