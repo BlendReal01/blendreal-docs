@@ -65,7 +65,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#bake-animation-locationrotationscale">🎬 Bake Animation (Location/Rotation/Scale)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mesh-utilities-standalone-no-blendreal-required">🔧 Mesh Utilities — standalone, no BlendReal® required</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-utilities-standalone-no-blendrealtm-required">🔧 Mesh Utilities — standalone, no BlendReal™ required</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#streams-collections">📦 Streams &amp; Collections</a>
     </li>
@@ -87,7 +87,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#options">⚙️ Options</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#spaceship-trail-export-to-ue-optional-requires-blendreal-cinematic-pipeline-ue5">🔥 Spaceship Trail (Export to UE) — optional, requires BlendReal® - Cinematic Pipeline UE5</a>
+    <li class="toctree-l3"><a class="reference internal" href="#spaceship-trail-export-to-ue-optional-requires-blendrealtm-cinematic-pipeline-ue5">🔥 Spaceship Trail (Export to UE) — optional, requires BlendReal™ - Cinematic Pipeline UE5</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#config-preset">📋 Config Preset</a>
     </li>
@@ -99,7 +99,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#faqs">❓FAQs</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#blendreal-spaceship-traffic-tutorial-videos">BlendReal® Spaceship Traffic Tutorial Videos</a>
+    <li class="toctree-l2"><a class="reference internal" href="#blendrealtm-spaceship-traffic-tutorial-videos">BlendReal™ Spaceship Traffic Tutorial Videos</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#1blendreal-camera-system-track-to-follow-curve-camera-shake-100-consistent-in-blender-ue5">1.BlendReal Camera System: Track-To, Follow Curve &amp; Camera Shake - 100% Consistent in Blender &amp; UE5</a>
     </li>
@@ -184,16 +184,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="blendreal-spaceship-traffic">BlendReal® Spaceship Traffic</h1>
+                <h1 id="blendrealtm-spaceship-traffic">BlendReal™ Spaceship Traffic</h1>
 <ul>
 <li>
-<p>Procedural Blender add-on for spaceship traffic — automatically generates lane/intersection networks, avoids buildings by pre-checking real gaps between them so every ship flies a single straight line with zero mid-flight direction changes, and performs true ship-to-ship avoidance using a Space-Time Reservation system. Includes a flight path toolkit (7 NURBS Path presets + Follow Curve for Mesh or Camera), a shared Camera Track-To / Camera Shake / Bake Animation / Restore Constraint toolkit, mesh utilities, and an optional engine exhaust effect export to Unreal Niagara via BlendReal®.</p>
+<p>Procedural Blender add-on for spaceship traffic — automatically generates lane/intersection networks, avoids buildings by pre-checking real gaps between them so every ship flies a single straight line with zero mid-flight direction changes, and performs true ship-to-ship avoidance using a Space-Time Reservation system. Includes a flight path toolkit (7 NURBS Path presets + Follow Curve for Mesh or Camera), a shared Camera Track-To / Camera Shake / Bake Animation / Restore Constraint toolkit, mesh utilities, and an optional engine exhaust effect export to Unreal Niagara via BlendReal™.</p>
 </li>
 <li>
 <p>The add-on operates in <strong>Standalone Mode — Unreal Engine is not required</strong> — all traffic features run entirely within Blender.</p>
 </li>
 <li>
-<p>Alternatively, the <strong>Spaceship Trail (Export to UE)</strong> feature requires the <strong>BlendReal® - Cinematic Pipeline UE5</strong> add-on to automatically transfer Niagara parameter values into UE.</p>
+<p>Alternatively, the <strong>Spaceship Trail (Export to UE)</strong> feature requires the <strong>BlendReal™ - Cinematic Pipeline UE5</strong> add-on to automatically transfer Niagara parameter values into UE.</p>
 </li>
 </ul>
 <p align="center">
@@ -205,14 +205,14 @@
 <li>Operating System: Windows 10/11 64-bit</li>
 <li><strong>Blender</strong>: 4.5, 5.0, or 5.2 (LTS)</li>
 <li>Unreal Engine is not required for the main traffic features</li>
-<li><strong>BlendReal®</strong> (separate add-on) is required to use the Spaceship Trail feature</li>
+<li><strong>BlendReal™</strong> (separate add-on) is required to use the Spaceship Trail feature</li>
 </ul>
 <hr />
 <h2 id="installation">🛠️Installation</h2>
 <ol>
 <li>In Blender, go to <strong>Edit &gt; Preferences &gt; Add-ons</strong></li>
 <li>Click <strong>Install from Disk...</strong> and select the <code>.zip</code> file</li>
-<li>Tick the checkbox next to <strong>BlendReal® Spaceship Traffic</strong> to enable the add-on</li>
+<li>Tick the checkbox next to <strong>BlendReal™ Spaceship Traffic</strong> to enable the add-on</li>
 <li>Open the Sidebar (press <code>N</code>) in the 3D Viewport and find the <strong>Spaceship Traffic</strong> tab</li>
 </ol>
 <hr />
@@ -255,21 +255,21 @@
 <ul>
 <li><strong>Remove Constraint After Bake</strong> — after baking, automatically removes the original Constraint(s) (Follow Path, Track To...) to avoid double-transform conflicts; disable this if you still need to edit the Constraint(s) afterward</li>
 <li><strong>Bake Animation</strong> — bakes Location/Rotation/Scale of any selected Mesh, Camera, or Empty into real keyframes with one click, automatically backing up <strong>every</strong> supported Constraint present on the object before baking (e.g. a Camera using both Follow Path + Track To together — not just one of them)</li>
-<li><strong>Restore Baked Constraint</strong> — restores <strong>all</strong> the original Constraint(s) + Target(s) + Action from before the last bake (only works on objects previously baked via the button above); this data is shared with <strong>BlendReal® - Cinematic Pipeline UE5</strong>, so baking in one add-on can be restored from the other</li>
-<li><strong>Create Camera Track-To Constraint</strong> — one click creates a Camera + a target Empty (named "CameraTarget") with a Track To constraint already set up between them (more stable than Damped Track during live preview); shared feature also found in <strong>BlendReal® - Cinematic Pipeline UE5</strong></li>
+<li><strong>Restore Baked Constraint</strong> — restores <strong>all</strong> the original Constraint(s) + Target(s) + Action from before the last bake (only works on objects previously baked via the button above); this data is shared with <strong>BlendReal™ - Cinematic Pipeline UE5</strong>, so baking in one add-on can be restored from the other</li>
+<li><strong>Create Camera Track-To Constraint</strong> — one click creates a Camera + a target Empty (named "CameraTarget") with a Track To constraint already set up between them (more stable than Damped Track during live preview); shared feature also found in <strong>BlendReal™ - Cinematic Pipeline UE5</strong></li>
 <li><strong>Add Camera Shake</strong> — adds a short, keyframed handheld-style shake to the selected Camera starting at the current frame, with <strong>Amplitude</strong>, <strong>Frequency</strong>, <strong>Pulses</strong>, and <strong>Target Shake Ratio</strong> (if the Camera has a Track To / Damped Track constraint, its target Empty shakes too — phase-shifted by 1/4 cycle so the aim direction wobbles naturally instead of staying locked dead-on target; set to 0 to shake only the Camera). Re-running this on an overlapping frame range replaces the previous shake there automatically</li>
 </ul>
 <hr />
-<h3 id="mesh-utilities-standalone-no-blendreal-required">🔧 Mesh Utilities — standalone, no BlendReal® required</h3>
+<h3 id="mesh-utilities-standalone-no-blendrealtm-required">🔧 Mesh Utilities — standalone, no BlendReal™ required</h3>
 <ul>
 <li><strong>Apply Rotation</strong> / <strong>Apply Scale</strong> — applies in batch to multiple selected meshes at once, keeping the other 2 values unchanged (Location is always preserved by both buttons)</li>
-<li><strong>Apply MNEMO Naming (Island/Building/Landscape)</strong> — batch renames using a standard prefix, opening a dialog with:</li>
-<li><strong>Type</strong> — Floating Island (<code>Island_</code>) / Building (<code>Building_</code>) / Landscape (<code>Landscape_</code>) / Custom Prefix (your own prefix, no automatic MNEMO Tag/Collision assignment)</li>
+<li><strong>Apply Naming (Island/Building/Landscape)</strong> — batch renames using a standard prefix, opening a dialog with:</li>
+<li><strong>Type</strong> — Floating Island (<code>Island_</code>) / Building (<code>Building_</code>) / Landscape (<code>Landscape_</code>) / Custom Prefix (your own prefix, no automatic Tag/Collision assignment)</li>
 <li><strong>Base Name</strong> — the name part after the prefix (e.g. "FloatingIsland" → <code>Island_FloatingIsland01</code>, <code>02</code>...)</li>
 <li><strong>Custom Prefix</strong> — only used when Type = Custom</li>
 <li><strong>Start Index</strong> / <strong>Digit Count</strong> — the starting number and zero-padding digit count (2 digits: 01, 02...; 3 digits: 001, 002...)</li>
 <li><strong>Fix Normals Per UV Island</strong> — recalculates normals per UV island in a radial outward direction (based on the object's center of mass, independent of topology) — handles cases where Blender's default Recalculate Outside / Merge+Recalculate fail</li>
-<li><strong>Create Proxy Collision (Convex Hull)</strong> — duplicates MNEMO-named meshes, splits them by connected "island" pieces, with 2 <strong>Method</strong> options:</li>
+<li><strong>Create Proxy Collision (Convex Hull)</strong> — duplicates meshes named with this convention, splits them by connected "island" pieces, with 2 <strong>Method</strong> options:</li>
 <li><strong>Convex Hull Per Piece</strong> (recommended) — always clean regardless of how broken the source mesh is, preserves concavities between pieces</li>
 <li><strong>Voxel Remesh</strong> (fallback) — rebuilds the surface via a distance field, with extra <strong>[Voxel] Resolution</strong>, <strong>[Voxel] Adaptivity</strong>, <strong>[Voxel] Weld Vertices Before Remesh</strong>, <strong>[Voxel] Merge Distance</strong> parameters</li>
 <li>The result is named so UE automatically recognizes it as Collision</li>
@@ -386,7 +386,7 @@
 <li><strong>Interpolation Type</strong> — <strong>Linear</strong> (100% match when exported to UE via BlendReal, in both export modes) or <strong>Bezier</strong> (smoother, with ease in/out — but only matches exactly when BlendReal uses "Every Frame" mode)</li>
 </ul>
 <hr />
-<h3 id="spaceship-trail-export-to-ue-optional-requires-blendreal-cinematic-pipeline-ue5">🔥 Spaceship Trail (Export to UE) — optional, requires BlendReal® - Cinematic Pipeline UE5</h3>
+<h3 id="spaceship-trail-export-to-ue-optional-requires-blendrealtm-cinematic-pipeline-ue5">🔥 Spaceship Trail (Export to UE) — optional, requires BlendReal™ - Cinematic Pipeline UE5</h3>
 <ul>
 <li><strong>Enable Spaceship Trail</strong> — the master switch for the trail feature</li>
 <li><strong>Niagara System Path (UE)</strong> — the Content Browser path to the pre-built Niagara System in UE; can be found via <strong>Trail Package Folder</strong> + <strong>Scan for Trail Systems</strong> to automatically scan and pick</li>
@@ -416,12 +416,12 @@
 </ul>
 <hr />
 <h2 id="support">💬Support</h2>
-<p>For any questions or update requests, please contact us through the <strong><a href="https://discord.gg/7qNt7NVsT">BlendReal® Discord Support</a></strong> channel.</p>
+<p>For any questions or update requests, please contact us through the <strong><a href="https://discord.gg/7qNt7NVsT">BlendReal™ Discord Support</a></strong> channel.</p>
 <hr />
 <h2 id="faqs">❓FAQs</h2>
 <p>✅<strong>Does this add-on work independently?</strong><br>
-Yes — all traffic simulation (lanes, building avoidance, ship avoidance, and animation) runs entirely within Blender. Only the Exhaust Trail feature requires the <strong>BlendReal® - Cinematic Pipeline UE5</strong> add-on.</p>
-<p>✅<strong>When do I need to use it together with the BlendReal® - Cinematic Pipeline UE5 add-on?</strong><br>
+Yes — all traffic simulation (lanes, building avoidance, ship avoidance, and animation) runs entirely within Blender. Only the Exhaust Trail feature requires the <strong>BlendReal™ - Cinematic Pipeline UE5</strong> add-on.</p>
+<p>✅<strong>When do I need to use it together with the BlendReal™ - Cinematic Pipeline UE5 add-on?</strong><br>
 When you need the Spaceship Trail feature (<strong>Export to UE</strong>) to transfer Niagara parameter values into UE.</p>
 <p>✅<strong>Ships flying in the wrong direction (upside down/sideways) after Generate Traffic?</strong><br>
 Change the <strong>Ship Nose Axis</strong> value to match the actual nose direction of your ship model.</p>
@@ -443,11 +443,11 @@ This feature is currently an internal work-in-progress and is not yet shown in t
 <p>✅<strong>Some ships fly all the way around a whole cluster of buildings instead of through it — is that a bug?</strong><br>
 No — this is the <strong>Boundary Lane</strong> fallback described in <strong>Building Avoidance</strong> above, working as intended. It only triggers for ships whose width can't fit through ANY real gap in that lane (accounting for the Staggered Formation's sideways reach). If you'd rather see more ships weaving between buildings, try lowering <strong>Staggered Slots — Horizontal</strong>, or spacing buildings further apart in your scene.</p>
 <p>✅<strong>Why are there Camera Track-To / Camera Shake buttons in a spaceship traffic add-on?</strong><br>
-They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipeline UE5</strong>, included here too so you don't need to switch add-ons for basic camera work. Both add-ons share the same Bake/Restore data format, so a camera baked in one can be restored in the other.</p>
-<h2 id="blendreal-spaceship-traffic-tutorial-videos">BlendReal® Spaceship Traffic Tutorial Videos</h2>
+They're the same Camera tools also found in <strong>BlendReal™ - Cinematic Pipeline UE5</strong>, included here too so you don't need to switch add-ons for basic camera work. Both add-ons share the same Bake/Restore data format, so a camera baked in one can be restored in the other.</p>
+<h2 id="blendrealtm-spaceship-traffic-tutorial-videos">BlendReal™ Spaceship Traffic Tutorial Videos</h2>
 <h3 id="1blendreal-camera-system-track-to-follow-curve-camera-shake-100-consistent-in-blender-ue5">1.BlendReal Camera System: Track-To, Follow Curve &amp; Camera Shake - 100% Consistent in Blender &amp; UE5</h3>
 <p><a href="https://youtu.be/vHSlGAWxEqo"><img alt="BlendReal Camera System" src="images/BlendRealCameraSystem.png" /></a></p>
-<p>The same Camera toolkit shared with <strong>BlendReal® - Cinematic Pipeline UE5</strong> — set up a Track-To camera, send it flying along any curve, add a handheld shake, bake it, and export straight to Unreal Engine 5 with a 1:1 match.</p>
+<p>The same Camera toolkit shared with <strong>BlendReal™ - Cinematic Pipeline UE5</strong> — set up a Track-To camera, send it flying along any curve, add a handheld shake, bake it, and export straight to Unreal Engine 5 with a 1:1 match.</p>
 <p><strong>Create Camera Track-To Constraint.</strong> One click spawns a Camera + a target Empty ("CameraTarget") already linked with a Track To constraint — more stable to preview live than a Damped Track constraint.</p>
 <p><strong>Follow Curve (Camera).</strong> Attach the Camera to any of the 7 NURBS Path presets (or a hand-drawn curve) — Follow Path only drives its POSITION along the curve, leaving 100% of the aim/rotation to the Track To constraint, so the camera keeps looking exactly where you pointed it while flying the path.</p>
 <p><strong>Bake Animation.</strong> Converts the live Camera Track-To + Follow Curve setup into real keyframes with one click, backing up every Constraint present (Follow Path + Track To together) so nothing is lost.</p>
@@ -532,7 +532,7 @@ They're the same Camera tools also found in <strong>BlendReal® - Cinematic Pipe
 <p>A set of mesh utilities, <strong>fully independent</strong> from the BlendReal_Core.py addon (no cross-calls — you can use this even if you only own one of the two addons).</p>
 <ul>
 <li><strong>Apply Rotation / Apply Scale</strong> — Applies (bakes) the current rotation/scale into the base mesh, resetting the transform to 0/1 default.</li>
-<li><strong>Apply MNEMO Naming (Island/Building/Landscape)</strong> — Automatically renames objects following the MNEMO project naming convention.</li>
+<li><strong>Apply Naming (Island/Building/Landscape)</strong> — Automatically renames objects following the standard Island/Building/Landscape naming convention.</li>
 <li><strong>Fix Normals Per UV Island</strong> — Fixes normal direction separately for each UV island.</li>
 <li><strong>Create Proxy Collision (Convex Hull)</strong> — Generates a simple collision mesh (convex hull) from the base mesh — used as lightweight collision when exporting to UE.</li>
 </ul>
